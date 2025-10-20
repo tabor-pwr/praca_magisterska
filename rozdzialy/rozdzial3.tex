@@ -1,0 +1,13 @@
+\chapter{Charakterystyka algorytmów uczenia maszynowego}
+\section{Uczenie nadzorowane (Supervised Learning)}
+Uczenie nadzorowane to technika, w której algorytm otrzymuje gotowy zestaw danych
+z wcześniej określonymi etykietami i uczy się na ich podstawie predyktować etykiety dla nowych nieznanych danych.
+Dane uczące zawierają zmienne wejściowe oraz zmienną predykowaną (etykietę).
+Standardowy proces uczenia nadzorowanego obejmuje podział zbioru danych na zbiór
+treningowy, walidacyjny oraz testowy. Trening polega na dopasowaniu parametrów modelu
+do danych treningowych poprzez minimalizację funkcji straty, która mierzy różnicę
+między przewidywaniami modelu a rzeczywistymi etykietami. Po zakończeniu treningu danych
+model zostaje poddany ocenie na zbiorze walidacyjnym w celu doboru hiperparametrów oraz monitorowaniu uczenia maszynowego,
+aby zapobiec przeuczeniu modelu. Ostateczna ocena odbywa się na zbiorze testowym na danych nieznanych dla modelu i na podstawie tego modelu określana
+wartość dokładności, precyzji, recall, F1 (dla klasyfikacji) lub MSE, MAE (dla regresji)\citep{bishop2006,hastie2009}.
+\subsection{Regresja liniowa (Linear Regression)}
