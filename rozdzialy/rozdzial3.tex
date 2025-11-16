@@ -11,3 +11,110 @@ model zostaje poddany ocenie na zbiorze walidacyjnym w celu doboru hiperparametr
 aby zapobiec przeuczeniu modelu. Ostateczna ocena odbywa się na zbiorze testowym na danych nieznanych dla modelu i na podstawie tego modelu określana
 wartość dokładności, precyzji, recall, F1 (dla klasyfikacji) lub MSE, MAE (dla regresji)\citep{bishop2006,hastie2009}.
 \subsection{Regresja liniowa (Linear Regression)}
+Regresja liniowa to podstawowa technika statystyczna i uczenia maszynowego stosowana do modelowania zależności między zmienną zależną (predykowaną) a jedną lub więcej zmiennymi niezależnymi (cechami). Celem regresji liniowej jest znalezienie liniowej funkcji, która najlepiej opisuje związek między zmiennymi, umożliwiając przewidywanie wartości zmiennej zależnej na podstawie wartości zmiennych niezależnych.
+
+\textbf{Regresja liniowa prosta.}
+W przypadku pojedynczej zmiennej niezależnej model można opisać równaniem:
+\begin{equation}
+y = \alpha + \beta x + \varepsilon,
+\end{equation}
+gdzie \(y\) to zmienna zależna, \(x\) to zmienna niezależna, \(\alpha\) to wyraz wolny, \(\beta\) to współczynnik nachylenia linii regresji, a \(\varepsilon\) to składnik losowy (błąd modelu).
+
+\textbf{Regresja wieloraka.}
+Regresja wieloraka jest rozszerzeniem regresji prostej, poprzez używanie wielu zmiennych niezależnych. Zakłada się liniową zależność między zmienną zależną a kombinacją liniową zmiennych niezależnych:
+\begin{equation}
+y = \alpha + \sum_{i=1}^{p} \beta_i x_i + \varepsilon,
+\end{equation}
+gdzie \(y\) to zmienna zależna, \(\alpha\) to wyraz wolny, \(x_i\) to zmienne niezależne, \(\beta_i\) to współczynniki regresji określające wpływ danej zmiennej na zmienną zależną, a \(\varepsilon\) to składnik losowy (błąd modelu).
+
+Celem algorytmu regresji (prostej i wielorakiej) jest znalezienie optymalnych wartości współczynników \(\beta_i\), które minimalizują błąd predykcji. Współczynniki można dobrać za pomocą różnych metod, jednak najczęściej stosuje się metodę najmniejszych kwadratów (OLS — Ordinary Least Squares), która minimalizuje sumę kwadratów różnic między rzeczywistymi a przewidywanymi wartościami zmiennej zależnej.
+
+\textbf{Estymator OLS (macierzowy zapis).}
+\begin{equation}\label{eq:ols}
+\widehat{\boldsymbol{\beta}} = (X^\top X)^{-1} X^\top \mathbf{y}
+\end{equation}
+
+Wzór \eqref{eq:ols} to macierzowy zapis estymatora OLS. Wyjaśnienie:
+\begin{itemize}
+  \item \(X\) — macierz projektująca (design matrix) o wymiarach \(n\times p\) (lub \(n\times (p+1)\), jeśli dodano kolumnę jedynek dla wyrazu wolnego),  
+  \item \(\mathbf{y}\) — wektor obserwacji o wymiarze \(n\times 1\),  
+  \item \(\widehat{\boldsymbol{\beta}}\) — wektor estymowanych współczynników o wymiarze \(p\times 1\).
+\end{itemize}
+
+Aby wyrażenie było poprawne, macierz \(X^\top X\) musi być odwracalna (brak doskonałej multikolinearności). Przy klasycznych założeniach (m.in. \(E[\varepsilon]=0\), \(\text{Var}(\varepsilon)=\sigma^2 I\)) estymator jest nieobciążony, a jego wariancja wynosi \(\text{Var}(\widehat{\boldsymbol{\beta}})=\sigma^2 (X^\top X)^{-1}\). Gdy \(X^\top X\) jest źle uwarunkowana lub nieodwracalna, stosuje się regularyzację (np. Ridge) lub metody numeryczne (gradient descent, SVD)\citep{james2013}.
+
+\vspace{0.5cm}
+
+\textbf{Inne metody estymacji współczynników regresji liniowej:}
+\begin{itemize}
+    \item Metoda gradientu prostego (Gradient Descent) — iteracyjna metoda optymalizacji minimalizująca funkcję straty poprzez aktualizację współczynników w kierunku przeciwnym do gradientu \citep{bishop2006,murphy2012}.
+    \item Metoda najmniejszych modułów (Least Absolute Deviations) — minimalizuje sumę bezwzględnych różnic między rzeczywistymi a przewidywanymi wartościami, co czyni ją bardziej odporną na wartości odstające \citep{birkes1993}. 
+    \item Metoda Ridge Regression — wprowadza regularyzację L2, karę za duże wartości współczynników, co pomaga w radzeniu sobie z problemem multikolinearności i przeuczenia modelu \citep{hoerl1970,hastie2009}.
+    \item Metoda Lasso Regression — regularyzacja L1, która może prowadzić do zerowania niektórych współczynników, skutkując modelem o mniejszej liczbie cech (automatyczny wybór cech) \citep{tibshirani1996}.
+    \item Metoda Elastic Net — łączy regularyzację L1 i L2, co pozwala na lepsze dostosowanie modelu do danych \citep{zou2005}.
+    \item Metoda SVD (Singular Value Decomposition) — rozkłada macierz projektującą na składniki, umożliwiając stabilne obliczenie współczynników regresji nawet w przypadku kolinearności cech \citep{golub1996,press2007}.
+    \item Metoda Bayesian Regression — wykorzystuje podejście bayesowskie do estymacji współczynników, uwzględniając niepewność i priorytety w modelu \citep{gelman2006,bishop2006}.
+    \item QR Decomposition — rozkłada macierz projektującą na iloczyn macierzy ortogonalnej i górnotrójkątnej, co umożliwia efektywne rozwiązanie układu równań regresji \citep{golub1996,press2007}.
+\end{itemize}
+
+\subsection{Regresja logistyczna (Logistic Regression)}
+Regresja logistyczna to technika statystyczna i uczenia maszynowego stosowana do modelowania zależności między zmienną zależną a jedną lub więcej zmiennymi niezależnymi, gdy zmienna zależna przyjmuję wartości binarne (np. 0 lub 1, tak lub nie). Celem regresji logistycznej jest przewidywanie prawdopodobieństwa przynależności do jednej z dwóch klas na podstawie wartości zmiennych niezależnych.
+
+\textbf{Model regresji logistycznej.}
+Model regresji logistycznej można zapisać jako:
+\begin{equation}
+P(Y=1|X) = \sigma(\boldsymbol{\beta}^\top X) = \frac{1}{1 + e^{-\boldsymbol{\beta}^\top X}}
+\end{equation}
+gdzie:
+\begin{itemize}
+  \item \(P(Y=1|X)\) — prawdopodobieństwo, że zmienna zależna \(Y\) przyjmuje wartość 1, biorąc pod uwagę zmienne niezależne \(X\),
+  \item \(\sigma(z)\) — funkcja sigmoidalna, która przekształca dowolną wartość rzeczywistą \(z\) w przedział (0, 1).
+\end{itemize}
+
+\textbf{Estymacja parametrów.}
+Parametry modelu \(\boldsymbol{\beta}\) są estymowane za pomocą metody największej wiarygodności (Maximum Likelihood Estimation, MLE). Celem jest maksymalizacja funkcji wiarygodności:
+\begin{equation}
+L(\boldsymbol{\beta}) = \prod_{i=1}^{n} P(Y_i|X_i; \boldsymbol{\beta})
+\end{equation}
+co jest równoważne minimalizacji funkcji straty:
+\begin{equation}
+J(\boldsymbol{\beta}) = -\sum_{i=1}^{n} \left[ Y_i \log(P(Y_i|X_i; \boldsymbol{\beta})) + (1 - Y_i) \log(1 - P(Y_i|X_i; \boldsymbol{\beta})) \right]
+\end{equation}
+
+\textbf{Właściwości modelu.}
+Model regresji logistycznej ma kilka istotnych właściwości:
+\begin{itemize}
+  \item Wynikiem modelu jest prawdopodobieństwo, co czyni go odpowiednim narzędziem do klasyfikacji binarnej.
+  \item Model jest odporny na wartości odstające, ponieważ wykorzystuje funkcję sigmoidalną.
+  \item Można go łatwo rozszerzyć na problemy wieloklasowe (np. regresja wielomianowa).
+\end{itemize}
+
+\subsection{\(k\)-Najbliższych Sąsiadów (k-Nearest Neighbors)}
+Algorytm \(k\)-Najbliższych Sąsiadów umieszcza dane wejściowe w przestrzeni wielowymiarowej i klasyfikuje je na podstawie etykiet najbliższych sąsiadów w tej przestrzeni.
+Przestrzeń jest definiowana przez cechy danych, zbiór danych posiadający \(x\) cech jest reprezentowany w \(x\)-wymiarowej przestrzeni.
+Algorytm klasyfikując dany obiekt oblicza odległości między nim a wszystkimi innymi obiektami w przestrzeni, a następnie wybiera \(k\) najblizszych sąsiadów.
+Wartość \(k\) jest ustalana ustalana przed rozpoczęciem działania algorytmu. Niska wartość parametru \(k\) jest bardziej podatna na szumy w danych, podczas gdy wysoka wartość \(k\) może prowadzić do nadmiernego uogólnienia modelu \citep{cover1967}.
+
+\vspace{0.5cm}
+Algorytm \(k\)-najbliższych sąsiadów może wykorzystywać różne metryki do obliczania odległości m.in:
+
+\vspace{0.5cm}
+\textbf{Metryka Euklidesowa:}
+Najpowszechniejsza metryka używana do obliczania odległości między dwoma punktami w przestrzeni wielowymiarowej. Definiowana jest jako:
+\begin{equation}
+d(p, q) = \sqrt{\sum_{i=1}^{n} (p_i - q_i)^2}
+\end{equation}
+gdzie \(p\) i \(q\) to dwa punkty w przestrzeni, a \(n\) to liczba wymiarów. Wyliczanie odległości metryką euklidesową polega na policzeniu różnicy ogległości w każdym wymiarze dla dwóch punktów,
+zsumowaniu kwadratów tych różnic, a następnie wyciągnięciu pierwiastka kwadratowego z tej sumy.
+
+\vspace{0.5cm}
+\textbf{Metryka Manhattan:}
+Metryka Manhattan, nazywana również metryką taksówkową lub L1, mierzy odległość miedzy dwoma punktami jako sumę watości bezwzględnych z różnic współżędnych.
+Definiowana jest jako:
+\begin{equation}
+d(p, q) = \sum_{i=1}^{n} |p_i - q_i|
+\end{equation}
+gdzie \(p\) i \(q\) to dwa punkty w przestrzeni, a \(n\) to liczba wymiarów. Obliczana jest jest różnica wartości \(p\) i \(q\) dla każdego wymiaru, a następnie sumowane są wartości bezwzględne tych różnic.
+
+\vspace{0.5cm}
+\textbf{Metryka Kosinusowa:}
