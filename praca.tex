@@ -1,35 +1,158 @@
-\documentclass{report}
+% filepath: c:\Users\mat3u\Desktop\Repo\praca_magisterska\praca.tex
+%\documentclass[printmode,oneside,pl]{mgr}  % do publikacji elektronicznej - wymaga klasy mgr.cls
+%\documentclass[printmode,pl]{mgr}  % do wydruku dwustronnego - wymaga klasy mgr.cls
+\documentclass[12pt,a4paper,oneside]{report}  % standardowa klasa report
+
+%----------------------| Wybór strony kodowej |------------------------
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[polish]{babel}
-\usepackage{graphicx}
+
+%-------------------------| Wybór kroju pisma |------------------------
+%% wybór Antykwy Toruńskiej - bardziej "współczesnej", całkowicie polskiej czcionki
+%\usepackage{anttor}
+
+%---------------------------| Pakietologia |-------------------------
+\usepackage{geometry}           % manipulowanie geometrią łamu
+\usepackage{indentfirst}        % wcięcia akapitowe w pierwszych paragrafach rozdziałów
+\usepackage[dvipsnames]{xcolor} % by mieć nazwy kolorów
+
+%% zmiana formatowania tytulariów
 \usepackage{titlesec}
-\usepackage[round]{natbib}
-\usepackage{amsmath}
-\begin{document}
-
-
-\includegraphics[page=1,width=0.6\textwidth]{pl.pdf}\par\vspace{1.5cm}
-{\LARGE Uczenie maszynowe jako narzędzie\\ doskonalenia procesów wytwórczych\par}
-  \vspace{1.5cm}
-  {\Large Mateusz Tabor\par}
-
 \titleformat{\chapter}[display]
   {\normalfont\huge\bfseries\centering} 
   {\thechapter}{20pt}{\Huge}            
 \titlespacing*{\chapter}{0pt}{-10pt}{20pt}
 
+%% Bibliografia
+\usepackage[round]{natbib}
 
-\clearpage
-%%\include{rozdzialy/wstep}
-%%\include{rozdzialy/rozdzial1}
-%%\include{rozdzialy/rozdzial2}
+%% modyfikacja odstępów między pozycjami w bibliografii
+\let\oldbibliography\thebibliography
+\renewcommand{\thebibliography}[1]{%
+  \oldbibliography{#1}%
+  \setlength{\itemsep}{0pt plus 0.3ex}%
+}
+
+%% ustawienie maksymalnej liczby i obszaru dla obiektów pływających (rysunków, tabel)
+\setcounter{topnumber}{3}
+\setcounter{totalnumber}{4}
+\renewcommand{\topfraction}{.8}
+
+\usepackage{graphicx}                % dołaczanie i manipulowanie grafikami
+\usepackage[caption = false]{subfig} % obsługa rysunków z częściami
+
+\usepackage{mathtools}          % doskonałe pakiety rozszerzające do matematyki
+\usepackage{amssymb, amsfonts}  % mathtools zastępuje amsmath
+\usepackage{bm}                 % pogrubiona matematyka
+
+\usepackage{hyperref}           % obsługa aktywnych odnośników i hypertekstu
+\usepackage{url}                % obsługa adresów url
+
+%-----------------------| End of pakietologia |----------------------
+
+%---------------------------| Tytularia |---------------------------
+\author{Mateusz A. Tabor}
+\title{Uczenie maszynowe jako narzędzie doskonalenia procesów wytwórczych}
+\engtitle{Machine Learning as a Tool for Manufacturing Process Improvement}
+\supervisor{Dr inż. Radosław Idzikowski}
+\field{Zarządzanie i~Inżynieria Produkcji (ZIP)}
+\specialisation{Organizacja Produkcji (OP)}
+\date{2026}
+
+%-------------------------| Hyper data general configuration |------------------------
+\hypersetup{unicode,
+   pdfauthor={Mateusz Tabor},
+   pdftitle={Uczenie maszynowe jako narzędzie doskonalenia procesów wytwórczych},
+   pdfsubject={Praca dyplomowa magisterska},
+   pdfkeywords={uczenie maszynowe, procesy wytwórcze, praca dyplomowa},
+   pdfpagemode=UseOutlines,
+   pdfpagelayout=SinglePage,
+   pdfstartview={Fit},
+   pdfstartpage=1,
+   bookmarksopen=true,
+   bookmarksopenlevel=1,
+   colorlinks=true,
+   citecolor=cyan,
+   filecolor=red,
+   linkcolor=blue,
+   menucolor=green,
+   urlcolor=blue
+}
+
+%-------------------------| Geometria strony |-----------------------------
+\geometry{
+  textwidth      = 16cm,
+  textheight     = 24cm,
+  top            = 25mm,
+  headheight     = 15mm,
+  headsep        =  3mm,
+  marginparwidth = 25mm,
+  bindingoffset  =  0mm
+}
+
+%--------------------------| Ścieżki do rysunków |-------------------------------
+\graphicspath{{./figures/}{./}}
+
+%-------------------------| The document starts here |-------------------------------
+\begin{document}
+
+\pdfbookmark{Strona tytułowa}{tytul}
+
+%% Prosta strona tytułowa
+\begin{titlepage}
+  \centering
+  \includegraphics[page=1,width=0.6\textwidth]{pl.pdf}\par\vspace{1.5cm}
+  {\LARGE Uczenie maszynowe jako narzędzie\\ doskonalenia procesów wytwórczych\par}
+  \vspace{1.5cm}
+  {\Large Mateusz Tabor\par}
+  \vfill
+  {\large Październik 2025\par}
+\end{titlepage}
+
+\cleardoublepage
+
+%% Streszczenia (opcjonalnie)
+%\input{sources/streszczenie.tex}
+
+\cleardoublepage
+\pdfbookmark{\contentsname}{Contents}
+\tableofcontents
+\markboth{\contentsname}{\contentsname}
+
+%---------------------------| Część właściwa dokumentu |---------------------------
+
+%\include{rozdzialy/wstep}
+%\include{rozdzialy/rozdzial1}
+%\include{rozdzialy/rozdzial2}
 \include{rozdzialy/rozdzial3}
-%%\include{rozdzialy/rozdzial4}
-%%\include{rozdzialy/rozdzial5}
-%%\include{rozdzialy/zakonczenie}
+%\include{rozdzialy/rozdzial4}
+%\include{rozdzialy/rozdzial5}
+%\include{rozdzialy/zakonczenie}
 
-
-\bibliographystyle{plainnat} 
+%---------------------------| Bibliografia |---------------------------
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{\bibname}
+\bibliographystyle{plainnat}
 \bibliography{bib/biblio}
+\markboth{\bibname}{\bibname}
+
+%%spis tabel (opcjonalnie)
+%\cleardoublepage
+%\phantomsection
+%\listoftables
+%\addcontentsline{toc}{chapter}{\listtablename}
+%\markboth{\listtablename}{\listtablename}
+
+%%spis rysunków (opcjonalnie)
+%\cleardoublepage
+%\phantomsection
+%\addcontentsline{toc}{chapter}{\listfigurename}
+%\listoffigures
+%\markboth{\listfigurename}{\listfigurename}
+
+%\appendix
+%\include{rozdzialy/dodatek}
+
 \end{document}

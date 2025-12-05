@@ -1,0 +1,9 @@
+\babel@toc {polish}{}\relax 
+\contentsline {chapter}{\numberline {1}Charakterystyka algorytmów uczenia maszynowego}{2}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Uczenie nadzorowane (Supervised Learning)}{2}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Regresja liniowa (Linear Regression)}{2}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Regresja logistyczna (Logistic Regression)}{4}{subsection.1.1.2}%
+\contentsline {subsection}{\numberline {1.1.3}\(k\)-Najbliższych Sąsiadów (k-Nearest Neighbors)}{5}{subsection.1.1.3}%
+\contentsline {subsection}{\numberline {1.1.4}Drzewa decyzyjne (Decision Trees)}{6}{subsection.1.1.4}%
+\contentsline {subsection}{\numberline {1.1.5}Las losowy (Random Forest)}{7}{subsection.1.1.5}%
+\contentsline {chapter}{Bibliografia}{10}{section*.2}%
