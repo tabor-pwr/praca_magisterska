@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.10.16)  5 DEC 2025 22:41
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.10.16)  5 DEC 2025 22:48
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -368,84 +368,37 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 28
 )
 \Hy@SectionHShift=\skip67
 )
-c:/Users/mat3u/Desktop/Repo/praca_magisterska/praca.tex:57: Undefined control sequence.
-l.57 \engtitle
-              {Machine Learning as a Tool for Manufacturing Process Improvem...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
-c:/Users/mat3u/Desktop/Repo/praca_magisterska/praca.tex:57: LaTeX Error: Missing \begin{document}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.57 \engtitle{M
-                achine Learning as a Tool for Manufacturing Process Improvem...
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-c:/Users/mat3u/Desktop/Repo/praca_magisterska/praca.tex:58: Undefined control sequence.
-l.58 \supervisor
-                {Dr inÅ¼. RadosÅ‚aw Idzikowski}
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-c:/Users/mat3u/Desktop/Repo/praca_magisterska/praca.tex:59: Undefined control sequence.
-l.59 \field
-           {ZarzÄ…dzanie i~InÅ¼ynieria Produkcji (ZIP)}
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-c:/Users/mat3u/Desktop/Repo/praca_magisterska/praca.tex:60: Undefined control sequence.
-l.60 \specialisation
-                    {Organizacja Produkcji (OP)}
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-Package hyperref Info: Option `unicode' set `true' on input line 81.
-Package hyperref Info: Option `bookmarksopen' set `true' on input line 81.
-Package hyperref Info: Option `colorlinks' set `true' on input line 81.
-(C:\Users\mat3u\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
+Package hyperref Info: Option `unicode' set `true' on input line 77.
+Package hyperref Info: Option `bookmarksopen' set `true' on input line 77.
+Package hyperref Info: Option `colorlinks' set `true' on input line 77.
+ (C:\Users\mat3u\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-06-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count325
-)
-No file praca.aux.
+) (praca.aux
+Package babel Info: 'polish' activates 'polish' shorthands.
+(babel)             Reported on input line 8.
+ (rozdzialy/rozdzial3.aux))
 \openout1 = `praca.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 98.
-LaTeX Font Info:    ... okay on input line 98.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 98.
-LaTeX Font Info:    ... okay on input line 98.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 98.
-LaTeX Font Info:    ... okay on input line 98.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 98.
-LaTeX Font Info:    ... okay on input line 98.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 98.
-LaTeX Font Info:    ... okay on input line 98.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 98.
-LaTeX Font Info:    ... okay on input line 98.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 98.
-LaTeX Font Info:    ... okay on input line 98.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 98.
-LaTeX Font Info:    ... okay on input line 98.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 98.
-LaTeX Font Info:    ... okay on input line 98.
-Package babel Info: 'polish' activates 'polish' shorthands.
-(babel)             Reported on input line 98.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 94.
+LaTeX Font Info:    ... okay on input line 94.
+
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -502,29 +455,28 @@ File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring ON on input line 98.
+Package hyperref Info: Link coloring ON on input line 94.
+ (praca.out) (praca.out)
 \@outlinefile=\write3
 \openout3 = `praca.out'.
 
-
+<pl.pdf, id=43, page=1, 291.0875pt x 80.3pt>
+File: pl.pdf Graphic file (type pdf)
+<use pl.pdf, page 1>
+Package pdftex.def Info: pl.pdf , page1 used on input line 101.
+(pdftex.def)             Requested size: 182.09485pt x 50.23392pt.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 119.
+ (C:\Users\mat3u\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 119.
+ (C:\Users\mat3u\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
 
 [1
 
-{C:/Users/mat3u/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
-<pl.pdf, id=10, page=1, 291.0875pt x 80.3pt>
-File: pl.pdf Graphic file (type pdf)
-<use pl.pdf, page 1>
-Package pdftex.def Info: pl.pdf , page1 used on input line 105.
-(pdftex.def)             Requested size: 273.14922pt x 75.35701pt.
-
-
-
-pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.111 \end{titlepage}
-                      [1 <./pl.pdf>]
-No file praca.toc.
+{C:/Users/mat3u/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./pl.pdf>] (praca.toc)
 \tf@toc=\write4
 \openout4 = `praca.toc'.
 
@@ -534,7 +486,7 @@ No file praca.toc.
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.128 \include{rozdzialy/rozdzial3}
+l.145 \include{rozdzialy/rozdzial3}
                                     [1
 
 
@@ -545,73 +497,14 @@ l.128 \include{rozdzialy/rozdzial3}
  (rozdzialy/rozdzial3.tex
 Rozdzia\l  1.
 
-Package natbib Warning: Citation `bishop2006' on page 2 undefined on input line 12.
-
-
-Package natbib Warning: Citation `hastie2009' on page 2 undefined on input line 12.
-
-LaTeX Font Info:    Trying to load font information for U+msa on input line 18.
-(C:\Users\mat3u\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-)
-LaTeX Font Info:    Trying to load font information for U+msb on input line 18.
- (C:\Users\mat3u\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
 
 [2
 
 
 ]
-
-LaTeX Warning: Reference `eq:ols' on page 3 undefined on input line 37.
-
-
-Package natbib Warning: Citation `james2013' on page 3 undefined on input line 44.
-
-
-Package natbib Warning: Citation `bishop2006' on page 3 undefined on input line 50.
-
-
-Package natbib Warning: Citation `murphy2012' on page 3 undefined on input line 50.
-
-
-Package natbib Warning: Citation `birkes1993' on page 3 undefined on input line 51.
-
-
 Overfull \hbox (2.37979pt too wide) in paragraph at lines 51--52
 \T1/cmr/m/n/12 bez-wzgl¦d-nych ró»-nic mi¦-dzy rze-czy-wi-stymi a prze-wi-dy-wa-nymi war-to-±ciami, co czyni
  []
-
-
-Package natbib Warning: Citation `hoerl1970' on page 3 undefined on input line 52.
-
-
-Package natbib Warning: Citation `hastie2009' on page 3 undefined on input line 52.
-
-
-Package natbib Warning: Citation `tibshirani1996' on page 3 undefined on input line 53.
-
-
-Package natbib Warning: Citation `zou2005' on page 3 undefined on input line 54.
-
-
-Package natbib Warning: Citation `golub1996' on page 3 undefined on input line 55.
-
-
-Package natbib Warning: Citation `press2007' on page 3 undefined on input line 55.
-
-
-Package natbib Warning: Citation `gelman2006' on page 3 undefined on input line 56.
-
-
-Package natbib Warning: Citation `bishop2006' on page 3 undefined on input line 56.
-
-
-Package natbib Warning: Citation `golub1996' on page 3 undefined on input line 57.
-
-
-Package natbib Warning: Citation `press2007' on page 3 undefined on input line 57.
 
 
 
@@ -621,94 +514,26 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 92.
 
 
-Package natbib Warning: Citation `cover1967' on page 4 undefined on input line 96.
-
-
 
 [4]
-
-Package natbib Warning: Citation `duda2001' on page 5 undefined on input line 108.
-
-
-Package natbib Warning: Citation `bishop2006' on page 5 undefined on input line 108.
-
-
-Package natbib Warning: Citation `duda2001' on page 5 undefined on input line 117.
-
-
 Overfull \hbox (9.79117pt too wide) in paragraph at lines 120--123
 []\T1/cmr/bx/n/12 Metryka Ko-si-nu-sowa: \T1/cmr/m/n/12 Me-tryka Ko-si-nu-sowa mie-rzy wy-zna-cza od-le-gªo±¢ mi¦-dzy dwoma
  []
 
 
-Package natbib Warning: Citation `manning2008' on page 5 undefined on input line 127.
-
-
-Package natbib Warning: Citation `bishop2006' on page 5 undefined on input line 127.
-
-
 
 [5]
 
-Package natbib Warning: Citation `hastie2009' on page 6 undefined on input line 138.
-
-
-Package natbib Warning: Citation `quinlan1986' on page 6 undefined on input line 144.
-
-
-Package natbib Warning: Citation `breiman1984' on page 6 undefined on input line 144.
-
-
-Package natbib Warning: Citation `shannon1948' on page 6 undefined on input line 157.
-
-
-Package natbib Warning: Citation `quinlan1986' on page 6 undefined on input line 157.
-
-
-Package natbib Warning: Citation `breiman1984' on page 6 undefined on input line 165.
-
-
-
 [6]
 
-Package natbib Warning: Citation `quinlan1986' on page 7 undefined on input line 173.
-
-
-Package natbib Warning: Citation `quinlan1993' on page 7 undefined on input line 185.
-
-
-Package natbib Warning: Citation `breiman1984' on page 7 undefined on input line 193.
-
-
-Package natbib Warning: Citation `breiman2001' on page 7 undefined on input line 199.
-
-
-
 [7]
-
-Package natbib Warning: Citation `breiman2001' on page 8 undefined on input line 205.
-
-
 Overfull \hbox (1.63719pt too wide) in paragraph at lines 235--239
 []\T1/cmr/bx/n/12 Grid Se-arch (prze-szu-ki-wa-nie siatki) \T1/cmr/m/n/12 Grid Se-arch po-lega na prze-szu-ki-wa-niu wszyst-
  []
 
 
-Package natbib Warning: Citation `akiba2019' on page 8 undefined on input line 247.
 
-
-
-[8]
-
-Package natbib Warning: Citation `snoek2012' on page 9 undefined on input line 251.
-
-
-Package natbib Warning: Citation `feurer2015' on page 9 undefined on input line 255.
-
-
-Package natbib Warning: Citation `olson2016' on page 9 undefined on input line 255.
-
-)
+[8])
 
 [9] (praca.bbl
 
@@ -719,48 +544,26 @@ Package natbib Warning: Citation `olson2016' on page 9 undefined on input line 2
 
 ])
 
-Package natbib Warning: There were undefined citations.
-
-
-
-[11] (praca.aux (rozdzialy/rozdzial3.aux)
-
-Package natbib Warning: Citation(s) may have changed.
-(natbib)                Rerun to get citations correct.
-
-)
+[11] (praca.aux (rozdzialy/rozdzial3.aux))
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-09-02>
  ***********
-
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
-Package rerunfilecheck Warning: File `praca.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `praca.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  B8DC0EFECA0B75E2D598E7D53027CA75;2186.
+Package rerunfilecheck Info: File `praca.out' has not changed.
+(rerunfilecheck)             Checksum: B8DC0EFECA0B75E2D598E7D53027CA75;2186.
  ) 
 Here is how much of TeX's memory you used:
- 14625 strings out of 468081
- 231142 string characters out of 5425788
- 671196 words of memory out of 5000000
- 43024 multiletter control sequences out of 15000+600000
- 649992 words of font info for 100 fonts, out of 8000000 for 9000
+ 14654 strings out of 468081
+ 231811 string characters out of 5425788
+ 672693 words of memory out of 5000000
+ 43041 multiletter control sequences out of 15000+600000
+ 651457 words of font info for 102 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,12n,79p,890b,616s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1200.pk> <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0800.pk> <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk> <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1728.pk> <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2488.pk> <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1440.pk> <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1728.pk> <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm2074.pk> <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmib10.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on praca.pdf (13 pages, 303604 bytes).
+ 75i,12n,79p,883b,616s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1200.pk> <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0800.pk> <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk> <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1728.pk> <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2488.pk> <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1440.pk> <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2074.pk> <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1440.pk><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmib10.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on praca.pdf (12 pages, 336117 bytes).
 PDF statistics:
- 566 PDF objects out of 1000 (max. 8388607)
+ 710 PDF objects out of 1000 (max. 8388607)
  64 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 86 words of extra memory for PDF output out of 10000 (max. 10000000)
 
