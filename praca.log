@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.10.16)  16 NOV 2025 14:34
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.10.16)  5 DEC 2025 22:28
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -163,7 +163,7 @@ File: l3backend-pdftex.def 2025-06-09 L3 backend support: PDF output (pdfTeX)
 ) (praca.aux
 Package babel Info: 'polish' activates 'polish' shorthands.
 (babel)             Reported on input line 5.
- (rozdzialy/wstep.aux) (rozdzialy/rozdzial1.aux) (rozdzialy/rozdzial2.aux) (rozdzialy/rozdzial3.aux) (rozdzialy/rozdzial4.aux) (rozdzialy/rozdzial5.aux) (rozdzialy/rozdzial6.aux))
+ (rozdzialy/rozdzial3.aux))
 \openout1 = `praca.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 9.
@@ -233,49 +233,13 @@ Package pdftex.def Info: pl.pdf , page1 used on input line 12.
 [1
 
 {C:/Users/mat3u/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./pl.pdf>]
-\openout2 = `rozdzialy/wstep.aux'.
-
- (rozdzialy/wstep.tex
-Rozdzia\l  1.
-)
-
-[2
-
-
-
-]
-\openout2 = `rozdzialy/rozdzial1.aux'.
-
- (rozdzialy/rozdzial1.tex
-Rozdzia\l  2.
-)
-
-[3
-
-
-
-
-]
-\openout2 = `rozdzialy/rozdzial2.aux'.
-
- (rozdzialy/rozdzial2.tex
-Rozdzia\l  3.
-)
-
-[4
-
-
-
-
-]
 \openout2 = `rozdzialy/rozdzial3.aux'.
 
  (rozdzialy/rozdzial3.tex
-Rozdzia\l  4.
+Rozdzia\l  1.
 
 
-[5
-
+[2
 
 
 
@@ -286,72 +250,61 @@ Overfull \hbox (5.00562pt too wide) in paragraph at lines 44--45
 
 
 
+[3]
+
+[4]
+
+[5]
+
 [6]
 
 [7]
-
-[8])
-
-[9]
-\openout2 = `rozdzialy/rozdzial4.aux'.
-
- (rozdzialy/rozdzial4.tex
-Rozdzia\l  5.
-)
-
-[10
+Overfull \hbox (72.13994pt too wide) in paragraph at lines 215--230
+ [][] 
+ []
 
 
 
+[8]
 
-]
-\openout2 = `rozdzialy/rozdzial5.aux'.
+[9])
 
- (rozdzialy/rozdzial5.tex
-Rozdzia\l  6.
-)
+[10] (praca.bbl
 
 [11
 
 
 
-
 ]
-\openout2 = `rozdzialy/rozdzial6.aux'.
+Underfull \hbox (badness 1226) in paragraph at lines 122--127
+[]\T1/cmr/m/n/10 Claude E. Shan-non.  A ma-the-ma-ti-cal the-ory of com-mu-ni-ca-tion.  \T1/cmr/m/it/10 Bell
+ []
 
- (rozdzialy/rozdzial6.tex
-Rozdzia\l  7.
+
+Underfull \hbox (badness 2285) in paragraph at lines 122--127
+\T1/cmr/m/it/10 Sys-tem Tech-ni-cal Jo-ur-nal\T1/cmr/m/n/10 , 27(3):379--423, 1948.  doi: 10.1002/j.1538-
+ []
+
 )
 
-[12
-
-
-
-
-] (praca.bbl)
-
-[13
-
-
-
-] (praca.aux (rozdzialy/wstep.aux) (rozdzialy/rozdzial1.aux) (rozdzialy/rozdzial2.aux) (rozdzialy/rozdzial3.aux) (rozdzialy/rozdzial4.aux) (rozdzialy/rozdzial5.aux) (rozdzialy/rozdzial6.aux))
+[12] (praca.aux (rozdzialy/rozdzial3.aux))
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-09-02>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 4926 strings out of 468081
- 82392 string characters out of 5425788
- 495867 words of memory out of 5000000
- 33469 multiletter control sequences out of 15000+600000
+ 4820 strings out of 468081
+ 77483 string characters out of 5425788
+ 497797 words of memory out of 5000000
+ 33405 multiletter control sequences out of 15000+600000
  645539 words of font info for 80 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 59i,7n,67p,608b,355s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1000.pk> <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk> <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1000.pk> <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2488.pk> <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2074.pk> <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1440.pk> <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1728.pk><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmib10.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on praca.pdf (13 pages, 254069 bytes).
+ 59i,12n,67p,883b,355s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1000.pk> <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0700.pk> <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk> <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1000.pk> <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2488.pk> <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2074.pk> <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1440.pk> <C:\Users\mat3u\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1728.pk><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmib10.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Users/mat3u/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
+Output written on praca.pdf (12 pages, 291338 bytes).
 PDF statistics:
- 442 PDF objects out of 1000 (max. 8388607)
+ 471 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

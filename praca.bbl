@@ -1,9 +1,16 @@
-\begin{thebibliography}{12}
+\begin{thebibliography}{23}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Akiba et~al.(2019)Akiba, Sano, Yanase, Ohta, and Koyama]{akiba2019}
+Takuya Akiba, Shotaro Sano, Toshihiko Yanase, Takeru Ohta, and Masanori Koyama.
+\newblock Optuna: A next-generation hyperparameter optimization framework.
+\newblock In \emph{Proceedings of the 25th ACM SIGKDD International Conference
+  on Knowledge Discovery and Data Mining}, pages 2623--2631, 2019.
+\newblock \doi{10.1145/3292500.3330701}.
 
 \bibitem[Birkes and Dodge(1993)]{birkes1993}
 David Birkes and Yadolah Dodge.
@@ -15,12 +22,36 @@ Christopher~M. Bishop.
 \newblock \emph{Pattern Recognition and Machine Learning}.
 \newblock Springer, New York, 2006.
 
+\bibitem[Breiman(2001)]{breiman2001}
+Leo Breiman.
+\newblock Random forests.
+\newblock \emph{Machine Learning}, 45\penalty0 (1):\penalty0 5--32, 2001.
+\newblock \doi{10.1023/A:1010933404324}.
+
+\bibitem[Breiman et~al.(1984)Breiman, Friedman, Olshen, and Stone]{breiman1984}
+Leo Breiman, Jerome~H. Friedman, Richard~A. Olshen, and Charles~J. Stone.
+\newblock \emph{Classification and Regression Trees}.
+\newblock Wadsworth, Belmont, CA, 1984.
+
 \bibitem[Cover and Hart(1967)]{cover1967}
 Thomas~M. Cover and Peter~E. Hart.
 \newblock Nearest neighbor pattern classification.
 \newblock \emph{IEEE Transactions on Information Theory}, 13\penalty0
   (1):\penalty0 21--27, 1967.
 \newblock \doi{10.1109/TIT.1967.1053964}.
+
+\bibitem[Duda et~al.(2001)Duda, Hart, and Stork]{duda2001}
+Richard~O. Duda, Peter~E. Hart, and David~G. Stork.
+\newblock \emph{Pattern Classification}.
+\newblock Wiley, New York, 2nd edition, 2001.
+
+\bibitem[Feurer et~al.(2015)Feurer, Klein, Eggensperger, Springenberg, Blum,
+  and Hutter]{feurer2015}
+Matthias Feurer, Aaron Klein, Katharina Eggensperger, Jost~Tobias Springenberg,
+  Manuel Blum, and Frank Hutter.
+\newblock Efficient and robust automated machine learning.
+\newblock In \emph{Advances in Neural Information Processing Systems},
+  volume~28, 2015.
 
 \bibitem[Gelman and Hill(2006)]{gelman2006}
 Andrew Gelman and Jennifer Hill.
@@ -51,10 +82,23 @@ Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani.
   R}.
 \newblock Springer, New York, 1st edition, 2013.
 
+\bibitem[Manning et~al.(2008)Manning, Raghavan, and Schütze]{manning2008}
+Christopher~D. Manning, Prabhakar Raghavan, and Hinrich Schütze.
+\newblock \emph{Introduction to Information Retrieval}.
+\newblock Cambridge University Press, Cambridge, 2008.
+
 \bibitem[Murphy(2012)]{murphy2012}
 Kevin~P. Murphy.
 \newblock \emph{Machine Learning: A Probabilistic Perspective}.
 \newblock MIT Press, Cambridge, MA, 2012.
+
+\bibitem[Olson et~al.(2016)Olson, Bartley, Urbanowicz, and Moore]{olson2016}
+Randal~S. Olson, Nathan Bartley, Ryan~J. Urbanowicz, and Jason~H. Moore.
+\newblock Evaluation of a tree-based pipeline optimization tool for automating
+  data science.
+\newblock In \emph{Proceedings of the Genetic and Evolutionary Computation
+  Conference}, pages 485--492, 2016.
+\newblock \doi{10.1145/2908812.2908918}.
 
 \bibitem[Press et~al.(2007)Press, Teukolsky, Vetterling, and
   Flannery]{press2007}
@@ -62,6 +106,29 @@ William~H. Press, Saul~A. Teukolsky, William~T. Vetterling, and Brian~P.
   Flannery.
 \newblock \emph{Numerical Recipes: The Art of Scientific Computing}.
 \newblock Cambridge University Press, Cambridge, 3rd edition, 2007.
+
+\bibitem[Quinlan(1986)]{quinlan1986}
+J.~Ross Quinlan.
+\newblock Induction of decision trees.
+\newblock \emph{Machine Learning}, 1\penalty0 (1):\penalty0 81--106, 1986.
+\newblock \doi{10.1007/BF00116251}.
+
+\bibitem[Quinlan(1993)]{quinlan1993}
+J.~Ross Quinlan.
+\newblock \emph{C4.5: Programs for Machine Learning}.
+\newblock Morgan Kaufmann, San Mateo, CA, 1993.
+
+\bibitem[Shannon(1948)]{shannon1948}
+Claude~E. Shannon.
+\newblock A mathematical theory of communication.
+\newblock \emph{Bell System Technical Journal}, 27\penalty0 (3):\penalty0
+  379--423, 1948.
+\newblock \doi{10.1002/j.1538-7305.1948.tb01338.x}.
+
+\bibitem[Snoek et~al.(2012)Snoek, Larochelle, and Adams]{snoek2012}
+Jasper Snoek, Hugo Larochelle, and Ryan~P. Adams.
+\newblock Practical bayesian optimization of machine learning algorithms.
+\newblock \emph{Advances in Neural Information Processing Systems}, 25, 2012.
 
 \bibitem[Tibshirani(1996)]{tibshirani1996}
 Robert Tibshirani.

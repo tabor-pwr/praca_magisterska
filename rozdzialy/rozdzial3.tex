@@ -105,7 +105,7 @@ Najpowszechniejsza metryka używana do obliczania odległości między dwoma pun
 d(p, q) = \sqrt{\sum_{i=1}^{n} (p_i - q_i)^2}
 \end{equation}
 gdzie \(p\) i \(q\) to dwa punkty w przestrzeni, a \(n\) to liczba wymiarów. Wyliczanie odległości metryką euklidesową polega na policzeniu różnicy ogległości w każdym wymiarze dla dwóch punktów,
-zsumowaniu kwadratów tych różnic, a następnie wyciągnięciu pierwiastka kwadratowego z tej sumy.
+zsumowaniu kwadratów tych różnic, a następnie wyciągnięciu pierwiastka kwadratowego z tej sumy \citep{duda2001,bishop2006}.
 
 \vspace{0.5cm}
 \textbf{Metryka Manhattan:}
@@ -114,7 +114,142 @@ Definiowana jest jako:
 \begin{equation}
 d(p, q) = \sum_{i=1}^{n} |p_i - q_i|
 \end{equation}
-gdzie \(p\) i \(q\) to dwa punkty w przestrzeni, a \(n\) to liczba wymiarów. Obliczana jest jest różnica wartości \(p\) i \(q\) dla każdego wymiaru, a następnie sumowane są wartości bezwzględne tych różnic.
+gdzie \(p\) i \(q\) to dwa punkty w przestrzeni, a \(n\) to liczba wymiarów. Obliczana jest jest różnica wartości \(p\) i \(q\) dla każdego wymiaru, a następnie sumowane są wartości bezwzględne tych różnic \citep{duda2001}.
 
 \vspace{0.5cm}
 \textbf{Metryka Kosinusowa:}
+Metryka Kosinusowa mierzy wyznacza odległość między dwoma punktami na podstawie wyliczonego kąta między nimi.
+Definiowana jest jako:
+\begin{equation}
+d(p, q) = 1 - \frac{p \cdot q}{\|p\| \|q\|}
+\end{equation}
+gdzie \(p\) i \(q\) to dwa punkty w przestrzeni, \(p \cdot q\) to iloczyn skalarny wektorów \(p\) i \(q\), a \(\|p\|\) i \(\|q\|\) to normy (długości) tych wektorów.
+Normy długości wektorów są obliczane jako pierwiastki kwadratowe z sumy kwadratów ich współrzędnych \citep{manning2008,bishop2006}.
+
+\vspace{0.5cm}
+\textbf{Metryka Minkowskiego:}
+Metryka Minkowskiego jest uogólnieniem metryk Euklidesowej i Manhattan. Umożliwa regulowanie sposobu obliczania odległości poprzez parametr \(p\).
+Definiowana jest jako:
+\begin{equation}
+d(p, q) = \left( \sum_{i=1}^{n} |
+p_i - q_i|^p \right)^{\frac{1}{p}}
+\end{equation}
+gdzie \(p\) i \(q\) to dwa punkty w przestrzeni, \(n\) to liczba wymiarów, a \(p\) to parametr regulujący sposób obliczania odległości.
+Dla \(p=1\) metryka Minkowskiego jest równoważna metryce Manhattan, a dla \(p=2\) jest równoważna metryce Euklidesowej \citep{hastie2009}.
+
+\subsection{Drzewa decyzyjne (Decision Trees)}
+Drzewa decyzyjne to algorytm uczenia maszynowego, która służy do podejmowania decyzji na podstawie zestawu reguł, które są reprezentowane w formie drzewa.
+Drzewo decyzyjne składa się z korzenia, które jest cechą dzielącą dane na grupy, węzłów wewnętrznych, które reprezentują pytania dotyczące cech danych, oraz liści, które reprezentują ostateczne decyzje lub klasyfikacje.
+Algorytm budowy drzewa decyzyjnego polega na iteracyjnym dzieleniu danych na podzbiory na podstawie cech, które najlepiej rozdzielają dane według określonego kryterium.
+Drzewo decyzyjne jest budowane, aż wszystkie elementy w podzbiorze należą do tej samej klasy lub nie ma już cech do podziału, osiągnie maksymalną głębokość lub kiedy dalszy podział nie poprawia jakości klasyfikacji \citep{quinlan1986,breiman1984}.
+
+\vspace{0.5cm}
+Drzewo decyzyjne do wyboru najlepszego podziału danych może wykorzystywać różne kryteria, m.in:
+
+\vspace{0.5cm}
+\textbf{Entropia:}
+Entropia jest miarą niepewności lub nieuporządkowania w zbiorze danych. Entropia jest wykorzystywana do oceny jakości podziału danych na podstaiwe cechy.
+Definiowana jest jako:
+\begin{equation} 
+H(S) = - \sum_{i=1}^{c} p_i \log_2(p_i)
+\end{equation}
+gdzie \(S\) to zbiór danych, \(c\) to liczba klas, a \(p_i\) to proporcja elementów należących do klasy \(i\) w zbiorze \(S\).
+Entropia obliczana jest jako suma iloczynów proporcji klas i logarytmów tych proporcji, a następnie mnożona przez -1 \citep{shannon1948,quinlan1986}.
+
+\vspace{0.5cm}
+\textbf{Wskaźnik Gini (Gini Impurity):}
+Wskaźnik Gini mierzy prawdopodobieństwo błędnej klasyfikacji losowo wybranego elementu, gdyby został on oznaczony losowo według rozkładu etykiet w węźle. Im niższy wskaźnik Gini, tym bardziej jednorodny jest węzeł. Wskaźnik Gini dla zbioru \(S\) jest definiowany jako:
+\begin{equation}
+\text{Gini}(S) = 1 - \sum_{i=1}^{c} p_i^2
+\end{equation}
+gdzie \(c\) to liczba klas, a \(p_i\) to proporcja przykładów w klasie \(i\). Wskaźnik Gini jest używany w algorytmie CART (Classification and Regression Trees) ze względu na swoją prostotę obliczeniową i dobrą wydajność \citep{breiman1984}.
+
+\vspace{0.5cm}
+\textbf{Zysk informacji (Information Gain):}
+Zysk informacji mierzy redukcję entropii osiągniętą przez podział zbioru danych według danego atrybutu. Jest to różnica między entropią zbioru nadrzędnego a ważoną sumą entropii zbiorów potomnych. Zysk informacji dla atrybutu \(A\) w zbiorze \(S\) definiuje się jako:
+\begin{equation}
+\text{IG}(S, A) = H(S) - \sum_{v \in \text{Values}(A)} \frac{|S_v|}{|S|} H(S_v)
+\end{equation}
+gdzie \(\text{Values}(A)\) to zbiór wszystkich możliwych wartości atrybutu \(A\), \(S_v\) to podzbiór \(S\), dla którego atrybut \(A\) ma wartość \(v\), a \(H(S)\) to entropia zbioru. Algorytm ID3 wybiera atrybut o największym zysku informacji \citep{quinlan1986}.
+
+\vspace{0.5cm}
+\textbf{Współczynnik zysku (Gain Ratio)}
+Współczynnik zysku jest modyfikacją zysku informacji, która koryguje tendencję do faworyzowania atrybutów o wielu wartościach. Normalizuje zysk informacji przez podzielenie go przez tzw. split information, która mierzy szerokość i jednolitość podziału. Współczynnik zysku dla atrybutu \(A\) w zbiorze \(S\) definiuje się jako:
+\begin{equation}
+\text{GainRatio}(S, A) = \frac{\text{IG}(S, A)}{\text{SplitInfo}(S, A)}
+\end{equation}
+gdzie \(\text{IG}(S, A)\) to zysk informacji dla atrybutu \(A\), a \(\text{SplitInfo}(S, A)\) to informacja o podziale, definiowana jako:
+\begin{equation}
+\text{SplitInfo}(S, A) = -\sum_{v \in \text{Values}(A)} \frac{|S_v|}{|S|} \log_2\left(\frac{|S_v|}{|S|}\right)
+\end{equation}
+gdzie \(\text{Values}(A)\) to zbiór wszystkich możliwych wartości atrybutu \(A\), \(S_v\) to podzbiór \(S\) zawierający elementy, dla których atrybut \(A\) ma wartość \(v\), \(|S_v|\) to liczba elementów w podzbiorze \(S_v\), a \(|S|\) to całkowita liczba elementów w zbiorze \(S\). Informacja o podziale mierzy, jak bardzo atrybut dzieli dane. Im bardziej równomierny podział, tym wyższa wartość \(\text{SplitInfo}\), co zmniejsza współczynnik zysku i zapobiega faworyzowaniu atrybutów o wielu unikalnych wartościach. Współczynnik zysku jest używany w algorytmie C4.5 jako ulepszona wersja ID3 \citep{quinlan1993}.
+
+\vspace{0.5cm}
+\textbf{Redukcja wariancji (Variance Reduction)}
+Redukcja wariancji jest kryterium stosowanym w drzewach regresyjnych, gdzie celem jest przewidywanie wartości ciągłych, a nie kategorii. Kryterium to wybiera podział, który maksymalnie redukuje wariancję wartości docelowych w węzłach potomnych. Redukcja wariancji dla podziału zbioru \(S\) na podzbiory \(S_{\text{left}}\) i \(S_{\text{right}}\) definiuje się jako:
+\begin{equation}
+\text{VarReduction}(S) = \text{Var}(S) - \left(\frac{|S_{\text{left}}|}{|S|} \text{Var}(S_{\text{left}}) + \frac{|S_{\text{right}}|}{|S|} \text{Var}(S_{\text{right}})\right)
+\end{equation}
+gdzie \(\text{Var}(S)\) oznacza wariancję wartości docelowych w zbiorze \(S\). Algorytm CART dla regresji wykorzystuje to kryterium do budowy drzew regresyjnych \citep{breiman1984}.
+
+\subsection{Las losowy (Random Forest)}
+Las losowy to algorytm uczenia maszynowego, który łączy wiele drzew decyzyjnych w celu poprawy dokładności przewidywań i redukcji przeuczenia.
+Algorytm ten działa na zasadzie tworzenia wielu niezależnych drzew decyzyjnych, z których każde jest trenowane na losowym podzbiorze danych i losowym podzbiorze cech.
+Ostateczna predykcja lasu losowego jest uzyskiwana przez agregację wyników wszystkich drzew. 
+Dla klasyfikacji stosuje się głosowanie większościowe, a dla regresji średnią arytmetyczną \citep{breiman2001}.
+
+\vspace{0.5cm}
+Las losowy uczy się poprzez losowanie i budowanie wielu drzew decyzyjnych.
+Każde drzewo dostaje losowy podzbiór danych treningowych oraz losowy podzbiór cech do rozważenia przy każdym podziale węzła.
+Ten proces losowania danych i cech wprowadza różnorodność między drzewami, co przekłada się na lepszą ogólną wydajność modelu.
+Poszczególne drzewa dzielone są na podstawie kryteriów omówionych w sekcji dotyczącej drzew decyzyjnych, takich jak entropia, wskaźnik Gini czy zysk informacji \citep{breiman2001}.
+
+\vspace{0.5cm}
+Dodatkowo przy budownie lasu losowego dobiera się parametry:
+
+\vspace{0.5cm}
+\begin{table}[ht]
+\centering
+\caption{Podstawowe hiperparametry lasu losowego}
+\label{tab:rf_params}
+\begin{tabular}{|l|p{10cm}|}
+\hline
+\textbf{Parametr} & \textbf{Opis} \\
+\hline
+Liczba drzew (\(B\)) & Liczba drzew decyzyjnych w lesie. Większa liczba zazwyczaj poprawia wydajność, ale zwiększa czas obliczeń. \\
+\hline
+Maksymalna głębokość & Maksymalna głębokość każdego drzewa. Ograniczenie głębokości może zapobiec przeuczeniu. \\
+\hline
+Liczba cech (\(m\)) & Liczba losowo wybranych cech rozważanych przy każdym podziale. Typowo \(m = \sqrt{p}\) dla klasyfikacji lub \(m = p/3\) dla regresji. (p to liczba wszystkich cech) \\
+\hline
+Minimalna liczba próbek & Minimalna liczba próbek wymagana do podziału węzła wewnętrznego lub do utworzenia liścia. \\
+\hline
+Bootstrap & Czy stosować bootstrap sampling (losowanie ze zwracaniem) do tworzenia podzbiorów treningowych. \\
+\hline
+\end{tabular}
+\end{table}
+
+Strojenie hiperparametrów lasu losowego, jest zadaniem człowieka, ale najczęściej wykorzystuje się metody automatyczne do testowania.
+
+\vspace{0.5cm}
+\textbf{Grid Search (przeszukiwanie siatki)}
+Grid Search polega na przeszukiwaniu wszystkich możliwych kombinacji hiperparametrów z wcześniej zdefiniowanej siatki wartości.
+Dla każdej kombinacji algorytm trenuje model i ocenia jego wydajność za pomocą walidacji krzyżowej.
+Następnie wybiera zestaw parametrów dający najlepsze wyniki według ustalonej metryki (np. accuracy, F1).
+
+\vspace{0.5cm}
+\textbf{Randomized Search (przeszukiwanie losowe)}
+Randomized Search jest wariantem Grid Search, który zamiast sprawdzać wszystkie kombinacje, losowo próbkuje określoną liczbę zestawów hiperparametrów z zadanych rozkładów.
+Użytkownik definiuje budżet iteracji (liczbę kombinacji do przetestowania).
+
+\vspace{0.5cm}
+\textbf{Optuna}
+Optuna to framework do optymalizacji hiperparametrów wykorzystujący zaawansowane algorytmy, takie jak Tree-structured Parzen Estimator (TPE). W przeciwieństwie do metod grid i random search, Optuna adaptacyjnie wybiera kolejne kombinacje hiperparametrów na podstawie wyników wcześniejszych prób — uczy się, które obszary przestrzeni są obiecujące i koncentruje tam przeszukiwanie. Framework oferuje elastyczność w definiowaniu przestrzeni parametrów, wbudowane wizualizacje oraz możliwość przycinania nieobiecujących prób (pruning). Optuna wykazuje szybszą zbieżność niż metody losowe, ale wymaga instalacji dodatkowej biblioteki \citep{akiba2019}.
+
+\vspace{0.5cm}
+\textbf{Bayesian Optimization (optymalizacja bayesowska)}
+Bayesian Optimization buduje probabilistyczny model zastępczy (surrogate model), zazwyczaj Gaussian Process, który aproksymuje funkcję celu (np. dokładność modelu jako funkcję hiperparametrów). Na podstawie tego modelu algorytm wybiera kolejne punkty do próbkowania za pomocą funkcji akwizycji (acquisition function), takiej jak Expected Improvement (EI), która balansuje eksplorację nowych obszarów przestrzeni i eksploatację obiecujących regionów. Metoda jest szczególnie efektywna, gdy ewaluacja funkcji celu jest kosztowna (np. trening dużych modeli), ponieważ wymaga stosunkowo małej liczby iteracji. Wadą jest złożoność implementacji oraz spowolnienie dla bardzo dużych przestrzeni hiperparametrów \citep{snoek2012}.
+
+\vspace{0.5cm}
+\textbf{AutoML (Automated Machine Learning)}
+AutoML automatyzuje cały proces budowy modelu uczenia maszynowego, w tym wybór algorytmu, inżynierię cech, dobór hiperparametrów oraz tworzenie modeli ensemble. Narzędzia takie jak Auto-sklearn, TPOT czy H2O AutoML wykorzystują kombinację technik optymalizacji (bayesian optimization, evolutionary algorithms) oraz meta-learning (wiedza z wcześniejszych eksperymentów na podobnych zbiorach). Główną zaletą AutoML jest minimalna interwencja użytkownika — wystarczy dostarczyć dane i określić metrykę, a system samodzielnie buduje i optymalizuje model. Wadą jest ograniczona kontrola nad procesem, długie czasy obliczeń oraz potencjalne tworzenie skomplikowanych, trudnych do interpretacji modeli typu „czarna skrzynka" \citep{feurer2015,olson2016}.
