@@ -39,6 +39,8 @@ INPUT C:\Users\mat3u\AppData\Local\Programs\MiKTeX\tex\latex\geometry\geometry.c
 INPUT C:\Users\mat3u\AppData\Local\Programs\MiKTeX\tex\latex\geometry\geometry.cfg
 INPUT C:\Users\mat3u\AppData\Local\Programs\MiKTeX\tex\latex\tools\indentfirst.sty
 INPUT C:\Users\mat3u\AppData\Local\Programs\MiKTeX\tex\latex\tools\indentfirst.sty
+INPUT C:\Users\mat3u\AppData\Local\Programs\MiKTeX\tex\latex\float\float.sty
+INPUT C:\Users\mat3u\AppData\Local\Programs\MiKTeX\tex\latex\float\float.sty
 INPUT C:\Users\mat3u\AppData\Local\Programs\MiKTeX\tex\latex\xcolor\xcolor.sty
 INPUT C:\Users\mat3u\AppData\Local\Programs\MiKTeX\tex\latex\xcolor\xcolor.sty
 INPUT C:\Users\mat3u\AppData\Local\Programs\MiKTeX\tex\latex\graphics-cfg\color.cfg
@@ -249,10 +251,10 @@ INPUT C:\Users\mat3u\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\cme
 INPUT C:\Users\mat3u\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbsy10.tfm
 INPUT C:\Users\mat3u\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbsy10.tfm
 INPUT C:\Users\mat3u\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\cmextra\cmbsy7.tfm
+INPUT C:\Users\mat3u\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecti1200.tfm
 INPUT .\praca.bbl
 INPUT .\praca.bbl
 INPUT praca.bbl
-INPUT C:\Users\mat3u\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecti1200.tfm
 INPUT praca.aux
 INPUT .\rozdzialy\rozdzial3.aux
 INPUT .\rozdzialy\rozdzial3.aux

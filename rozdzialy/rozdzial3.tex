@@ -232,24 +232,393 @@ Bootstrap & Czy stosować bootstrap sampling (losowanie ze zwracaniem) do tworze
 Strojenie hiperparametrów lasu losowego, jest zadaniem człowieka, ale najczęściej wykorzystuje się metody automatyczne do testowania.
 
 \vspace{0.5cm}
-\textbf{Grid Search (przeszukiwanie siatki)}
+\textbf{Przeszukiwanie Siatki (Grid Search)}
 Grid Search polega na przeszukiwaniu wszystkich możliwych kombinacji hiperparametrów z wcześniej zdefiniowanej siatki wartości.
 Dla każdej kombinacji algorytm trenuje model i ocenia jego wydajność za pomocą walidacji krzyżowej.
-Następnie wybiera zestaw parametrów dający najlepsze wyniki według ustalonej metryki (np. accuracy, F1).
+Następnie wybiera zestaw parametrów dający najlepsze wyniki według ustalonej metryki.
 
 \vspace{0.5cm}
-\textbf{Randomized Search (przeszukiwanie losowe)}
+\textbf{przeszukiwanie losowe (Randomized Search)}
 Randomized Search jest wariantem Grid Search, który zamiast sprawdzać wszystkie kombinacje, losowo próbkuje określoną liczbę zestawów hiperparametrów z zadanych rozkładów.
-Użytkownik definiuje budżet iteracji (liczbę kombinacji do przetestowania).
+Liczba iteracji jest definiowana przez programistę.
 
 \vspace{0.5cm}
 \textbf{Optuna}
-Optuna to framework do optymalizacji hiperparametrów wykorzystujący zaawansowane algorytmy, takie jak Tree-structured Parzen Estimator (TPE). W przeciwieństwie do metod grid i random search, Optuna adaptacyjnie wybiera kolejne kombinacje hiperparametrów na podstawie wyników wcześniejszych prób — uczy się, które obszary przestrzeni są obiecujące i koncentruje tam przeszukiwanie. Framework oferuje elastyczność w definiowaniu przestrzeni parametrów, wbudowane wizualizacje oraz możliwość przycinania nieobiecujących prób (pruning). Optuna wykazuje szybszą zbieżność niż metody losowe, ale wymaga instalacji dodatkowej biblioteki \citep{akiba2019}.
+Optuna to framework do optymalizacji hiperparametrów wykorzystujący zaawansowane algorytmy, takie jak Tree-structured Parzen Estimator (TPE). 
+W przeciwieństwie do metod grid i random search, Optuna adaptacyjnie wybiera kolejne kombinacje hiperparametrów na podstawie wyników wcześniejszych prób.
+Uczy się, które obszary przestrzeni są obiecujące i koncentruje tam przeszukiwanie.
+Framework oferuje elastyczność w definiowaniu przestrzeni parametrów, wbudowane wizualizacje oraz możliwość przycinania nieobiecujących prób \citep{akiba2019}.
 
 \vspace{0.5cm}
-\textbf{Bayesian Optimization (optymalizacja bayesowska)}
-Bayesian Optimization buduje probabilistyczny model zastępczy (surrogate model), zazwyczaj Gaussian Process, który aproksymuje funkcję celu (np. dokładność modelu jako funkcję hiperparametrów). Na podstawie tego modelu algorytm wybiera kolejne punkty do próbkowania za pomocą funkcji akwizycji (acquisition function), takiej jak Expected Improvement (EI), która balansuje eksplorację nowych obszarów przestrzeni i eksploatację obiecujących regionów. Metoda jest szczególnie efektywna, gdy ewaluacja funkcji celu jest kosztowna (np. trening dużych modeli), ponieważ wymaga stosunkowo małej liczby iteracji. Wadą jest złożoność implementacji oraz spowolnienie dla bardzo dużych przestrzeni hiperparametrów \citep{snoek2012}.
+\textbf{Optymalizacja bayesowska (Bayesian Optimization)}
+Bayesian Optimization buduje probabilistyczny model zastępczy (surrogate model), zazwyczaj Gaussian Process, który aproksymuje funkcję celu (np. dokładność modelu jako funkcję hiperparametrów).
+Na podstawie tego modelu algorytm wybiera kolejne punkty do próbkowania za pomocą funkcji akwizycji (acquisition function),
+takiej jak Expected Improvement (EI), która balansuje eksplorację nowych obszarów przestrzeni i eksploatację obiecujących regionów \citep{snoek2012}.
 
 \vspace{0.5cm}
 \textbf{AutoML (Automated Machine Learning)}
-AutoML automatyzuje cały proces budowy modelu uczenia maszynowego, w tym wybór algorytmu, inżynierię cech, dobór hiperparametrów oraz tworzenie modeli ensemble. Narzędzia takie jak Auto-sklearn, TPOT czy H2O AutoML wykorzystują kombinację technik optymalizacji (bayesian optimization, evolutionary algorithms) oraz meta-learning (wiedza z wcześniejszych eksperymentów na podobnych zbiorach). Główną zaletą AutoML jest minimalna interwencja użytkownika — wystarczy dostarczyć dane i określić metrykę, a system samodzielnie buduje i optymalizuje model. Wadą jest ograniczona kontrola nad procesem, długie czasy obliczeń oraz potencjalne tworzenie skomplikowanych, trudnych do interpretacji modeli typu „czarna skrzynka" \citep{feurer2015,olson2016}.
+AutoML automatyzuje cały proces budowy modelu uczenia maszynowego, w tym wybór algorytmu, inżynierię cech, dobór hiperparametrów oraz tworzenie modeli zespołowych.
+Narzędzia takie jak Auto-sklearn, TPOT czy H2O AutoML wykorzystują kombinację technik optymalizacji (bayesian optimization, evolutionary algorithms) oraz wiedzę z wcześniejszych eksperymentów na podobnych zbiorach
+(meta-learning) \citep{feurer2015,olson2016}.
+
+\subsection{Maszyna wektorów nośnych (Support Vector Machine, SVM)}
+Maszyna wektorów nośnych (SVM) to algorytm uczenia maszynowego stosowany do klasyfikacji i regresji, który działa na zasadzie znajdowania optymalnej hiperpłaszczyzny rozdzielającej dane należące do różnych klas w przestrzeni wielowymiarowej.
+Celem SVM jest maksymalizacja marginesu, czyli odległości między hiperpłaszczyzną a najbliższymi punktami z obu klas, zwanymi wektorami nośnymi (support vectors).
+Większy margines prowadzi do lepszej generalizacji modelu na nowe, nieznane dane \citep{bishop2006,hastie2009}.
+
+\vspace{0.5cm}
+\textbf{Zasada działania.}
+Dla liniowo separowalnych danych, SVM znajduje hiperpłaszczyznę definiowaną jako:
+\begin{equation}
+\boldsymbol{w}^\top \boldsymbol{x} + b = 0
+\end{equation}
+gdzie \(\boldsymbol{w}\) to wektor normalny do hiperpłaszczyzny, \(\boldsymbol{x}\) to wektor cech, a \(b\) to wyraz wolny. Funkcja decyzyjna klasyfikuje punkt \(\boldsymbol{x}\) na podstawie znaku wyrażenia \(\boldsymbol{w}^\top \boldsymbol{x} + b\):
+\begin{equation}
+f(\boldsymbol{x}) = \text{sign}(\boldsymbol{w}^\top \boldsymbol{x} + b)
+\end{equation}
+
+Optymalna hiperpłaszczyzna jest wyznaczana przez rozwiązanie problemu optymalizacji:
+\begin{equation}
+\min_{\boldsymbol{w}, b} \frac{1}{2} \|\boldsymbol{w}\|^2 \quad \text{przy ograniczeniach} \quad y_i(\boldsymbol{w}^\top \boldsymbol{x}_i + b) \geq 1, \; \forall i
+\end{equation}
+gdzie \(y_i \in \{-1, +1\}\) to etykiety klas, a \(\boldsymbol{x}_i\) to wektory treningowe. Problem ten jest rozwiązywany za pomocą metod programowania kwadratowego lub przez przekształcenie do postaci dualnej z wykorzystaniem mnożników Lagrange'a \citep{bishop2006}.
+
+\vspace{0.5cm}
+\textbf{Soft Margin SVM.}
+W praktyce dane często nie są liniowo separowalne lub zawierają szumy. W takich przypadkach stosuje się wariant soft margin SVM, który dopuszcza błędy klasyfikacji poprzez wprowadzenie zmiennych slackowych \(\xi_i \geq 0\). Problem optymalizacji przyjmuje wtedy postać:
+\begin{equation}
+\min_{\boldsymbol{w}, b, \boldsymbol{\xi}} \frac{1}{2} \|\boldsymbol{w}\|^2 + C \sum_{i=1}^{n} \xi_i
+\end{equation}
+przy ograniczeniach:
+\begin{equation}
+y_i(\boldsymbol{w}^\top \boldsymbol{x}_i + b) \geq 1 - \xi_i, \quad \xi_i \geq 0, \; \forall i
+\end{equation}
+gdzie \(C > 0\) to parametr regularyzacji kontrolujący kompromis między maksymalizacją marginesu a minimalizacją błędów klasyfikacji. Niskie wartości \(C\) preferują większy margines (tolerancja na błędy), wysokie wartości \(C\) zmuszają model do dokładniejszego dopasowania danych treningowych \citep{hastie2009,james2013}.
+
+\vspace{0.5cm}
+\textbf{Kernel Trick (sztuczka jądrowa).}
+Gdy dane nie są liniowo separowalne w oryginalnej przestrzeni cech, SVM wykorzystuje funkcje jądrowe (kernel functions) do mapowania danych do przestrzeni o wyższym wymiarze, w której separacja liniowa staje się możliwa. Najpopularniejsze funkcje jądrowe to:
+
+
+\textbf{Jądro liniowe} — dla liniowo separowalnych danych:
+\begin{equation}
+K(\boldsymbol{x}_i, \boldsymbol{x}_j) = \boldsymbol{x}_i^\top \boldsymbol{x}_j
+\end{equation}
+
+\textbf{Jądro wielomianowe} — pozwala na nieliniowe granice decyzyjne:
+\begin{equation}
+K(\boldsymbol{x}_i, \boldsymbol{x}_j) = (\gamma \boldsymbol{x}_i^\top \boldsymbol{x}_j + r)^d
+\end{equation}
+gdzie \(d\) to stopień wielomianu, \(\gamma\) to parametr skalowania, a \(r\) to wyraz wolny.  
+
+\textbf{Jądro radialnej funkcji bazowej (RBF, Gaussian)} — najczęściej stosowane, elastyczne:
+\begin{equation}
+K(\boldsymbol{x}_i, \boldsymbol{x}_j) = \exp\left(-\gamma \|\boldsymbol{x}_i - \boldsymbol{x}_j\|^2\right)
+\end{equation}
+gdzie \(\gamma > 0\) kontroluje zasięg wpływu pojedynczych punktów treningowych. Małe \(\gamma\) daje szerokie „dzwony" (prostsze modele), duże \(\gamma\) — wąskie (ryzyko przeuczenia).
+
+\textbf{Jądro sigmoidalne} — zachowuje się podobnie do sieci neuronowych:
+\begin{equation}
+K(\boldsymbol{x}_i, \boldsymbol{x}_j) = \tanh(\gamma \boldsymbol{x}_i^\top \boldsymbol{x}_j + r)
+\end{equation}
+
+Dzięki sztuczce jądrowej SVM może modelować złożone, nieliniowe granice decyzyjne bez jawnego obliczania transformacji do wyższego wymiaru, co jest kosztowne obliczeniowo \citep{bishop2006,murphy2012}.
+
+\subsection{Naiwny Klasyfikator Bayesowski (Naive Bayes)}
+Naiwny klasyfikator Bayesowski to probabilistyczny algorytm klasyfikacji oparty na twierdzeniu Bayesa z założeniem warunkowej niezależności cech. 
+Algorytm oblicza prawdopodobieństwo przynależności obiektu do każdej z klas na podstawie wartości jego cech.
+Po obliczeniu przypisuje obiekt do klasy o najwyższym prawdopodobieństwie po uwzględnieniu danych.
+Pomimo upraszczającego założenia o niezależności cech, Naive Bayes często osiąga dobre wyniki, szczególnie w zadaniach klasyfikacji tekstu i filtrowania spamu \citep{bishop2006,murphy2012}.
+
+\vspace{0.5cm}
+\textbf{Twierdzenie Bayesa.}
+Podstawą algorytmu jest twierdzenie Bayesa, które wyraża prawdopodobieństwo przynależności obiektu do klasy \(C_k\) przy danych cechach \(\boldsymbol{x} = (x_1, x_2, \ldots, x_n)\):
+\begin{equation}
+P(C_k|\boldsymbol{x}) = \frac{P(\boldsymbol{x}|C_k) P(C_k)}{P(\boldsymbol{x})}
+\end{equation}
+
+gdzie \(P(C_k|\boldsymbol{x})\) oznacza prawdopodobieństwo a posteriori (po uwzględnieniu danych) przynależności do klasy \(C_k\) przy danych cechach \(\boldsymbol{x}\),
+\(P(\boldsymbol{x}|C_k)\) to prawdopodobieństwo wystąpienia cech \(\boldsymbol{x}\) w klasie \(C_k\) (tzw. likelihood),
+a \(P(C_k)\) to prawdopodobieństwo a priori (przed zobaczeniem danych) klasy \(C_k\). Mianownik \(P(\boldsymbol{x})\) jest prawdopodobieństwem wystąpienia cech \(\boldsymbol{x}\) i pełni rolę stałej normalizującej.
+
+\vspace{0.5cm}
+\textbf{Warianty algorytmu.}
+W zależności od charakteru danych stosuje się różne warianty Naive Bayes:
+
+\vspace{0.5cm}
+\textbf{Gaussian Naive Bayes.}
+Wariant stosowany dla cech ciągłych, zakłada, że wartości każdej cechy w danej klasie mają rozkład normalny (Gaussa), a
+parametry rozkładu (średnia \(\mu_k\) i wariancja \(\sigma_k^2\)) są estymowane z danych treningowych dla każdej cechy i każdej klasy.
+Gaussowy wariant naiwnego klasyfikatora Bayesowskiego jest szczególnie skuteczny, gdzie cechy są liczbami rzeczywistymi, takimi jak pomiary fizyczne czy dane sensoryczne \citep{bishop2006}.
+
+\vspace{0.5cm}
+\textbf{Multinomial Naive Bayes.}
+Wariant przeznaczony dla cech dyskretnych reprezentujących liczby wystąpień zdarzeń, takich jak częstotliwość występowania słów w dokumentach tekstowych.
+Modeluje prawdopodobieństwo wystąpienia danej liczby zdarzeń zgodnie z rozkładem wielomianowym.
+Algorytmem jest szczególnie efektywny w zadaniach, gdzie dane są reprezentowane jako wektory liczników.
+Ten wariant jest często stosowany do klasyfikacji tekstów, filtrowania spamu oraz analizie sentymentu, gdzie każda cecha reprezentuje liczbę wystąpień określonego słowa\citep{murphy2012}.
+
+\vspace{0.5cm}
+\textbf{Bernoulli Naive Bayes.}
+Wariant dla cech binarnych przyjmujących wartości 0 lub 1.
+W odróżnieniu od wariantu wielomianowego, który liczy wystąpienia, Bernoulli Naive Bayes modeluje jedynie fakt obecności cechy.
+Jest stosowany w klasyfikacji dokumentów, gdzie cechy wskazują, czy dane słowo występuje w dokumencie, niezależnie od liczby jego wystąpień \citep{murphy2012}.
+
+\section{Uczenie nienadzorowane (Unsupervised Learning)}
+Uczenie nienadzorowane to rodzaj uczenia maszynowego, który sam odkrywa wzorce i struktury danych bez ówcześnie nadachynych etykiek przez człowieka.
+Alogrytm przetwarza surowe dane wejściowe, a następnie za pomocą metod statystycznych i geometrycznych grupuje je na podstawie podobieństw lub różnic.
+Po grupowaniu algorytm redukuje liczbę wymiarów danych, zachowując najważniejsze cechy i wzorce.
+Uczenie nienadzorowane dzieli się na dwie główne kategorie: klasteryzację i redukcję wymiarowości \citep{bishop2006,hastie2009}.
+
+\vspace{0.5cm}
+\textbf{Klasteryzacja (Clustering)}
+Klasteryzacja to technika uczenia nienadzorowanego, która polega na grupowaniu podobnych obiektów w zbiory zwane klastrami.
+Celem klasteryzacji jest identyfikacja naturalnych struktur w danych, gdzie obiekty w tym samym klastrze są bardziej podobne do siebie niż do obiektów z innych klastrów.
+Algorytmy klasteryzacji wykorzystują różne metryki odległości do oceny podobieństwa między obiektami, takie jak metryka euklidesowa, Manhattan czy kosinusowa, które zostały omówione w sekcji dotyczącej algorytmu \(k\)-najbliższych sąsiadów \citep{duda2001,hastie2009}.
+
+\vspace{0.5cm}
+\textbf{Redukcja wymiarowości (Dimensionality Reduction)}
+Redukcja wymiarowości to technika uczenia nienadzorowanego, która polega na zmniejszeniu liczby cech w zbiorze danych przy jednoczesnym zachowaniu jak największej ilości istotnej informacji.
+Celem redukcji wymiarowości jest uproszczenie modelu, poprawa wydajności obliczeniowej oraz eliminacja szumów i nadmiarowości w danych.
+Popularne metody redukcji wymiarowości to analiza głównych składowych (PCA) oraz t-SNE (t-distributed Stochastic Neighbor Embedding) \citep{bishop2006,murphy2012}.
+
+\subsection{k-Średnich (k-Means)}
+Algorytm \(k\)-średnich to jedna z metod klasteryzacji, która grupuje dane wejściowe w \(k\) klastrów na podstawie podobieństwa między obiektami.
+Algorytm działa iteracyjnie, przypisując każdy obiekt do najbliższego centroidu (środka klastra) i aktualizując położenie centroidów na podstawie średnich wartości obiektów w każdym klastrze.
+Proces ten powtarza się, aż do osiągnięcia zbieżności, czyli gdy przypisania obiektów do klastrów przestają się zmieniać \citep{bishop2006,hastie2009}.
+
+\begin{equation}
+J = \sum_{j=1}^{k} \sum_{\boldsymbol{x}_i \in C_j} \|\boldsymbol{x}_i - \boldsymbol{\mu}_j\|^2
+\end{equation}
+gdzie \(J\) to całkowita suma kwadratów błędów, które są minimalizowane iteracyjnie przez algorytm, \(j\) to iteracja, \(k\) to liczba klastrów, \(\boldsymbol{x}_i\) to wektor cech obiektu \(i\), \(C_j\) to zbiór obiektów przypisanych do klastra \(j\), a \(\boldsymbol{\mu}_j\) to centroid klastra \(j\).
+
+W algorytmie \(k\)-średnich dobiera sie następujące parametry:
+
+\vspace{0.5cm}
+\begin{table}[H]
+\centering
+\caption{Podstawowe parametry algorytmu \(k\)-średnich}
+\label{tab:km_params}
+\begin{tabular}{|l|p{10cm}|}
+\hline
+\textbf{Parametr} & \textbf{Opis} \\
+\hline
+Liczba klastrów (\(k\)) & Liczba klastrów, na które mają być podzielone dane. Wybór odpowiedniej wartości \(k\) jest kluczowy dla jakości klasteryzacji (np. metoda łokcia). \\
+\hline
+Inicjalizacja centroidów & Metoda wyboru początkowych pozycji centroidów (np.metoda \(k\)-means++). \\
+\hline
+Maksymalna liczba iteracji & Maksymalna liczba iteracji, które algorytm wykona przed zatrzymaniem. \\
+\hline
+Metryka odległości & Metryka używana do obliczania odległości między obiektami a centroidami, (np. metryka euklidesowa, Manhattan czy kosinusowa, które zostały opisane w sekcji dotyczącej algorytmu \(k\)-najbliższych sąsiadów). \\
+\hline
+\end{tabular}
+\end{table}
+
+\vspace{0.5cm}
+\textbf{Metoda łokcia (Elbow Method).}
+Metoda łokcia polega na uruchomieniu algorytmu \(k\)-średnich dla różnych wartości \(k\) i obliczeniu sumy kwadratów błędów (SSE) dla każdej wartości.
+Następnie wykreśla się wykres SSE w funkcji \(k\) i szuka punktu, w którym dalsze zwiększanie \(k\) prowadzi do niewielkiej redukcji SSE, tworząc charakterystyczny "łokieć" na wykresie.
+
+\vspace{0.5cm}
+\textbf{Metoda \(k\)-means++.}
+Metoda wyboru centroidów \(k\)-means++ polega na wyborze początkowych centroidów, aby przyspieszyć zbieżność algorytmu i poprawić jakość klasteryzacji.
+Pierwszy centroid jest wybierany losowo z danych, a kolejne centroidy są wybierane z prawdopodobieństwem proporcjonalnym do kwadratu odległości od najbliższego już wybranego centroidu.
+Ta metoda zmniejsza ryzyko złego rozmieszczenia początkowych centroidów, co może prowadzić do gorszych wyników klasteryzacji \citep{arthur2007}.
+
+\vspace{0.5cm}
+\subsection{Hierarchiczna klasteryzacja (Hierarchical Clustering)}
+Hierarchiczna klasteryzacja to metoda klasteryzacji, która tworzy hierarchię klastrów poprzez iteracyjne łączenie lub dzielenie grup obiektów na podstawie ich podobieństwa.
+Istnieją dwa główne podejścia do hierarchicznej klasteryzacji: aglomeracyjne (bottom-up) i dzielące (top-down).
+W podejściu aglomeracyjnym każdy obiekt zaczyna jako oddzielny klaster, a następnie iteracyjnie łączy się najbliższe klastry, aż do osiągnięcia jednej grupy lub określonej liczby klastrów.
+W podejściu dzielącym cały zbiór danych zaczyna jako jeden klaster, który jest następnie dzielony na mniejsze klastry na podstawie podobieństwa obiektów \citep{hastie2009,bishop2006}.
+
+\vspace{0.5cm}
+Hierarchiczna klasteryzacja wykorzystuje różne metryki odległości do oceny podobieństwa między obiektami lub klastrami, takie jak metryka euklidesowa, Manhattan czy kosinusowa, które zostały omówione w sekcji dotyczącej algorytmu \(k\)-najbliższych sąsiadów \citep{duda2001,hastie2009}.
+W hierarchicznej klasteryzacji stosuje się również różne metody łączenia klastrów, takie jak:
+
+\vspace{0.5cm}
+\textbf{Metoda pojedynczego łączenia (Single Linkage).}
+Metoda pojedynczego łączenia definiuje odległość między dwoma klastrami jako minimalną odległość między dowolnymi dwoma obiektami z tych klastrów:
+\begin{equation}
+d(C_i, C_j) = \min_{\boldsymbol{x} \in C_i, \boldsymbol{y} \in C_j} d(\boldsymbol{x}, \boldsymbol{y})
+\end{equation}
+gdzie \(C_i\) i \(C_j\) to dwa klastry, a \(d(\boldsymbol{x}, \boldsymbol{y})\) to odległość między obiektami \(\boldsymbol{x}\) i \(\boldsymbol{y}\).
+Jest to podejście zachłanne, które może prowadzić do tworzenia długich, cienkich klastrów (tzw. efekt łańcucha).
+
+\vspace{0.5cm}
+\textbf{Metoda pełnego łączenia (Complete Linkage).}
+Metoda pełnego łączenia definiuje odległość między dwoma klastrami jako maksymalną odległość między dowolnymi dwoma obiektami z tych klastrów:
+\begin{equation}
+d(C_i, C_j) = \max_{\boldsymbol{x} \in C_i, \boldsymbol{y} \in C_j} d(\boldsymbol{x}, \boldsymbol{y})
+\end{equation}
+To podejście prowadzi do tworzenia bardziej zwartych klastrów, ale może być wrażliwe na odległe punkty (outliers).
+
+\vspace{0.5cm}
+\textbf{Metoda średniego łączenia (Average Linkage).}
+Metoda średniego łączenia definiuje odległość między dwoma klastrami jako średnią odległość między wszystkimi parami obiektów z tych klastrów:
+\begin{equation}
+d(C_i, C_j) = \frac{1}{|C_i| \cdot |C_j|} \sum_{\boldsymbol{x} \in C_i} \sum_{\boldsymbol{y} \in C_j} d(\boldsymbol{x}, \boldsymbol{y})
+\end{equation}
+gdzie \(|C_i|\) i \(|C_j|\) to liczby obiektów w klastrach \(C_i\) i \(C_j\).
+To podejście stanowi kompromis między metodą pojedynczego i pełnego łączenia, tworząc bardziej zrównoważone klastry.
+
+\vspace{0.5cm}
+\subsection{DBSCAN (Density-Based Spatial Clustering)}
+DBSCAN to algorytm klasteryzacji oparty na gęstości, który grupuje razem punkty znajdujące się blisko siebie w przestrzeni cech, definiując klastry jako obszary o wysokiej gęstości punktów oddzielone od siebie obszarami o niskiej gęstości.
+Algorytm DBSCAN identyfikuje klastry na podstawie dwóch głównych parametrów: promienia sąsiedztwa \(\varepsilon\) (epsilon) oraz minimalnej liczby punktów \(minPts\) wymaganej do utworzenia gęstego regionu.
+Punkty są klasyfikowane jako rdzeniowe, brzegowe lub szumowe w zależności od liczby sąsiadów w promieniu \(\varepsilon\) \citep{ester1996}.
+
+\vspace{0.5cm}
+\textbf{Sąsiedztwo \(\varepsilon\).}
+Dla punktu \(\boldsymbol{p}\) sąsiedztwo \(\varepsilon\) definiowane jest jako zbiór punktów:
+\begin{equation}
+N_\varepsilon(\boldsymbol{p}) = \{\boldsymbol{q} \in D \mid d(\boldsymbol{p}, \boldsymbol{q}) \leq \varepsilon\}
+\end{equation}
+gdzie \(D\) to zbiór wszystkich punktów, a \(d(\boldsymbol{p}, \boldsymbol{q})\) to odległość między punktami \(\boldsymbol{p}\) i \(\boldsymbol{q}\).
+
+\vspace{0.5cm}
+\textbf{Punkt rdzeniowy (core point).}
+Punkt \(\boldsymbol{p}\) jest punktem rdzeniowym, jeśli liczba punktów w jego sąsiedztwie \(\varepsilon\) wynosi co najmniej \(minPts\):
+\begin{equation}
+|N_\varepsilon(\boldsymbol{p})| \geq minPts
+\end{equation}
+
+\vspace{0.5cm}
+\textbf{Bezpośrednia osiągalność gęstościowa.}
+Punkt \(\boldsymbol{q}\) jest bezpośrednio osiągalny gęstościowo z punktu \(\boldsymbol{p}\), jeśli \(\boldsymbol{p}\) jest punktem rdzeniowym i \(\boldsymbol{q} \in N_\varepsilon(\boldsymbol{p})\).
+
+\vspace{0.5cm}
+\textbf{Osiągalność gęstościowa.}
+Punkt \(\boldsymbol{q}\) jest osiągalny gęstościowo z punktu \(\boldsymbol{p}\), jeśli istnieje łańcuch punktów \(\boldsymbol{p}_1, \boldsymbol{p}_2, \ldots, \boldsymbol{p}_n\), gdzie \(\boldsymbol{p}_1 = \boldsymbol{p}\) i \(\boldsymbol{p}_n = \boldsymbol{q}\), taki że każdy kolejny punkt jest bezpośrednio osiągalny gęstościowo z poprzedniego.
+
+\vspace{0.5cm}
+\textbf{Klasyfikacja punktów w DBSCAN.}
+Algorytm DBSCAN klasyfikuje każdy punkt w zbiorze danych do jednej z trzech kategorii:
+
+\vspace{0.5cm}
+\textit{Punkt rdzeniowy (core point)}: punkt \(\boldsymbol{p}\) jest rdzeniowy, jeśli ma co najmniej \(minPts\) sąsiadów w promieniu \(\varepsilon\), tj. \(|N_\varepsilon(\boldsymbol{p})| \geq minPts\). Punkty rdzeniowe stanowią centrum klastrów i inicjują ich tworzenie.
+
+\vspace{0.5cm}
+\textit{Punkt brzegowy (border point)}: punkt należący do klastra, ale niebędący punktem rdzeniowym. Punkt brzegowy leży w sąsiedztwie \(\varepsilon\) co najmniej jednego punktu rdzeniowego, ale sam ma mniej niż \(minPts\) sąsiadów. Punkty brzegowe znajdują się na peryferiach klastrów i są przypisywane do klastra poprzez bezpośrednią osiągalność gęstościową z punktu rdzeniowego.
+
+\vspace{0.5cm}
+\textit{Punkt szumowy (noise point)}: punkt, który nie jest ani rdzeniowy, ani brzegowy. Punkt szumowy nie leży w sąsiedztwie \(\varepsilon\) żadnego punktu rdzeniowego i nie należy do żadnego klastra. Punkty szumowe reprezentują obserwacje odstające (outliers) lub szum w danych.
+
+Dzięki tej klasyfikacji DBSCAN automatycznie identyfikuje i odrzuca punkty odstające, co czyni go odpornym na szum w danych \citep{ester1996}.
+
+\subsection{PCA (Principal Component Analysis)}
+Analiza głównych składowych (PCA) to technika redukcji wymiarowości, która przekształca oryginalne cechy danych w nowy zestaw nieskorelowanych zmiennych zwanych głównymi składowymi.
+Główne składowe są liniowymi kombinacjami oryginalnych cech i są uporządkowane według wariancji, którą wyjaśniają w danych.
+Pierwsza główna składowa wyjaśnia największą część wariancji, druga główna składowa wyjaśnia drugą co do wielkości część wariancji, i tak dalej.
+PCA jest szeroko stosowana do wizualizacji danych, kompresji danych oraz usuwania szumów \citep{murphy2012,hastie2009}.
+
+\vspace{0.5cm}
+\textbf{Macierz kowariancji.}
+Algorytm PCA rozpoczyna się od wycentrowania danych (odjęcia średniej od każdej cechy) i obliczenia macierzy kowariancji, która opisuje zależności między cechami:
+\begin{equation}
+\Sigma = \frac{1}{n} X^\top X
+\end{equation}
+gdzie \(X\) to macierz danych o wymiarach \(n \times p\) (po wycentrowaniu), gdzie \(n\) to liczba próbek, a \(p\) to liczba cech. Macierz \(\Sigma\) ma wymiary \(p \times p\).
+
+\vspace{0.5cm}
+\textbf{Rozkład własny (Eigendecomposition).}
+Kolejnym krokiem jest znalezienie wektorów własnych i wartości własnych macierzy kowariancji poprzez rozwiązanie równania:
+\begin{equation}
+\Sigma \boldsymbol{v}_i = \lambda_i \boldsymbol{v}_i
+\end{equation}
+gdzie \(\boldsymbol{v}_i\) to \(i\)-ty wektor własny określający kierunek \(i\)-tej głównej składowej, a \(\lambda_i\) to odpowiadająca mu wartość własna reprezentująca wariancję wyjaśnianą przez tę składową. Wektory własne są ortogonalne, co zapewnia nieskorelowanie głównych składowych.
+
+\vspace{0.5cm}
+\textbf{Transformacja danych.}
+Po uporządkowaniu wektorów własnych według malejących wartości własnych (\(\lambda_1 \geq \lambda_2 \geq \ldots \geq \lambda_p\)), dane są transformowane do nowej przestrzeni głównych składowych:
+\begin{equation}
+Z = XW
+\end{equation}
+gdzie \(W\) to macierz o wymiarach \(p \times k\) zawierająca \(k\) pierwszych wektorów własnych jako kolumny, a \(Z\) to macierz danych w nowej przestrzeni o wymiarach \(n \times k\). Wybór liczby \(k\) składowych do zachowania zależy od wymaganej ilości wyjaśnianej wariancji.
+
+\vspace{0.5cm}
+\textbf{Wariancja wyjaśniona.}
+Proporcja wariancji wyjaśnianej przez \(i\)-tą główną składową wynosi:
+\begin{equation}
+\text{Var}_i = \frac{\lambda_i}{\sum_{j=1}^{p} \lambda_j}
+\end{equation}
+Suma wariancji wyjaśnianych przez pierwsze \(k\) składowych określa, jaki procent całkowitej zmienności danych został zachowany po redukcji wymiarowości. W praktyce często wybiera się \(k\) takie, aby zachować 90-95\% wariancji \citep{bishop2006,hastie2009}.
+
+\subsection{t-SNE (t-distributed Stochastic Neighbor Embedding)}
+t-SNE to technika redukcji wymiarowości, która przekształca dane wysokowymiarowe w przestrzeń niskowymiarową (zazwyczaj 2D lub 3D) w taki sposób, aby zachować lokalne struktury danych.
+Algorytm t-SNE modeluje podobieństwa między punktami w oryginalnej
+przestrzeni jako prawdopodobieństwa warunkowe, a następnie optymalizuje rozmieszczenie punktów w przestrzeni niskowymiarowej, minimalizując różnicę między tymi prawdopodobieństwami za pomocą dywergencji Kullbacka-Leiblera \citep{maaten2008}.
+
+\vspace{0.5cm}
+\textbf{Podobieństwa w przestrzeni wysokowymiarowej.}
+W przestrzeni wysokowymiarowej podobieństwo między punktami \(\boldsymbol{x}_i\) i \(\boldsymbol{x}_j\) jest modelowane jako prawdopodobieństwo warunkowe:
+\begin{equation}
+p_{j|i} = \frac{\exp(-\|\boldsymbol{x}_i
+  - \boldsymbol{x}_j\|^2 / 2\sigma_i^2)}{\sum_{k \neq i} \exp(-\|\boldsymbol{x}_i - \boldsymbol{x}_k\|^2 / 2\sigma_i^2)}
+\end{equation}
+gdzie \(\sigma_i\) to szerokość jądra Gaussa dla punktu \(\boldsymbol{x}_i\). Prawdopodobieństwo symetryczne definiuje się jako:
+\begin{equation}
+p_{ij} = \frac{p_{j|i} + p_{i|j}}{2n}
+\end{equation}
+gdzie \(n\) to liczba punktów danych.
+
+\vspace{0.5cm}
+\textbf{Podobieństwa w przestrzeni niskowymiarowej.}
+W przestrzeni niskowymiarowej podobieństwo między punktami \(\boldsymbol{y}_i\) i \(\boldsymbol{y}_j\) jest modelowane za pomocą rozkładu t-Studenta z jednym stopniem swobody:
+\begin{equation}
+q_{ij} = \frac{(1 + \|\boldsymbol{y}_i - \boldsymbol{y}_j\|^2)^{-1}}{\sum_{k \neq l} (1 + \|\boldsymbol{y}_k - \boldsymbol{y}_l\|^2)^{-1}}
+\end{equation}
+\vspace{0.5cm}
+\textbf{Optymalizacja.}
+Algorytm t-SNE minimalizuje dywergencję Kullbacka-Leiblera między rozkładami \(P\) i \(Q\):
+\begin{equation}
+KL(P||Q) = \sum_{i \neq j} p_{ij} \log \frac{p_{ij}}{q_{ij}}
+\end{equation}
+Optymalizacja jest przeprowadzana za pomocą gradientu prostego lub metod opartych na momencie, co pozwala na znalezienie układu punktów \(\boldsymbol{y}_i\) w przestrzeni niskowymiarowej, który najlepiej zachowuje lokalne struktury danych z przestrzeni wysokowymiarowej \citep{maaten2008}.
+
+\vspace{0.5cm}
+\textbf{Parametry t-SNE.}
+Algorytm t-SNE posiada kilka kluczowych parametrów, które wpływają na jakość i charakter wynikowej wizualizacji:
+\begin{itemize}
+  \item \textbf{Perplexity:} Określa liczbę najbliższych sąsiadów branych pod uwagę przy obliczaniu podobieństw w przestrzeni wysokowymiarowej. Typowe wartości to od 5 do 50. Wyższe wartości prowadzą do bardziej globalnych struktur, podczas gdy niższe wartości skupiają się na lokalnych strukturach.
+  \item \textbf{Liczba iteracji:} Określa, ile razy algorytm będzie aktualizował położenia punktów w przestrzeni niskowymiarowej. Większa liczba iteracji może prowadzić do lepszej konwergencji, ale zwiększa czas obliczeń.
+  \item \textbf{Współczynnik uczenia (learning rate):} Kontroluje szybkość aktualizacji położeń punktów podczas optymalizacji. Zbyt wysoki współczynnik może prowadzić do niestabilności, podczas gdy zbyt niski może spowolnić zbieżność.
+\end{itemize}
+Dobranie powyższych parametrów jest głównym czynnikiem wpływajacym na czytelność i jakość wizualizacji \citep{maaten2008}.
+
+\vspace{0.5cm}
+\subsection{UMAP (Uniform Manifold Approximation and Projection)}
+UMAP to technika redukcji wymiarowości i wizualizacji danych, która opiera się na teorii topologii i geometrii różniczkowej.
+UMAP tworzy niskowymiarową reprezentację danych wysokowymiarowych, zachowując zarówno lokalne, jak i globalne struktury danych.
+Algorytm UMAP składa się z dwóch głównych etapów: konstrukcji grafu sąsiedztwa w przestrzeni wysokowymiarowej oraz optymalizacji rozmieszczenia punktów w przestrzeni niskowymiarowej \citep{mcinnes2018}.
+
+\vspace{0.5cm}
+\textbf{Konstrukcja grafu sąsiedztwa.}
+W pierwszym etapie UMAP buduje graf sąsiedztwa, w którym każdy punkt danych jest połączony z jego \(k\) najbliższymi sąsiadami.
+Podobieństwo między punktami \(\boldsymbol{x}_i\) i \(\boldsymbol{x}_j\) jest modelowane za pomocą funkcji ważonej:
+\begin{equation}
+w_{ij} = \exp\left(-\frac{d(\boldsymbol{x}_i, \boldsymbol{x}_j) - \rho_i}{\sigma_i}\right)
+\end{equation}
+gdzie \(d(\boldsymbol{x}_i, \boldsymbol{x}_j)\) to odległość między punktami, \(\rho_i\) to odległość do najbliższego sąsiada punktu \(\boldsymbol{x}_i\), a \(\sigma_i\) to skalowanie lokalne kontrolujące gęstość sąsiedztwa.
+
+\vspace{0.5cm}
+\textbf{Optymalizacja w przestrzeni niskowymiarowej.}
+W drugim etapie UMAP optymalizuje rozmieszczenie punktów \(\boldsymbol{y}_i\) w przestrzeni niskowymiarowej, minimalizując funkcję kosztu opartą na różnicy między grafem sąsiedztwa w przestrzeni wysokowymiarowej a grafem w przestrzeni niskowymiarowej:
+\begin{equation}C = \sum_{i \neq j} \left( w_{ij} \log \frac{w_{ij}}{q_{ij}} + (1 - w_{ij}) \log \frac{1 - w_{ij}}{1 - q_{ij}} \right)
+\end{equation}
+gdzie \(q_{ij}\) to podobieństwo między punktami \(\boldsymbol{y}_i\) i \(\boldsymbol{y}_j\) w przestrzeni niskowymiarowej, modelowane za pomocą funkcji:
+\begin{equation}
+q_{ij} = \frac{1}{1 + a \|\boldsymbol{y}_i - \boldsymbol{y}_j\|^{2b}}
+\end{equation}
+gdzie \(a\) i \(b\) to parametry kontrolujące kształt funkcji podobieństwa.
+Optymalizacja jest przeprowadzana za pomocą metod gradientu prostego lub jego wariantów, co pozwala na znalezienie układu punktów \(\boldsymbol{y}_i\) w przestrzeni niskowymiarowej, który najlepiej zachowuje struktury danych z przestrzeni wysokowymiarowej \citep{mcinnes2018}.
+\vspace{0.5cm}
+\textbf{Parametry UMAP.}
+Algorytm UMAP posiada kilka kluczowych parametrów, które wpływają na jakość i charakter wynikowej wizualizacji:
+\begin{itemize}
+  \item \textbf{Liczba sąsiadów (n\_neighbors):} Określa liczbę najbliższych sąsiadów branych pod uwagę przy budowie grafu sąsiedztwa. Typowe wartości to od 5 do 50. Wyższe wartości prowadzą do bardziej globalnych struktur, podczas gdy niższe wartości skupiają się na lokalnych strukturach.
+  \item \textbf{Minimalna odległość (min\_dist):} Kontroluje, jak blisko punkty mogą być rozmieszczone w przestrzeni niskowymiarowej. Niższe wartości prowadzą do bardziej skondensowanych klastrów, podczas gdy wyższe wartości rozpraszają punkty bardziej równomiernie.
+  \item \textbf{Liczba wymiarów docelowych (n\_components):} Określa liczbę wymiarów w przestrzeni niskowymiarowej (zazwyczaj 2 lub 3).
+  \item \textbf{Liczba iteracji (n\_epochs):} Określa, ile razy algorytm będzie aktualizował położenia punktów w przestrzeni niskowymiarowej. Większa liczba iteracji może prowadzić do lepszej konwergencji, ale zwiększa czas obliczeń.
+\end{itemize}
+Dopasowanie parametrów takich jak liczba sąsiadów (n\_neighbors), minimalna odległość (min\_dist), liczba wymiarów docelowych i epochs przesądza o równowadze między zachowaniem lokalnych struktur danych a globalnej topologii w wizualizacjach UMAP \citep{mcinnes2018}.
