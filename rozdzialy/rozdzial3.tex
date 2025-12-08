@@ -10,38 +10,43 @@ między przewidywaniami modelu a rzeczywistymi etykietami. Po zakończeniu treni
 model zostaje poddany ocenie na zbiorze walidacyjnym w celu doboru hiperparametrów oraz monitorowaniu uczenia maszynowego,
 aby zapobiec przeuczeniu modelu. Ostateczna ocena odbywa się na zbiorze testowym na danych nieznanych dla modelu i na podstawie tego modelu określana
 wartość dokładności, precyzji, recall, F1 (dla klasyfikacji) lub MSE, MAE (dla regresji)\citep{bishop2006,hastie2009}.
-\subsection{Regresja liniowa (Linear Regression)}
-Regresja liniowa to podstawowa technika statystyczna i uczenia maszynowego stosowana do modelowania zależności między zmienną zależną (predykowaną) a jedną lub więcej zmiennymi niezależnymi (cechami). Celem regresji liniowej jest znalezienie liniowej funkcji, która najlepiej opisuje związek między zmiennymi, umożliwiając przewidywanie wartości zmiennej zależnej na podstawie wartości zmiennych niezależnych.
 
+\vspace{0.5cm}
+\subsection{Regresja liniowa (Linear Regression)}
+Regresja liniowa to podstawowa technika statystyczna i uczenia maszynowego stosowana do modelowania zależności między zmienną zależną (predykowaną) a jedną lub więcej zmiennymi niezależnymi (cechami). Celem regresji liniowej jest znalezienie liniowej funkcji, która najlepiej opisuje związek między zmiennymi, umożliwiając przewidywanie wartości zmiennej zależnej na podstawie wartości zmiennych niezależnych \citep{hastie2009,james2013}.
+
+\vspace{0.5cm}
 \textbf{Regresja liniowa prosta.}
-W przypadku pojedynczej zmiennej niezależnej model można opisać równaniem:
+W przypadku pojedynczej zmiennej niezależnej model można opisać równaniem \citep{james2013}:
 \begin{equation}
 y = \alpha + \beta x + \varepsilon,
 \end{equation}
 gdzie \(y\) to zmienna zależna, \(x\) to zmienna niezależna, \(\alpha\) to wyraz wolny, \(\beta\) to współczynnik nachylenia linii regresji, a \(\varepsilon\) to składnik losowy (błąd modelu).
 
+\vspace{0.5cm}
 \textbf{Regresja wieloraka.}
-Regresja wieloraka jest rozszerzeniem regresji prostej, poprzez używanie wielu zmiennych niezależnych. Zakłada się liniową zależność między zmienną zależną a kombinacją liniową zmiennych niezależnych:
+Regresja wieloraka jest rozszerzeniem regresji prostej, poprzez używanie wielu zmiennych niezależnych. Zakłada się liniową zależność między zmienną zależną a kombinacją liniową zmiennych niezależnych \citep{hastie2009}:
 \begin{equation}
 y = \alpha + \sum_{i=1}^{p} \beta_i x_i + \varepsilon,
 \end{equation}
 gdzie \(y\) to zmienna zależna, \(\alpha\) to wyraz wolny, \(x_i\) to zmienne niezależne, \(\beta_i\) to współczynniki regresji określające wpływ danej zmiennej na zmienną zależną, a \(\varepsilon\) to składnik losowy (błąd modelu).
 
-Celem algorytmu regresji (prostej i wielorakiej) jest znalezienie optymalnych wartości współczynników \(\beta_i\), które minimalizują błąd predykcji. Współczynniki można dobrać za pomocą różnych metod, jednak najczęściej stosuje się metodę najmniejszych kwadratów (OLS — Ordinary Least Squares), która minimalizuje sumę kwadratów różnic między rzeczywistymi a przewidywanymi wartościami zmiennej zależnej.
+Celem algorytmu regresji (prostej i wielorakiej) jest znalezienie optymalnych wartości współczynników \(\beta_i\), które minimalizują błąd predykcji. Współczynniki można dobrać za pomocą różnych metod, jednak najczęściej stosuje się metodę najmniejszych kwadratów (OLS — Ordinary Least Squares), która minimalizuje sumę kwadratów różnic między rzeczywistymi a przewidywanymi wartościami zmiennej zależnej \citep{hastie2009}.
 
+\vspace{0.5cm}
 \textbf{Estymator OLS (macierzowy zapis).}
 \begin{equation}\label{eq:ols}
 \widehat{\boldsymbol{\beta}} = (X^\top X)^{-1} X^\top \mathbf{y}
 \end{equation}
 
-Wzór \eqref{eq:ols} to macierzowy zapis estymatora OLS. Wyjaśnienie:
+Wzór \eqref{eq:ols} to macierzowy zapis estymatora OLS \citep{hastie2009,james2013}. Wyjaśnienie:
 \begin{itemize}
   \item \(X\) — macierz projektująca (design matrix) o wymiarach \(n\times p\) (lub \(n\times (p+1)\), jeśli dodano kolumnę jedynek dla wyrazu wolnego),  
   \item \(\mathbf{y}\) — wektor obserwacji o wymiarze \(n\times 1\),  
   \item \(\widehat{\boldsymbol{\beta}}\) — wektor estymowanych współczynników o wymiarze \(p\times 1\).
 \end{itemize}
 
-Aby wyrażenie było poprawne, macierz \(X^\top X\) musi być odwracalna (brak doskonałej multikolinearności). Przy klasycznych założeniach (m.in. \(E[\varepsilon]=0\), \(\text{Var}(\varepsilon)=\sigma^2 I\)) estymator jest nieobciążony, a jego wariancja wynosi \(\text{Var}(\widehat{\boldsymbol{\beta}})=\sigma^2 (X^\top X)^{-1}\). Gdy \(X^\top X\) jest źle uwarunkowana lub nieodwracalna, stosuje się regularyzację (np. Ridge) lub metody numeryczne (gradient descent, SVD)\citep{james2013}.
+Aby wyrażenie było poprawne, macierz \(X^\top X\) musi być odwracalna (brak doskonałej multikolinearności). Przy klasycznych założeniach (m.in. \(E[\varepsilon]=0\), \(\text{Var}(\varepsilon)=\sigma^2 I\)) estymator jest nieobciążony, a jego wariancja wynosi \(\text{Var}(\widehat{\boldsymbol{\beta}})=\sigma^2 (X^\top X)^{-1}\). Gdy \(X^\top X\) jest źle uwarunkowana lub nieodwracalna, stosuje się regularyzację (np. Ridge) lub metody numeryczne (gradient descent, SVD) \citep{james2013,hastie2009}.
 
 \vspace{0.5cm}
 
@@ -58,10 +63,11 @@ Aby wyrażenie było poprawne, macierz \(X^\top X\) musi być odwracalna (brak d
 \end{itemize}
 
 \subsection{Regresja logistyczna (Logistic Regression)}
-Regresja logistyczna to technika statystyczna i uczenia maszynowego stosowana do modelowania zależności między zmienną zależną a jedną lub więcej zmiennymi niezależnymi, gdy zmienna zależna przyjmuję wartości binarne (np. 0 lub 1, tak lub nie). Celem regresji logistycznej jest przewidywanie prawdopodobieństwa przynależności do jednej z dwóch klas na podstawie wartości zmiennych niezależnych.
+Regresja logistyczna to technika statystyczna i uczenia maszynowego stosowana do modelowania zależności między zmienną zależną a jedną lub więcej zmiennymi niezależnymi, gdy zmienna zależna przyjmuję wartości binarne. Celem regresji logistycznej jest przewidywanie prawdopodobieństwa przynależności do jednej z dwóch klas na podstawie wartości zmiennych niezależnych \citep{hastie2009,james2013}.
 
+\vspace{0.5cm}
 \textbf{Model regresji logistycznej.}
-Model regresji logistycznej można zapisać jako:
+Model regresji logistycznej można zapisać jako \citep{hastie2009}:
 \begin{equation}
 P(Y=1|X) = \sigma(\boldsymbol{\beta}^\top X) = \frac{1}{1 + e^{-\boldsymbol{\beta}^\top X}}
 \end{equation}
@@ -71,23 +77,17 @@ gdzie:
   \item \(\sigma(z)\) — funkcja sigmoidalna, która przekształca dowolną wartość rzeczywistą \(z\) w przedział (0, 1).
 \end{itemize}
 
+\vspace{0.5cm}
 \textbf{Estymacja parametrów.}
-Parametry modelu \(\boldsymbol{\beta}\) są estymowane za pomocą metody największej wiarygodności (Maximum Likelihood Estimation, MLE). Celem jest maksymalizacja funkcji wiarygodności:
+Parametry modelu \(\boldsymbol{\beta}\) są estymowane za pomocą metody największej wiarygodności (Maximum Likelihood Estimation, MLE). Celem jest maksymalizacja funkcji wiarygodności \citep{hastie2009}:
 \begin{equation}
 L(\boldsymbol{\beta}) = \prod_{i=1}^{n} P(Y_i|X_i; \boldsymbol{\beta})
 \end{equation}
-co jest równoważne minimalizacji funkcji straty:
+co jest równoważne minimalizacji funkcji straty \citep{hastie2009}:
 \begin{equation}
 J(\boldsymbol{\beta}) = -\sum_{i=1}^{n} \left[ Y_i \log(P(Y_i|X_i; \boldsymbol{\beta})) + (1 - Y_i) \log(1 - P(Y_i|X_i; \boldsymbol{\beta})) \right]
 \end{equation}
 
-\textbf{Właściwości modelu.}
-Model regresji logistycznej ma kilka istotnych właściwości:
-\begin{itemize}
-  \item Wynikiem modelu jest prawdopodobieństwo, co czyni go odpowiednim narzędziem do klasyfikacji binarnej.
-  \item Model jest odporny na wartości odstające, ponieważ wykorzystuje funkcję sigmoidalną.
-  \item Można go łatwo rozszerzyć na problemy wieloklasowe (np. regresja wielomianowa).
-\end{itemize}
 
 \subsection{\(k\)-Najbliższych Sąsiadów (k-Nearest Neighbors)}
 Algorytm \(k\)-Najbliższych Sąsiadów umieszcza dane wejściowe w przestrzeni wielowymiarowej i klasyfikuje je na podstawie etykiet najbliższych sąsiadów w tej przestrzeni.
@@ -233,13 +233,13 @@ Strojenie hiperparametrów lasu losowego, jest zadaniem człowieka, ale najczę�
 
 \vspace{0.5cm}
 \textbf{Przeszukiwanie Siatki (Grid Search)}
-Grid Search polega na przeszukiwaniu wszystkich możliwych kombinacji hiperparametrów z wcześniej zdefiniowanej siatki wartości.
+Grid Search polega na przeszukiwaniu wszystkich możliwych kombinacji hiperparametrów z wcześniej zdefiniowanej siatki wartości \citep{james2013,hastie2009}.
 Dla każdej kombinacji algorytm trenuje model i ocenia jego wydajność za pomocą walidacji krzyżowej.
-Następnie wybiera zestaw parametrów dający najlepsze wyniki według ustalonej metryki.
+Następnie wybiera zestaw parametrów dający najlepsze wyniki według ustalonej metryki \citep{hastie2009}.
 
 \vspace{0.5cm}
-\textbf{przeszukiwanie losowe (Randomized Search)}
-Randomized Search jest wariantem Grid Search, który zamiast sprawdzać wszystkie kombinacje, losowo próbkuje określoną liczbę zestawów hiperparametrów z zadanych rozkładów.
+\textbf{Przeszukiwanie Losowe (Randomized Search)}
+Randomized Search jest wariantem Grid Search, który zamiast sprawdzać wszystkie kombinacje, losowo próbkuje określoną liczbę zestawów hiperparametrów z zadanych rozkładów \citep{james2013}.
 Liczba iteracji jest definiowana przez programistę.
 
 \vspace{0.5cm}
@@ -262,22 +262,22 @@ Narzędzia takie jak Auto-sklearn, TPOT czy H2O AutoML wykorzystują kombinację
 (meta-learning) \citep{feurer2015,olson2016}.
 
 \subsection{Maszyna wektorów nośnych (Support Vector Machine, SVM)}
-Maszyna wektorów nośnych (SVM) to algorytm uczenia maszynowego stosowany do klasyfikacji i regresji, który działa na zasadzie znajdowania optymalnej hiperpłaszczyzny rozdzielającej dane należące do różnych klas w przestrzeni wielowymiarowej.
+Maszyna wektorów nośnych (SVM) to algorytm uczenia maszynowego stosowany do klasyfikacji i regresji, który działa na zasadzie znajdowania optymalnej hiperpłaszczyzny rozdzielającej dane należące do różnych klas w przestrzeni wielowymiarowej \citep{bishop2006,hastie2009}.
 Celem SVM jest maksymalizacja marginesu, czyli odległości między hiperpłaszczyzną a najbliższymi punktami z obu klas, zwanymi wektorami nośnymi (support vectors).
 Większy margines prowadzi do lepszej generalizacji modelu na nowe, nieznane dane \citep{bishop2006,hastie2009}.
 
 \vspace{0.5cm}
 \textbf{Zasada działania.}
-Dla liniowo separowalnych danych, SVM znajduje hiperpłaszczyznę definiowaną jako:
+Dla liniowo separowalnych danych, SVM znajduje hiperpłaszczyznę definiowaną jako \citep{bishop2006}:
 \begin{equation}
 \boldsymbol{w}^\top \boldsymbol{x} + b = 0
 \end{equation}
-gdzie \(\boldsymbol{w}\) to wektor normalny do hiperpłaszczyzny, \(\boldsymbol{x}\) to wektor cech, a \(b\) to wyraz wolny. Funkcja decyzyjna klasyfikuje punkt \(\boldsymbol{x}\) na podstawie znaku wyrażenia \(\boldsymbol{w}^\top \boldsymbol{x} + b\):
+gdzie \(\boldsymbol{w}\) to wektor normalny do hiperpłaszczyzny, \(\boldsymbol{x}\) to wektor cech, a \(b\) to wyraz wolny. Funkcja decyzyjna klasyfikuje punkt \(\boldsymbol{x}\) na podstawie znaku wyrażenia \(\boldsymbol{w}^\top \boldsymbol{x} + b\) \citep{hastie2009}:
 \begin{equation}
 f(\boldsymbol{x}) = \text{sign}(\boldsymbol{w}^\top \boldsymbol{x} + b)
 \end{equation}
 
-Optymalna hiperpłaszczyzna jest wyznaczana przez rozwiązanie problemu optymalizacji:
+Optymalna hiperpłaszczyzna jest wyznaczana przez rozwiązanie problemu optymalizacji \citep{bishop2006,hastie2009}:
 \begin{equation}
 \min_{\boldsymbol{w}, b} \frac{1}{2} \|\boldsymbol{w}\|^2 \quad \text{przy ograniczeniach} \quad y_i(\boldsymbol{w}^\top \boldsymbol{x}_i + b) \geq 1, \; \forall i
 \end{equation}
@@ -285,7 +285,7 @@ gdzie \(y_i \in \{-1, +1\}\) to etykiety klas, a \(\boldsymbol{x}_i\) to wektory
 
 \vspace{0.5cm}
 \textbf{Soft Margin SVM.}
-W praktyce dane często nie są liniowo separowalne lub zawierają szumy. W takich przypadkach stosuje się wariant soft margin SVM, który dopuszcza błędy klasyfikacji poprzez wprowadzenie zmiennych slackowych \(\xi_i \geq 0\). Problem optymalizacji przyjmuje wtedy postać:
+W praktyce dane często nie są liniowo separowalne lub zawierają szumy. W takich przypadkach stosuje się wariant soft margin SVM, który dopuszcza błędy klasyfikacji poprzez wprowadzenie zmiennych slackowych \(\xi_i \geq 0\) \citep{hastie2009,james2013}. Problem optymalizacji przyjmuje wtedy postać:
 \begin{equation}
 \min_{\boldsymbol{w}, b, \boldsymbol{\xi}} \frac{1}{2} \|\boldsymbol{w}\|^2 + C \sum_{i=1}^{n} \xi_i
 \end{equation}
@@ -296,28 +296,28 @@ y_i(\boldsymbol{w}^\top \boldsymbol{x}_i + b) \geq 1 - \xi_i, \quad \xi_i \geq 0
 gdzie \(C > 0\) to parametr regularyzacji kontrolujący kompromis między maksymalizacją marginesu a minimalizacją błędów klasyfikacji. Niskie wartości \(C\) preferują większy margines (tolerancja na błędy), wysokie wartości \(C\) zmuszają model do dokładniejszego dopasowania danych treningowych \citep{hastie2009,james2013}.
 
 \vspace{0.5cm}
-\textbf{Kernel Trick (sztuczka jądrowa).}
-Gdy dane nie są liniowo separowalne w oryginalnej przestrzeni cech, SVM wykorzystuje funkcje jądrowe (kernel functions) do mapowania danych do przestrzeni o wyższym wymiarze, w której separacja liniowa staje się możliwa. Najpopularniejsze funkcje jądrowe to:
+\textbf{Sztuczka jądrowa (Kernel Trick).}
+Gdy dane nie są liniowo separowalne w oryginalnej przestrzeni cech, SVM wykorzystuje funkcje jądrowe (kernel functions) do mapowania danych do przestrzeni o wyższym wymiarze, w której separacja liniowa staje się możliwa \citep{bishop2006,hastie2009}. Najpopularniejsze funkcje jądrowe to:
 
 
-\textbf{Jądro liniowe} — dla liniowo separowalnych danych:
+\textbf{Jądro liniowe} — dla liniowo separowalnych danych \citep{hastie2009}:
 \begin{equation}
 K(\boldsymbol{x}_i, \boldsymbol{x}_j) = \boldsymbol{x}_i^\top \boldsymbol{x}_j
 \end{equation}
 
-\textbf{Jądro wielomianowe} — pozwala na nieliniowe granice decyzyjne:
+\textbf{Jądro wielomianowe} — pozwala na nieliniowe granice decyzyjne \citep{bishop2006,hastie2009}:
 \begin{equation}
 K(\boldsymbol{x}_i, \boldsymbol{x}_j) = (\gamma \boldsymbol{x}_i^\top \boldsymbol{x}_j + r)^d
 \end{equation}
 gdzie \(d\) to stopień wielomianu, \(\gamma\) to parametr skalowania, a \(r\) to wyraz wolny.  
 
-\textbf{Jądro radialnej funkcji bazowej (RBF, Gaussian)} — najczęściej stosowane, elastyczne:
+\textbf{Jądro radialnej funkcji bazowej (RBF, Gaussian)} — najczęściej stosowane, elastyczne \citep{bishop2006,hastie2009}:
 \begin{equation}
 K(\boldsymbol{x}_i, \boldsymbol{x}_j) = \exp\left(-\gamma \|\boldsymbol{x}_i - \boldsymbol{x}_j\|^2\right)
 \end{equation}
-gdzie \(\gamma > 0\) kontroluje zasięg wpływu pojedynczych punktów treningowych. Małe \(\gamma\) daje szerokie „dzwony" (prostsze modele), duże \(\gamma\) — wąskie (ryzyko przeuczenia).
+gdzie \(\gamma > 0\) kontroluje zasięg wpływu pojedynczych punktów treningowych. Małe \(\gamma\) daje szerokie „dzwony" (prostsze modele), duże \(\gamma\) — wąskie (ryzyko przeuczenia) \citep{hastie2009}.
 
-\textbf{Jądro sigmoidalne} — zachowuje się podobnie do sieci neuronowych:
+\textbf{Jądro sigmoidalne} — zachowuje się podobnie do sieci neuronowych \citep{bishop2006}:
 \begin{equation}
 K(\boldsymbol{x}_i, \boldsymbol{x}_j) = \tanh(\gamma \boldsymbol{x}_i^\top \boldsymbol{x}_j + r)
 \end{equation}
@@ -325,44 +325,44 @@ K(\boldsymbol{x}_i, \boldsymbol{x}_j) = \tanh(\gamma \boldsymbol{x}_i^\top \bold
 Dzięki sztuczce jądrowej SVM może modelować złożone, nieliniowe granice decyzyjne bez jawnego obliczania transformacji do wyższego wymiaru, co jest kosztowne obliczeniowo \citep{bishop2006,murphy2012}.
 
 \subsection{Naiwny Klasyfikator Bayesowski (Naive Bayes)}
-Naiwny klasyfikator Bayesowski to probabilistyczny algorytm klasyfikacji oparty na twierdzeniu Bayesa z założeniem warunkowej niezależności cech. 
+Naiwny klasyfikator Bayesowski to probabilistyczny algorytm klasyfikacji oparty na twierdzeniu Bayesa z założeniem warunkowej niezależności cech \citep{bishop2006,murphy2012}. 
 Algorytm oblicza prawdopodobieństwo przynależności obiektu do każdej z klas na podstawie wartości jego cech.
 Po obliczeniu przypisuje obiekt do klasy o najwyższym prawdopodobieństwie po uwzględnieniu danych.
 Pomimo upraszczającego założenia o niezależności cech, Naive Bayes często osiąga dobre wyniki, szczególnie w zadaniach klasyfikacji tekstu i filtrowania spamu \citep{bishop2006,murphy2012}.
 
 \vspace{0.5cm}
 \textbf{Twierdzenie Bayesa.}
-Podstawą algorytmu jest twierdzenie Bayesa, które wyraża prawdopodobieństwo przynależności obiektu do klasy \(C_k\) przy danych cechach \(\boldsymbol{x} = (x_1, x_2, \ldots, x_n)\):
+Podstawą algorytmu jest twierdzenie Bayesa, które wyraża prawdopodobieństwo przynależności obiektu do klasy \(C_k\) przy danych cechach \(\boldsymbol{x} = (x_1, x_2, \ldots, x_n)\) \citep{bishop2006}:
 \begin{equation}
 P(C_k|\boldsymbol{x}) = \frac{P(\boldsymbol{x}|C_k) P(C_k)}{P(\boldsymbol{x})}
 \end{equation}
 
 gdzie \(P(C_k|\boldsymbol{x})\) oznacza prawdopodobieństwo a posteriori (po uwzględnieniu danych) przynależności do klasy \(C_k\) przy danych cechach \(\boldsymbol{x}\),
 \(P(\boldsymbol{x}|C_k)\) to prawdopodobieństwo wystąpienia cech \(\boldsymbol{x}\) w klasie \(C_k\) (tzw. likelihood),
-a \(P(C_k)\) to prawdopodobieństwo a priori (przed zobaczeniem danych) klasy \(C_k\). Mianownik \(P(\boldsymbol{x})\) jest prawdopodobieństwem wystąpienia cech \(\boldsymbol{x}\) i pełni rolę stałej normalizującej.
+a \(P(C_k)\) to prawdopodobieństwo a priori (przed zobaczeniem danych) klasy \(C_k\). Mianownik \(P(\boldsymbol{x})\) jest prawdopodobieństwem wystąpienia cech \(\boldsymbol{x}\) i pełni rolę stałej normalizującej \citep{murphy2012}.
 
 \vspace{0.5cm}
 \textbf{Warianty algorytmu.}
-W zależności od charakteru danych stosuje się różne warianty Naive Bayes:
+W zależności od charakteru danych stosuje się różne warianty Naive Bayes \citep{murphy2012}:
 
 \vspace{0.5cm}
 \textbf{Gaussian Naive Bayes.}
-Wariant stosowany dla cech ciągłych, zakłada, że wartości każdej cechy w danej klasie mają rozkład normalny (Gaussa), a
+Wariant stosowany dla cech ciągłych, zakłada, że wartości każdej cechy w danej klasie mają rozkład normalny (Gaussa) \citep{bishop2006,murphy2012}, a
 parametry rozkładu (średnia \(\mu_k\) i wariancja \(\sigma_k^2\)) są estymowane z danych treningowych dla każdej cechy i każdej klasy.
 Gaussowy wariant naiwnego klasyfikatora Bayesowskiego jest szczególnie skuteczny, gdzie cechy są liczbami rzeczywistymi, takimi jak pomiary fizyczne czy dane sensoryczne \citep{bishop2006}.
 
 \vspace{0.5cm}
 \textbf{Multinomial Naive Bayes.}
-Wariant przeznaczony dla cech dyskretnych reprezentujących liczby wystąpień zdarzeń, takich jak częstotliwość występowania słów w dokumentach tekstowych.
+Wariant przeznaczony dla cech dyskretnych reprezentujących liczby wystąpień zdarzeń, takich jak częstotliwość występowania słów w dokumentach tekstowych \citep{murphy2012}.
 Modeluje prawdopodobieństwo wystąpienia danej liczby zdarzeń zgodnie z rozkładem wielomianowym.
 Algorytmem jest szczególnie efektywny w zadaniach, gdzie dane są reprezentowane jako wektory liczników.
-Ten wariant jest często stosowany do klasyfikacji tekstów, filtrowania spamu oraz analizie sentymentu, gdzie każda cecha reprezentuje liczbę wystąpień określonego słowa\citep{murphy2012}.
+Ten wariant jest często stosowany do klasyfikacji tekstów, filtrowania spamu oraz analizie sentymentu, gdzie każda cecha reprezentuje liczbę wystąpień określonego słowa \citep{murphy2012,manning2008}.
 
 \vspace{0.5cm}
 \textbf{Bernoulli Naive Bayes.}
-Wariant dla cech binarnych przyjmujących wartości 0 lub 1.
+Wariant dla cech binarnych przyjmujących wartości 0 lub 1 \citep{murphy2012}.
 W odróżnieniu od wariantu wielomianowego, który liczy wystąpienia, Bernoulli Naive Bayes modeluje jedynie fakt obecności cechy.
-Jest stosowany w klasyfikacji dokumentów, gdzie cechy wskazują, czy dane słowo występuje w dokumencie, niezależnie od liczby jego wystąpień \citep{murphy2012}.
+Jest stosowany w klasyfikacji dokumentów, gdzie cechy wskazują, czy dane słowo występuje w dokumencie, niezależnie od liczby jego wystąpień \citep{murphy2012,manning2008}.
 
 \section{Uczenie nienadzorowane (Unsupervised Learning)}
 Uczenie nienadzorowane to rodzaj uczenia maszynowego, który sam odkrywa wzorce i struktury danych bez ówcześnie nadachynych etykiek przez człowieka.
@@ -383,14 +383,14 @@ Celem redukcji wymiarowości jest uproszczenie modelu, poprawa wydajności oblic
 Popularne metody redukcji wymiarowości to analiza głównych składowych (PCA) oraz t-SNE (t-distributed Stochastic Neighbor Embedding) \citep{bishop2006,murphy2012}.
 
 \subsection{k-Średnich (k-Means)}
-Algorytm \(k\)-średnich to jedna z metod klasteryzacji, która grupuje dane wejściowe w \(k\) klastrów na podstawie podobieństwa między obiektami.
+Algorytm \(k\)-średnich to jedna z metod klasteryzacji, która grupuje dane wejściowe w \(k\) klastrów na podstawie podobieństwa między obiektami \citep{bishop2006,hastie2009}.
 Algorytm działa iteracyjnie, przypisując każdy obiekt do najbliższego centroidu (środka klastra) i aktualizując położenie centroidów na podstawie średnich wartości obiektów w każdym klastrze.
 Proces ten powtarza się, aż do osiągnięcia zbieżności, czyli gdy przypisania obiektów do klastrów przestają się zmieniać \citep{bishop2006,hastie2009}.
 
 \begin{equation}
 J = \sum_{j=1}^{k} \sum_{\boldsymbol{x}_i \in C_j} \|\boldsymbol{x}_i - \boldsymbol{\mu}_j\|^2
 \end{equation}
-gdzie \(J\) to całkowita suma kwadratów błędów, które są minimalizowane iteracyjnie przez algorytm, \(j\) to iteracja, \(k\) to liczba klastrów, \(\boldsymbol{x}_i\) to wektor cech obiektu \(i\), \(C_j\) to zbiór obiektów przypisanych do klastra \(j\), a \(\boldsymbol{\mu}_j\) to centroid klastra \(j\).
+gdzie \(J\) to całkowita suma kwadratów błędów, które są minimalizowane iteracyjnie przez algorytm \citep{hastie2009}, \(j\) to iteracja, \(k\) to liczba klastrów, \(\boldsymbol{x}_i\) to wektor cech obiektu \(i\), \(C_j\) to zbiór obiektów przypisanych do klastra \(j\), a \(\boldsymbol{\mu}_j\) to centroid klastra \(j\).
 
 W algorytmie \(k\)-średnich dobiera sie następujące parametry:
 
@@ -416,61 +416,61 @@ Metryka odległości & Metryka używana do obliczania odległości między obiek
 
 \vspace{0.5cm}
 \textbf{Metoda łokcia (Elbow Method).}
-Metoda łokcia polega na uruchomieniu algorytmu \(k\)-średnich dla różnych wartości \(k\) i obliczeniu sumy kwadratów błędów (SSE) dla każdej wartości.
+Metoda łokcia polega na uruchomieniu algorytmu \(k\)-średnich dla różnych wartości \(k\) i obliczeniu sumy kwadratów błędów (SSE) dla każdej wartości \citep{hastie2009}.
 Następnie wykreśla się wykres SSE w funkcji \(k\) i szuka punktu, w którym dalsze zwiększanie \(k\) prowadzi do niewielkiej redukcji SSE, tworząc charakterystyczny "łokieć" na wykresie.
 
 \vspace{0.5cm}
 \textbf{Metoda \(k\)-means++.}
-Metoda wyboru centroidów \(k\)-means++ polega na wyborze początkowych centroidów, aby przyspieszyć zbieżność algorytmu i poprawić jakość klasteryzacji.
+Metoda wyboru centroidów \(k\)-means++ polega na wyborze początkowych centroidów, aby przyspieszyć zbieżność algorytmu i poprawić jakość klasteryzacji \citep{arthur2007}.
 Pierwszy centroid jest wybierany losowo z danych, a kolejne centroidy są wybierane z prawdopodobieństwem proporcjonalnym do kwadratu odległości od najbliższego już wybranego centroidu.
 Ta metoda zmniejsza ryzyko złego rozmieszczenia początkowych centroidów, co może prowadzić do gorszych wyników klasteryzacji \citep{arthur2007}.
 
 \vspace{0.5cm}
 \subsection{Hierarchiczna klasteryzacja (Hierarchical Clustering)}
-Hierarchiczna klasteryzacja to metoda klasteryzacji, która tworzy hierarchię klastrów poprzez iteracyjne łączenie lub dzielenie grup obiektów na podstawie ich podobieństwa.
+Hierarchiczna klasteryzacja to metoda klasteryzacji, która tworzy hierarchię klastrów poprzez iteracyjne łączenie lub dzielenie grup obiektów na podstawie ich podobieństwa \citep{hastie2009,bishop2006}.
 Istnieją dwa główne podejścia do hierarchicznej klasteryzacji: aglomeracyjne (bottom-up) i dzielące (top-down).
 W podejściu aglomeracyjnym każdy obiekt zaczyna jako oddzielny klaster, a następnie iteracyjnie łączy się najbliższe klastry, aż do osiągnięcia jednej grupy lub określonej liczby klastrów.
 W podejściu dzielącym cały zbiór danych zaczyna jako jeden klaster, który jest następnie dzielony na mniejsze klastry na podstawie podobieństwa obiektów \citep{hastie2009,bishop2006}.
 
 \vspace{0.5cm}
 Hierarchiczna klasteryzacja wykorzystuje różne metryki odległości do oceny podobieństwa między obiektami lub klastrami, takie jak metryka euklidesowa, Manhattan czy kosinusowa, które zostały omówione w sekcji dotyczącej algorytmu \(k\)-najbliższych sąsiadów \citep{duda2001,hastie2009}.
-W hierarchicznej klasteryzacji stosuje się również różne metody łączenia klastrów, takie jak:
+W hierarchicznej klasteryzacji stosuje się również różne metody łączenia klastrów, takie jak \citep{hastie2009}:
 
 \vspace{0.5cm}
 \textbf{Metoda pojedynczego łączenia (Single Linkage).}
-Metoda pojedynczego łączenia definiuje odległość między dwoma klastrami jako minimalną odległość między dowolnymi dwoma obiektami z tych klastrów:
+Metoda pojedynczego łączenia definiuje odległość między dwoma klastrami jako minimalną odległość między dowolnymi dwoma obiektami z tych klastrów \citep{hastie2009}:
 \begin{equation}
 d(C_i, C_j) = \min_{\boldsymbol{x} \in C_i, \boldsymbol{y} \in C_j} d(\boldsymbol{x}, \boldsymbol{y})
 \end{equation}
 gdzie \(C_i\) i \(C_j\) to dwa klastry, a \(d(\boldsymbol{x}, \boldsymbol{y})\) to odległość między obiektami \(\boldsymbol{x}\) i \(\boldsymbol{y}\).
-Jest to podejście zachłanne, które może prowadzić do tworzenia długich, cienkich klastrów (tzw. efekt łańcucha).
+Jest to podejście zachłanne, które może prowadzić do tworzenia długich, cienkich klastrów (tzw. efekt łańcucha) \citep{hastie2009}.
 
 \vspace{0.5cm}
 \textbf{Metoda pełnego łączenia (Complete Linkage).}
-Metoda pełnego łączenia definiuje odległość między dwoma klastrami jako maksymalną odległość między dowolnymi dwoma obiektami z tych klastrów:
+Metoda pełnego łączenia definiuje odległość między dwoma klastrami jako maksymalną odległość między dowolnymi dwoma obiektami z tych klastrów \citep{hastie2009}:
 \begin{equation}
 d(C_i, C_j) = \max_{\boldsymbol{x} \in C_i, \boldsymbol{y} \in C_j} d(\boldsymbol{x}, \boldsymbol{y})
 \end{equation}
-To podejście prowadzi do tworzenia bardziej zwartych klastrów, ale może być wrażliwe na odległe punkty (outliers).
+To podejście prowadzi do tworzenia bardziej zwartych klastrów, ale może być wrażliwe na odległe punkty (outliers) \citep{hastie2009}.
 
 \vspace{0.5cm}
 \textbf{Metoda średniego łączenia (Average Linkage).}
-Metoda średniego łączenia definiuje odległość między dwoma klastrami jako średnią odległość między wszystkimi parami obiektów z tych klastrów:
+Metoda średniego łączenia definiuje odległość między dwoma klastrami jako średnią odległość między wszystkimi parami obiektów z tych klastrów \citep{hastie2009}:
 \begin{equation}
 d(C_i, C_j) = \frac{1}{|C_i| \cdot |C_j|} \sum_{\boldsymbol{x} \in C_i} \sum_{\boldsymbol{y} \in C_j} d(\boldsymbol{x}, \boldsymbol{y})
 \end{equation}
 gdzie \(|C_i|\) i \(|C_j|\) to liczby obiektów w klastrach \(C_i\) i \(C_j\).
-To podejście stanowi kompromis między metodą pojedynczego i pełnego łączenia, tworząc bardziej zrównoważone klastry.
+To podejście stanowi kompromis między metodą pojedynczego i pełnego łączenia, tworząc bardziej zrównoważone klastry \citep{hastie2009}.
 
 \vspace{0.5cm}
 \subsection{DBSCAN (Density-Based Spatial Clustering)}
-DBSCAN to algorytm klasteryzacji oparty na gęstości, który grupuje razem punkty znajdujące się blisko siebie w przestrzeni cech, definiując klastry jako obszary o wysokiej gęstości punktów oddzielone od siebie obszarami o niskiej gęstości.
+DBSCAN to algorytm klasteryzacji oparty na gęstości, który grupuje razem punkty znajdujące się blisko siebie w przestrzeni cech, definiując klastry jako obszary o wysokiej gęstości punktów oddzielone od siebie obszarami o niskiej gęstości \citep{ester1996}.
 Algorytm DBSCAN identyfikuje klastry na podstawie dwóch głównych parametrów: promienia sąsiedztwa \(\varepsilon\) (epsilon) oraz minimalnej liczby punktów \(minPts\) wymaganej do utworzenia gęstego regionu.
 Punkty są klasyfikowane jako rdzeniowe, brzegowe lub szumowe w zależności od liczby sąsiadów w promieniu \(\varepsilon\) \citep{ester1996}.
 
 \vspace{0.5cm}
 \textbf{Sąsiedztwo \(\varepsilon\).}
-Dla punktu \(\boldsymbol{p}\) sąsiedztwo \(\varepsilon\) definiowane jest jako zbiór punktów:
+Dla punktu \(\boldsymbol{p}\) sąsiedztwo \(\varepsilon\) definiowane jest jako zbiór punktów \citep{ester1996}:
 \begin{equation}
 N_\varepsilon(\boldsymbol{p}) = \{\boldsymbol{q} \in D \mid d(\boldsymbol{p}, \boldsymbol{q}) \leq \varepsilon\}
 \end{equation}
@@ -478,22 +478,22 @@ gdzie \(D\) to zbiór wszystkich punktów, a \(d(\boldsymbol{p}, \boldsymbol{q})
 
 \vspace{0.5cm}
 \textbf{Punkt rdzeniowy (core point).}
-Punkt \(\boldsymbol{p}\) jest punktem rdzeniowym, jeśli liczba punktów w jego sąsiedztwie \(\varepsilon\) wynosi co najmniej \(minPts\):
+Punkt \(\boldsymbol{p}\) jest punktem rdzeniowym, jeśli liczba punktów w jego sąsiedztwie \(\varepsilon\) wynosi co najmniej \(minPts\) \citep{ester1996}:
 \begin{equation}
 |N_\varepsilon(\boldsymbol{p})| \geq minPts
 \end{equation}
 
 \vspace{0.5cm}
 \textbf{Bezpośrednia osiągalność gęstościowa.}
-Punkt \(\boldsymbol{q}\) jest bezpośrednio osiągalny gęstościowo z punktu \(\boldsymbol{p}\), jeśli \(\boldsymbol{p}\) jest punktem rdzeniowym i \(\boldsymbol{q} \in N_\varepsilon(\boldsymbol{p})\).
+Punkt \(\boldsymbol{q}\) jest bezpośrednio osiągalny gęstościowo z punktu \(\boldsymbol{p}\), jeśli \(\boldsymbol{p}\) jest punktem rdzeniowym i \(\boldsymbol{q} \in N_\varepsilon(\boldsymbol{p})\) \citep{ester1996}.
 
 \vspace{0.5cm}
 \textbf{Osiągalność gęstościowa.}
-Punkt \(\boldsymbol{q}\) jest osiągalny gęstościowo z punktu \(\boldsymbol{p}\), jeśli istnieje łańcuch punktów \(\boldsymbol{p}_1, \boldsymbol{p}_2, \ldots, \boldsymbol{p}_n\), gdzie \(\boldsymbol{p}_1 = \boldsymbol{p}\) i \(\boldsymbol{p}_n = \boldsymbol{q}\), taki że każdy kolejny punkt jest bezpośrednio osiągalny gęstościowo z poprzedniego.
+Punkt \(\boldsymbol{q}\) jest osiągalny gęstościowo z punktu \(\boldsymbol{p}\), jeśli istnieje łańcuch punktów \(\boldsymbol{p}_1, \boldsymbol{p}_2, \ldots, \boldsymbol{p}_n\), gdzie \(\boldsymbol{p}_1 = \boldsymbol{p}\) i \(\boldsymbol{p}_n = \boldsymbol{q}\), taki że każdy kolejny punkt jest bezpośrednio osiągalny gęstościowo z poprzedniego \citep{ester1996}.
 
 \vspace{0.5cm}
 \textbf{Klasyfikacja punktów w DBSCAN.}
-Algorytm DBSCAN klasyfikuje każdy punkt w zbiorze danych do jednej z trzech kategorii:
+Algorytm DBSCAN klasyfikuje każdy punkt w zbiorze danych do jednej z trzech kategorii \citep{ester1996}:
 
 \vspace{0.5cm}
 \textit{Punkt rdzeniowy (core point)}: punkt \(\boldsymbol{p}\) jest rdzeniowy, jeśli ma co najmniej \(minPts\) sąsiadów w promieniu \(\varepsilon\), tj. \(|N_\varepsilon(\boldsymbol{p})| \geq minPts\). Punkty rdzeniowe stanowią centrum klastrów i inicjują ich tworzenie.
@@ -507,14 +507,14 @@ Algorytm DBSCAN klasyfikuje każdy punkt w zbiorze danych do jednej z trzech kat
 Dzięki tej klasyfikacji DBSCAN automatycznie identyfikuje i odrzuca punkty odstające, co czyni go odpornym na szum w danych \citep{ester1996}.
 
 \subsection{PCA (Principal Component Analysis)}
-Analiza głównych składowych (PCA) to technika redukcji wymiarowości, która przekształca oryginalne cechy danych w nowy zestaw nieskorelowanych zmiennych zwanych głównymi składowymi.
+Analiza głównych składowych (PCA) to technika redukcji wymiarowości, która przekształca oryginalne cechy danych w nowy zestaw nieskorelowanych zmiennych zwanych głównymi składowymi \citep{murphy2012,hastie2009}.
 Główne składowe są liniowymi kombinacjami oryginalnych cech i są uporządkowane według wariancji, którą wyjaśniają w danych.
 Pierwsza główna składowa wyjaśnia największą część wariancji, druga główna składowa wyjaśnia drugą co do wielkości część wariancji, i tak dalej.
 PCA jest szeroko stosowana do wizualizacji danych, kompresji danych oraz usuwania szumów \citep{murphy2012,hastie2009}.
 
 \vspace{0.5cm}
 \textbf{Macierz kowariancji.}
-Algorytm PCA rozpoczyna się od wycentrowania danych (odjęcia średniej od każdej cechy) i obliczenia macierzy kowariancji, która opisuje zależności między cechami:
+Algorytm PCA rozpoczyna się od wycentrowania danych (odjęcia średniej od każdej cechy) i obliczenia macierzy kowariancji, która opisuje zależności między cechami \citep{bishop2006,hastie2009}:
 \begin{equation}
 \Sigma = \frac{1}{n} X^\top X
 \end{equation}
@@ -522,15 +522,15 @@ gdzie \(X\) to macierz danych o wymiarach \(n \times p\) (po wycentrowaniu), gdz
 
 \vspace{0.5cm}
 \textbf{Rozkład własny (Eigendecomposition).}
-Kolejnym krokiem jest znalezienie wektorów własnych i wartości własnych macierzy kowariancji poprzez rozwiązanie równania:
+Kolejnym krokiem jest znalezienie wektorów własnych i wartości własnych macierzy kowariancji poprzez rozwiązanie równania \citep{bishop2006,hastie2009}:
 \begin{equation}
 \Sigma \boldsymbol{v}_i = \lambda_i \boldsymbol{v}_i
 \end{equation}
-gdzie \(\boldsymbol{v}_i\) to \(i\)-ty wektor własny określający kierunek \(i\)-tej głównej składowej, a \(\lambda_i\) to odpowiadająca mu wartość własna reprezentująca wariancję wyjaśnianą przez tę składową. Wektory własne są ortogonalne, co zapewnia nieskorelowanie głównych składowych.
+gdzie \(\boldsymbol{v}_i\) to \(i\)-ty wektor własny określający kierunek \(i\)-tej głównej składowej, a \(\lambda_i\) to odpowiadająca mu wartość własna reprezentująca wariancję wyjaśnianą przez tę składową. Wektory własne są ortogonalne, co zapewnia nieskorelowanie głównych składowych \citep{hastie2009}.
 
 \vspace{0.5cm}
 \textbf{Transformacja danych.}
-Po uporządkowaniu wektorów własnych według malejących wartości własnych (\(\lambda_1 \geq \lambda_2 \geq \ldots \geq \lambda_p\)), dane są transformowane do nowej przestrzeni głównych składowych:
+Po uporządkowaniu wektorów własnych według malejących wartości własnych (\(\lambda_1 \geq \lambda_2 \geq \ldots \geq \lambda_p\)), dane są transformowane do nowej przestrzeni głównych składowych \citep{hastie2009}:
 \begin{equation}
 Z = XW
 \end{equation}
@@ -538,20 +538,20 @@ gdzie \(W\) to macierz o wymiarach \(p \times k\) zawierająca \(k\) pierwszych 
 
 \vspace{0.5cm}
 \textbf{Wariancja wyjaśniona.}
-Proporcja wariancji wyjaśnianej przez \(i\)-tą główną składową wynosi:
+Proporcja wariancji wyjaśnianej przez \(i\)-tą główną składową wynosi \citep{hastie2009}:
 \begin{equation}
 \text{Var}_i = \frac{\lambda_i}{\sum_{j=1}^{p} \lambda_j}
 \end{equation}
 Suma wariancji wyjaśnianych przez pierwsze \(k\) składowych określa, jaki procent całkowitej zmienności danych został zachowany po redukcji wymiarowości. W praktyce często wybiera się \(k\) takie, aby zachować 90-95\% wariancji \citep{bishop2006,hastie2009}.
 
 \subsection{t-SNE (t-distributed Stochastic Neighbor Embedding)}
-t-SNE to technika redukcji wymiarowości, która przekształca dane wysokowymiarowe w przestrzeń niskowymiarową (zazwyczaj 2D lub 3D) w taki sposób, aby zachować lokalne struktury danych.
+t-SNE to technika redukcji wymiarowości, która przekształca dane wysokowymiarowe w przestrzeń niskowymiarową (zazwyczaj 2D lub 3D) w taki sposób, aby zachować lokalne struktury danych \citep{maaten2008}.
 Algorytm t-SNE modeluje podobieństwa między punktami w oryginalnej
 przestrzeni jako prawdopodobieństwa warunkowe, a następnie optymalizuje rozmieszczenie punktów w przestrzeni niskowymiarowej, minimalizując różnicę między tymi prawdopodobieństwami za pomocą dywergencji Kullbacka-Leiblera \citep{maaten2008}.
 
 \vspace{0.5cm}
 \textbf{Podobieństwa w przestrzeni wysokowymiarowej.}
-W przestrzeni wysokowymiarowej podobieństwo między punktami \(\boldsymbol{x}_i\) i \(\boldsymbol{x}_j\) jest modelowane jako prawdopodobieństwo warunkowe:
+W przestrzeni wysokowymiarowej podobieństwo między punktami \(\boldsymbol{x}_i\) i \(\boldsymbol{x}_j\) jest modelowane jako prawdopodobieństwo warunkowe \citep{maaten2008}:
 \begin{equation}
 p_{j|i} = \frac{\exp(-\|\boldsymbol{x}_i
   - \boldsymbol{x}_j\|^2 / 2\sigma_i^2)}{\sum_{k \neq i} \exp(-\|\boldsymbol{x}_i - \boldsymbol{x}_k\|^2 / 2\sigma_i^2)}
@@ -564,13 +564,13 @@ gdzie \(n\) to liczba punktów danych.
 
 \vspace{0.5cm}
 \textbf{Podobieństwa w przestrzeni niskowymiarowej.}
-W przestrzeni niskowymiarowej podobieństwo między punktami \(\boldsymbol{y}_i\) i \(\boldsymbol{y}_j\) jest modelowane za pomocą rozkładu t-Studenta z jednym stopniem swobody:
+W przestrzeni niskowymiarowej podobieństwo między punktami \(\boldsymbol{y}_i\) i \(\boldsymbol{y}_j\) jest modelowane za pomocą rozkładu t-Studenta z jednym stopniem swobody \citep{maaten2008}:
 \begin{equation}
 q_{ij} = \frac{(1 + \|\boldsymbol{y}_i - \boldsymbol{y}_j\|^2)^{-1}}{\sum_{k \neq l} (1 + \|\boldsymbol{y}_k - \boldsymbol{y}_l\|^2)^{-1}}
 \end{equation}
 \vspace{0.5cm}
 \textbf{Optymalizacja.}
-Algorytm t-SNE minimalizuje dywergencję Kullbacka-Leiblera między rozkładami \(P\) i \(Q\):
+Algorytm t-SNE minimalizuje dywergencję Kullbacka-Leiblera między rozkładami \(P\) i \(Q\) \citep{maaten2008}:
 \begin{equation}
 KL(P||Q) = \sum_{i \neq j} p_{ij} \log \frac{p_{ij}}{q_{ij}}
 \end{equation}
@@ -578,7 +578,7 @@ Optymalizacja jest przeprowadzana za pomocą gradientu prostego lub metod oparty
 
 \vspace{0.5cm}
 \textbf{Parametry t-SNE.}
-Algorytm t-SNE posiada kilka kluczowych parametrów, które wpływają na jakość i charakter wynikowej wizualizacji:
+Algorytm t-SNE posiada kilka kluczowych parametrów, które wpływają na jakość i charakter wynikowej wizualizacji \citep{maaten2008}:
 \begin{itemize}
   \item \textbf{Perplexity:} Określa liczbę najbliższych sąsiadów branych pod uwagę przy obliczaniu podobieństw w przestrzeni wysokowymiarowej. Typowe wartości to od 5 do 50. Wyższe wartości prowadzą do bardziej globalnych struktur, podczas gdy niższe wartości skupiają się na lokalnych strukturach.
   \item \textbf{Liczba iteracji:} Określa, ile razy algorytm będzie aktualizował położenia punktów w przestrzeni niskowymiarowej. Większa liczba iteracji może prowadzić do lepszej konwergencji, ale zwiększa czas obliczeń.
@@ -588,13 +588,13 @@ Dobranie powyższych parametrów jest głównym czynnikiem wpływajacym na czyte
 
 \vspace{0.5cm}
 \subsection{UMAP (Uniform Manifold Approximation and Projection)}
-UMAP to technika redukcji wymiarowości i wizualizacji danych, która opiera się na teorii topologii i geometrii różniczkowej.
+UMAP to technika redukcji wymiarowości i wizualizacji danych, która opiera się na teorii topologii i geometrii różniczkowej \citep{mcinnes2018}.
 UMAP tworzy niskowymiarową reprezentację danych wysokowymiarowych, zachowując zarówno lokalne, jak i globalne struktury danych.
 Algorytm UMAP składa się z dwóch głównych etapów: konstrukcji grafu sąsiedztwa w przestrzeni wysokowymiarowej oraz optymalizacji rozmieszczenia punktów w przestrzeni niskowymiarowej \citep{mcinnes2018}.
 
 \vspace{0.5cm}
 \textbf{Konstrukcja grafu sąsiedztwa.}
-W pierwszym etapie UMAP buduje graf sąsiedztwa, w którym każdy punkt danych jest połączony z jego \(k\) najbliższymi sąsiadami.
+W pierwszym etapie UMAP buduje graf sąsiedztwa, w którym każdy punkt danych jest połączony z jego \(k\) najbliższymi sąsiadami \citep{mcinnes2018}.
 Podobieństwo między punktami \(\boldsymbol{x}_i\) i \(\boldsymbol{x}_j\) jest modelowane za pomocą funkcji ważonej:
 \begin{equation}
 w_{ij} = \exp\left(-\frac{d(\boldsymbol{x}_i, \boldsymbol{x}_j) - \rho_i}{\sigma_i}\right)
@@ -603,7 +603,7 @@ gdzie \(d(\boldsymbol{x}_i, \boldsymbol{x}_j)\) to odległość między punktami
 
 \vspace{0.5cm}
 \textbf{Optymalizacja w przestrzeni niskowymiarowej.}
-W drugim etapie UMAP optymalizuje rozmieszczenie punktów \(\boldsymbol{y}_i\) w przestrzeni niskowymiarowej, minimalizując funkcję kosztu opartą na różnicy między grafem sąsiedztwa w przestrzeni wysokowymiarowej a grafem w przestrzeni niskowymiarowej:
+W drugim etapie UMAP optymalizuje rozmieszczenie punktów \(\boldsymbol{y}_i\) w przestrzeni niskowymiarowej, minimalizując funkcję kosztu opartą na różnicy między grafem sąsiedztwa w przestrzeni wysokowymiarowej a grafem w przestrzeni niskowymiarowej \citep{mcinnes2018}:
 \begin{equation}C = \sum_{i \neq j} \left( w_{ij} \log \frac{w_{ij}}{q_{ij}} + (1 - w_{ij}) \log \frac{1 - w_{ij}}{1 - q_{ij}} \right)
 \end{equation}
 gdzie \(q_{ij}\) to podobieństwo między punktami \(\boldsymbol{y}_i\) i \(\boldsymbol{y}_j\) w przestrzeni niskowymiarowej, modelowane za pomocą funkcji:
@@ -614,7 +614,7 @@ gdzie \(a\) i \(b\) to parametry kontrolujące kształt funkcji podobieństwa.
 Optymalizacja jest przeprowadzana za pomocą metod gradientu prostego lub jego wariantów, co pozwala na znalezienie układu punktów \(\boldsymbol{y}_i\) w przestrzeni niskowymiarowej, który najlepiej zachowuje struktury danych z przestrzeni wysokowymiarowej \citep{mcinnes2018}.
 \vspace{0.5cm}
 \textbf{Parametry UMAP.}
-Algorytm UMAP posiada kilka kluczowych parametrów, które wpływają na jakość i charakter wynikowej wizualizacji:
+Algorytm UMAP posiada kilka kluczowych parametrów, które wpływają na jakość i charakter wynikowej wizualizacji \citep{mcinnes2018}:
 \begin{itemize}
   \item \textbf{Liczba sąsiadów (n\_neighbors):} Określa liczbę najbliższych sąsiadów branych pod uwagę przy budowie grafu sąsiedztwa. Typowe wartości to od 5 do 50. Wyższe wartości prowadzą do bardziej globalnych struktur, podczas gdy niższe wartości skupiają się na lokalnych strukturach.
   \item \textbf{Minimalna odległość (min\_dist):} Kontroluje, jak blisko punkty mogą być rozmieszczone w przestrzeni niskowymiarowej. Niższe wartości prowadzą do bardziej skondensowanych klastrów, podczas gdy wyższe wartości rozpraszają punkty bardziej równomiernie.
@@ -622,3 +622,689 @@ Algorytm UMAP posiada kilka kluczowych parametrów, które wpływają na jakoś�
   \item \textbf{Liczba iteracji (n\_epochs):} Określa, ile razy algorytm będzie aktualizował położenia punktów w przestrzeni niskowymiarowej. Większa liczba iteracji może prowadzić do lepszej konwergencji, ale zwiększa czas obliczeń.
 \end{itemize}
 Dopasowanie parametrów takich jak liczba sąsiadów (n\_neighbors), minimalna odległość (min\_dist), liczba wymiarów docelowych i epochs przesądza o równowadze między zachowaniem lokalnych struktur danych a globalnej topologii w wizualizacjach UMAP \citep{mcinnes2018}.
+
+\vspace{0.5cm}
+\section{Uczenie półnadzorowane (Semi-Supervised Learning)}
+Uczenie półnadzorowane to podejście w uczeniu maszynowego, które łączy cechy uczenia nadzorowanego i nienadzorowanego, wykorzystując zarówno dane oznaczone etykietami, jak i dane bez etykiet do trenowania modelu.
+Ten rodzaj uczenia wykorzystuje niewielki zbiór danych oznaczonych do nauki podstawowej struktury problemu. W kolejnym etapie wykorzystuje duży zbiór danych nieoznaczonych do poprawy uogólnienia modelu i lepszego zrozumienia rozkładu danych.
+Skuteczność tych metod opiera się na założeniu, że struktura danych nieoznaczonych dostarcza informacji o warunkowym rozkładzie etykiet \citep{chapelle2006,zhu2009}.
+
+\vspace{0.5cm}
+\textbf{Założenia uczenia półnadzorowanego.}
+Skuteczność uczenia półnadzorowanego opiera się na kilku kluczowych założeniach dotyczących struktury danych \citep{chapelle2006,zhu2009}:
+
+\vspace{0.5cm}
+\textit{Założenie płynności (Smoothness Assumption):} Jeśli dwa punkty \(\boldsymbol{x}_1\) i \(\boldsymbol{x}_2\) w przestrzeni cech są blisko siebie, to ich odpowiadające etykiety \(y_1\) i \(y_2\) powinny być podobne. Oznacza to, że funkcja decyzyjna powinna być płynna w obszarach o wysokiej gęstości danych.
+
+\vspace{0.5cm}
+\textit{Założenie klastrów (Cluster Assumption):} Dane mają tendencję do tworzenia odrębnych klastrów, a punkty w tym samym klastrze prawdopodobnie należą do tej samej klasy. Granice decyzyjne powinny przebiegać przez obszary o niskiej gęstości danych, dzieląc różne klastry.
+
+\vspace{0.5cm}
+\textit{Założenie rozmaitości (Manifold Assumption):} Dane wysokowymiarowe leżą w przybliżeniu na niskowymiarowej rozmaitości. Punkty, które są bliskie na tej rozmaitości, powinny mieć podobne etykiety, nawet jeśli są daleko od siebie w oryginalnej przestrzeni wysokowymiarowej.
+
+\vspace{0.5cm}
+\subsection{Self-Training (Samouczenie)}
+Self-training to jedna z najprostszych metod uczenia półnadzorowanego, która działa w sposób iteracyjny, wykorzystując własne predykcje modelu do etykietowania danych nieoznaczonych.
+Algorytm rozpoczyna od wytrenowania modelu na małym zbiorze danych oznaczonych, a następnie używa tego modelu do predykcji etykiet dla danych nieoznaczonych.
+Dane nieoznaczone, dla których model jest najbardziej pewny swoich predykcji, są dodawane do zbioru treningowego wraz z przewidywanymi etykietami.
+Model jest następnie ponownie trenowany na powiększonym zbiorze danych, a proces powtarza się iteracyjnie, aż do wyczerpania danych nieoznaczonych lub osiągnięcia kryterium stopu \citep{zhu2009}.
+
+\vspace{0.5cm}
+\textbf{Algorytm self-training}
+rozpoczyna się od wytrenowania klasyfikatora na małym zbiorze oznaczonych danych.
+Następnie klasyfikator jest wykorzystywany do przewidywania etykiet dla danych nieoznaczonych.
+Dla każdej predykcji obliczany jest poziom pewności, który określa, jak pewny jest model swojej decyzji.
+Wybierany jest podzbiór predykcji, dla których poziom pewności przekracza ustalony próg, i predykcje te wraz z przewidywanymi etykietami są dodawane do zbioru treningowego.
+Klasyfikator jest następnie trenowany ponownie na powiększonym zbiorze danych. Proces powtarza się iteracyjnie — kroki przewidywania, wyboru pewnych predykcji i retrenowania — aż do osiągnięcia kryterium stopu,
+którym może być wyczerpanie danych nieoznaczonych, brak nowych pewnych predykcji lub osiągnięcie maksymalnej liczby iteracji \citep{zhu2009}.
+
+Głównym ryzykiem self-training jest kumulacja błędów — jeśli model popełni błąd w przewidywaniu etykiety i dodaje ją do zbioru treningowego, błędne etykiety mogą propagować się i wzmacniać w kolejnych iteracjach, prowadząc do degradacji wydajności \citep{zhu2009}.
+
+\vspace{0.5cm}
+\subsection{Co-Training}
+Co-training to metoda uczenia półnadzorowanego zaproponowana dla sytuacji, gdy dane można naturalnie opisać za pomocą dwóch różnych, niezależnych zestawów cech.
+Każdy zestaw cech powinien być wystarczający do trenowania dobrego klasyfikatora, a widoki powinny być warunkowo niezależne przy danej etykiecie klasy.
+Dwa klasyfikatory są trenowane oddzielnie na różnych zestawach cech, a następnie każdy klasyfikator etykietuje dane nieoznaczone dla drugiego klasyfikatora, wykorzystując najbardziej pewne predykcje.
+Ta wzajemna nauka pozwala klasyfikatorom uczyć się od siebie nawzajem, wykorzystując komplementarną informację z różnych perspektyw danych \citep{zhu2009}.
+
+\vspace{0.5cm}
+\textbf{Algorytm co-training \citep{zhu2009}:}
+Co-training rozpoczyna się od podziału cech na dwa niezależne widoki \(\boldsymbol{x}^{(1)}\) i \(\boldsymbol{x}^{(2)}\). Następnie trenowane są dwa klasyfikatory \(f_1\) i \(f_2\) na małym zbiorze danych oznaczonych,
+każdy wykorzystując tylko swój widok danych. W kolejnym kroku każdy klasyfikator \(f_i\) przewiduje etykiety dla wszystkich danych nieoznaczonych.
+Klasyfikator \(f_1\) wybiera \(n\) najbardziej pewnych pozytywnych i \(n\) najbardziej pewnych negatywnych przykładów i dodaje je do zbioru treningowego dla \(f_2\), podczas gdy klasyfikator \(f_2\) wykonuje analogiczną operację,
+dodając swoje najbardziej pewne predykcje do zbioru treningowego dla \(f_1\).
+Oba klasyfikatory są następnie trenowane ponownie na powiększonych zbiorach danych.
+Proces powtarza się przez ustaloną liczbę iteracji lub do momentu wyczerpania danych nieoznaczonych \citep{zhu2009}.
+
+
+\vspace{0.5cm}
+\subsection{Transductive SVM (TSVM)}
+Transductive Support Vector Machine to rozszerzenie standardowego SVM na uczenie półnadzorowane, które maksymalizuje margines zarówno dla danych oznaczonych, jak i nieoznaczonych.
+TSVM poszukuje hiperpłaszczyzny, która nie tylko poprawnie klasyfikuje dane oznaczone z maksymalnym marginesem, ale również dzieli dane nieoznaczone tak, aby granica decyzyjna przechodziła przez obszary o niskiej gęstości punktów.
+Algorytm realizuje założenie klastrów (cluster assumption), dążąc do sytuacji, w której jak najmniej danych nieoznaczonych znajduje się blisko granicy decyzyjnej \citep{chapelle2006}.
+
+\vspace{0.5cm}
+\textbf{Funkcja celu TSVM.}
+Problem optymalizacji dla TSVM można zapisać jako \citep{chapelle2006}:
+\begin{equation}
+\min_{\boldsymbol{w}, b, \boldsymbol{\xi}, \boldsymbol{\xi}^*, \boldsymbol{y}^*} \frac{1}{2}\|\boldsymbol{w}\|^2 + C \sum_{i=1}^{l} \xi_i + C^* \sum_{j=1}^{u} \xi_j^*
+\end{equation}
+przy ograniczeniach dla danych oznaczonych:
+\begin{equation}
+y_i(\boldsymbol{w}^\top \boldsymbol{x}_i + b) \geq 1 - \xi_i, \quad \xi_i \geq 0, \quad i=1,\ldots,l
+\end{equation}
+i dla danych nieoznaczonych z przewidywanymi etykietami \(y_j^* \in \{-1, +1\}\):
+\begin{equation}
+y_j^*(\boldsymbol{w}^\top \boldsymbol{x}_j + b) \geq 1 - \xi_j^*, \quad \xi_j^* \geq 0, \quad j=1,\ldots,u
+\end{equation}
+gdzie \(C\) i \(C^*\) to parametry regularyzacji dla danych oznaczonych i nieoznaczonych odpowiednio.
+
+Problem jest trudny obliczeniowo (NP-trudny), ponieważ wymaga optymalizacji również po etykietach danych nieoznaczonych \(y_j^*\). W praktyce stosuje się heurystyki i przybliżone algorytmy optymalizacji \citep{chapelle2006}.
+
+\vspace{0.5cm}
+\subsection{Graph-Based Methods (Metody grafowe)}
+Metody grafowe w uczeniu półnadzorowanym konstruują graf, w którym węzły reprezentują wszystkie punkty danych (zarówno oznaczone, jak i nieoznaczone), a krawędzie reprezentują podobieństwo między nimi.
+Założenie jest takie, że etykiety powinny zmieniać się płynnie wzdłuż grafu — punkty połączone silnymi krawędziami (wysokie podobieństwo) powinny mieć podobne etykiety.
+Etykiety są propagowane od węzłów oznaczonych do nieoznaczonych zgodnie z tą zasadą, wykorzystując strukturę grafu do wnioskowania o etykietach \citep{zhu2009}.
+
+\vspace{0.5cm}
+\textbf{Konstrukcja grafu.}
+Najpopularniejsze metody konstrukcji grafu to \citep{zhu2009}:
+\begin{itemize}
+  \item \textbf{k-nearest neighbor graph} — każdy punkt jest połączony z \(k\) najbliższymi sąsiadami.
+  \item \textbf{\(\varepsilon\)-neighborhood graph} — punkty są połączone, jeśli odległość między nimi jest mniejsza niż \(\varepsilon\).
+  \item \textbf{Fully connected graph} — wszystkie punkty są połączone, a wagi krawędzi maleją z odległością.
+\end{itemize}
+
+Macierz podobieństwa (wag krawędzi) \(W\) często definiuje się za pomocą jądra Gaussa \citep{zhu2009}:
+\begin{equation}
+W_{ij} = \exp\left(-\frac{\|\boldsymbol{x}_i - \boldsymbol{x}_j\|^2}{2\sigma^2}\right)
+\end{equation}
+gdzie \(\sigma\) kontroluje szerokość jądra.
+
+\vspace{0.5cm}
+\textbf{Label Propagation.}
+Algorytm label propagation propaguje etykiety przez graf iteracyjnie. Niech \(Y\) będzie macierzą etykiet rozmiaru \(n \times c\), gdzie \(n\) to liczba punktów, a \(c\) to liczba klas.
+Dla danych oznaczonych \(Y_{il} = 1\) jeśli punkt \(i\) należy do klasy \(l\), w przeciwnym razie \(Y_{il} = 0\).
+
+Macierz przejścia \(P\) definiuje się jako znormalizowaną macierz wag \citep{zhu2009}:
+\begin{equation}
+P_{ij} = \frac{W_{ij}}{\sum_{k=1}^{n} W_{ik}}
+\end{equation}
+
+Algorytm iteracyjnie aktualizuje etykiety według \citep{zhu2009}:
+\begin{equation}
+Y^{(t+1)} = PY^{(t)}
+\end{equation}
+gdzie po każdej iteracji etykiety danych oznaczonych są resetowane do oryginalnych wartości, aby zachować pewność co do prawdziwych etykiet.
+
+\vspace{0.5cm}
+\textbf{Label Spreading.}
+Label spreading to wariant label propagation, który pozwala na miękką zmianę również etykiet danych oznaczonych (z mniejszą wagą).
+Algorytm minimalizuje funkcję kosztu \citep{zhu2009}:
+\begin{equation}
+E(Y) = \frac{1}{2} \sum_{i,j=1}^{n} W_{ij} \left\| \frac{Y_i}{\sqrt{D_{ii}}} - \frac{Y_j}{\sqrt{D_{jj}}} \right\|^2 + \mu \sum_{i=1}^{l} \|Y_i - Y_i^0\|^2
+\end{equation}
+gdzie \(D\) to macierz diagonalna stopni węzłów (\(D_{ii} = \sum_j W_{ij}\)), \(Y_i^0\) to oryginalne etykiety danych oznaczonych, a \(\mu\) kontroluje siłę przywiązania do oryginalnych etykiet.
+Rozwiązanie w stanie równowagi można znaleźć analitycznie.
+
+\vspace{0.5cm}
+\subsection{Generative Models (Modele generatywne)}
+Modele generatywne w uczeniu półnadzorowanym modelują łączny rozkład prawdopodobieństwa \(P(\boldsymbol{x}, y)\) dla cech i etykiet.
+Kluczowa idea polega na tym, że dane nieoznaczone pomagają w lepszej estymacji rozkładu marginalnego \(P(\boldsymbol{x})\), co z kolei poprawia estymację rozkładu warunkowego \(P(y|\boldsymbol{x})\) poprzez współdzielenie parametrów.
+Najczęściej stosuje się mieszaniny rozkładów Gaussa (Gaussian Mixture Models), gdzie zakłada się, że każda klasa jest generowana z mieszaniny komponentów gaussowskich \citep{chapelle2006,murphy2012}.
+
+\vspace{0.5cm}
+\textbf{Semi-Supervised GMM.}
+Model zakłada, że dane są generowane z mieszaniny \(K\) rozkładów Gaussa \citep{murphy2012}:
+\begin{equation}
+P(\boldsymbol{x}) = \sum_{k=1}^{K} \pi_k \mathcal{N}(\boldsymbol{x}|\boldsymbol{\mu}_k, \Sigma_k)
+\end{equation}
+gdzie \(\pi_k\) to wagi komponentów (\(\sum_k \pi_k = 1\)), \(\boldsymbol{\mu}_k\) to średnie, a \(\Sigma_k\) to macierze kowariancji.
+
+Dla danych oznaczonych log-likelihood wynosi \citep{chapelle2006}:
+\begin{equation}
+\log L_{\text{labeled}} = \sum_{i=1}^{l} \log P(y_i, \boldsymbol{x}_i) = \sum_{i=1}^{l} \log \sum_{k \in C_{y_i}} \pi_k \mathcal{N}(\boldsymbol{x}_i|\boldsymbol{\mu}_k, \Sigma_k)
+\end{equation}
+gdzie \(C_{y_i}\) to zbiór komponentów odpowiadających klasie \(y_i\).
+
+Dla danych nieoznaczonych \citep{chapelle2006}:
+\begin{equation}
+\log L_{\text{unlabeled}} = \sum_{j=1}^{u} \log P(\boldsymbol{x}_j) = \sum_{j=1}^{u} \log \sum_{k=1}^{K} \pi_k \mathcal{N}(\boldsymbol{x}_j|\boldsymbol{\mu}_k, \Sigma_k)
+\end{equation}
+
+Całkowita log-likelihood:
+\begin{equation}
+\log L = \log L_{\text{labeled}} + \log L_{\text{unlabeled}}
+\end{equation}
+
+Parametry są estymowane za pomocą algorytmu EM (Expectation-Maximization), który w kroku E oblicza prawdopodobieństwa przynależności punktów do komponentów, a w kroku M aktualizuje parametry modelu na podstawie tych prawdopodobieństw \citep{murphy2012}.
+
+\vspace{0.5cm}
+\subsection{Entropy Minimization (Minimalizacja entropii)}
+Minimalizacja entropii to podejście oparte na zasadzie, że dobry model powinien być pewny swoich predykcji również dla danych nieoznaczonych.
+Entropia rozkładu predykcji mierzy niepewność modelu — niska entropia oznacza pewne predykcje (rozkład skoncentrowany na jednej klasie), wysoka entropia oznacza niepewność (rozkład rozłożony równomiernie).
+Metoda dodaje do funkcji straty składnik karny, który minimalizuje entropię predykcji dla danych nieoznaczonych, zmuszając model do dokonywania pewnych klasyfikacji \citep{chapelle2006}.
+
+\vspace{0.5cm}
+\textbf{Funkcja straty.}
+Całkowita funkcja straty składa się z nadzorowanego składnika dla danych oznaczonych i składnika minimalizacji entropii dla danych nieoznaczonych \citep{chapelle2006}:
+\begin{equation}
+L = L_{\text{supervised}} + \lambda L_{\text{entropy}}
+\end{equation}
+gdzie:
+\begin{equation}
+L_{\text{supervised}} = \frac{1}{l} \sum_{i=1}^{l} \mathcal{L}(f(\boldsymbol{x}_i), y_i)
+\end{equation}
+to standardowa strata klasyfikacji dla danych oznaczonych, a:
+\begin{equation}
+L_{\text{entropy}} = -\frac{1}{u} \sum_{j=1}^{u} \sum_{k=1}^{c} p_k^{(j)} \log p_k^{(j)}
+\end{equation}
+to entropia predykcji dla danych nieoznaczonych, gdzie \(p_k^{(j)} = P(y=k|\boldsymbol{x}_j)\) to przewidywane prawdopodobieństwo klasy \(k\) dla punktu \(j\).
+Parametr \(\lambda\) kontroluje wagę składnika entropijnego.
+
+Minimalizacja entropii jest szczególnie efektywna w połączeniu z innymi metodami półnadzorowanymi i jest często używana jako regularyzator w głębokich sieciach neuronowych \citep{chapelle2006}.
+
+\vspace{0.5cm}
+\textbf{Zastosowania uczenia półnadzorowanego.}
+Uczenie półnadzorowane znajduje zastosowanie w wielu dziedzinach, gdzie etykietowanie danych jest kosztowne \citep{chapelle2006,zhu2009,hastie2009}:
+\begin{itemize}
+  \item \textbf{Klasyfikacja tekstów i dokumentów} — gdzie ręczne oznaczanie dokumentów jest czasochłonne, ale dostępne są ogromne zbiory tekstów nieoznaczonych.
+  \item \textbf{Rozpoznawanie obrazów i wizja komputerowa} — wykorzystanie milionów zdjęć bez etykiet do poprawy klasyfikatorów wytrenowanych na małych zbiorach oznaczonych.
+  \item \textbf{Bioinformatyka i medycyna} — analiza sekwencji DNA/RNA lub obrazów medycznych, gdzie eksperymentalne potwierdzenie etykiet jest bardzo drogie.
+  \item \textbf{Kontrola jakości w produkcji} — w procesach wytwórczych, gdzie dostępne są ogromne ilości danych z czujników (nieoznaczonych), ale tylko nieliczne przypadki defektów są zidentyfikowane i oznaczone.
+  \item \textbf{Systemy rekomendacyjne} — gdzie mamy dużo danych o interakcjach użytkowników, ale mało jawnych ocen.
+\end{itemize}
+
+Uczenie półnadzorowane jest szczególnie wartościowe w rzeczywistych zastosowaniach przemysłowych, gdzie koszt eksperckich etykiet jest wysoki, a dane nieoznaczone są generowane automatycznie przez systemy monitorujące i czujniki \citep{chapelle2006,zhu2009}.
+
+\vspace{0.5cm}
+\section{Uczenie ze wzmocnieniem (Reinforcement Learning)}
+Uczenie ze wzmocnieniem to paradygmat uczenia maszynowego, w którym agent uczy się podejmować decyzje poprzez interakcję ze środowiskiem w celu maksymalizacji skumulowanej nagrody.
+W przeciwieństwie do uczenia nadzorowanego, gdzie model uczy się na podstawie par wejście-wyjście, w uczeniu ze wzmocnieniem agent otrzymuje jedynie sygnały zwrotne w postaci nagród lub kar za wykonane akcje.
+Agent musi samodzielnie odkryć, które akcje prowadzą do największych nagród, ucząc się poprzez eksperymentowanie i doświadczenie.
+Uczenie ze wzmocnieniem jest szczególnie efektywne w problemach sekwencyjnego podejmowania decyzji, gdzie długoterminowe konsekwencje akcji są ważniejsze niż natychmiastowe nagrody \citep{sutton2018}.
+
+\vspace{0.5cm}
+\textbf{Podstawowe elementy uczenia ze wzmocnieniem.}
+System uczenia ze wzmocnieniem składa się z kilku kluczowych elementów \citep{sutton2018}:
+
+\vspace{0.5cm}
+\textit{Agent:} System podejmujący decyzje, który uczy się optymalnej strategii działania poprzez interakcję ze środowiskiem.
+
+\vspace{0.5cm}
+\textit{Środowisko (Environment):} Wszystko to, z czym agent wchodzi w interakcję i co znajduje się poza jego bezpośrednią kontrolą. Środowisko odbiera akcje agenta i zwraca nowe stany oraz nagrody.
+
+\vspace{0.5cm}
+\textit{Stan (State):} Reprezentacja bieżącej sytuacji w środowisku, oznaczana jako \(s \in \mathcal{S}\), gdzie \(\mathcal{S}\) to przestrzeń wszystkich możliwych stanów.
+
+\vspace{0.5cm}
+\textit{Akcja (Action):} Decyzja podejmowana przez agenta w danym stanie, oznaczana jako \(a \in \mathcal{A}\), gdzie \(\mathcal{A}\) to przestrzeń wszystkich możliwych akcji.
+
+\vspace{0.5cm}
+\textit{Nagroda (Reward):} Sygnał numeryczny \(r \in \mathbb{R}\) otrzymywany przez agenta od środowiska po wykonaniu akcji, wskazujący na natychmiastową wartość tej akcji.
+
+\vspace{0.5cm}
+\textit{Polityka (Policy):} Strategia agenta określająca, jaką akcję wybrać w danym stanie, oznaczana jako \(\pi(a|s)\) dla polityki stochastycznej lub \(\pi(s)\) dla polityki deterministycznej.
+
+\vspace{0.5cm}
+\textbf{Proces decyzyjny Markova (Markov Decision Process).}
+Formalne podstawy uczenia ze wzmocnieniem opierają się na procesie decyzyjnym Markova (MDP), który definiuje się jako krotkę \((\mathcal{S}, \mathcal{A}, P, R, \gamma)\) \citep{sutton2018}, gdzie:
+\begin{itemize}
+  \item \(\mathcal{S}\) — zbiór stanów,
+  \item \(\mathcal{A}\) — zbiór akcji,
+  \item \(P(s'|s,a)\) — prawdopodobieństwo przejścia do stanu \(s'\) po wykonaniu akcji \(a\) w stanie \(s\),
+  \item \(R(s,a,s')\) — funkcja nagrody otrzymana za przejście ze stanu \(s\) do \(s'\) poprzez akcję \(a\),
+  \item \(\gamma \in [0,1]\) — współczynnik dyskontowania określający wartość przyszłych nagród względem natychmiastowych.
+\end{itemize}
+
+MDP zakłada własność Markova, która stwierdza, że przyszłość zależy tylko od obecnego stanu i akcji, a nie od całej historii \citep{sutton2018}:
+\begin{equation}
+P(s_{t+1}, r_{t+1}|s_t, a_t, s_{t-1}, a_{t-1}, \ldots, s_0, a_0) = P(s_{t+1}, r_{t+1}|s_t, a_t)
+\end{equation}
+
+\vspace{0.5cm}
+\textbf{Funkcja wartości.}
+Celem agenta jest maksymalizacja oczekiwanego skumulowanego zwrotu (return), zdefiniowanego jako zdyskontowana suma przyszłych nagród \citep{sutton2018}:
+\begin{equation}
+G_t = \sum_{k=0}^{\infty} \gamma^k r_{t+k+1}
+\end{equation}
+gdzie \(\gamma\) kontroluje, jak bardzo agent ceni przyszłe nagrody — dla \(\gamma = 0\) agent jest myopic (krótkowzroczny), a dla \(\gamma \to 1\) agent w pełni uwzględnia przyszłe konsekwencje.
+
+Funkcja wartości stanu (state-value function) dla polityki \(\pi\) definiuje się jako oczekiwany zwrot startując ze stanu \(s\) i następując politykę \(\pi\) \citep{sutton2018}:
+\begin{equation}
+V^\pi(s) = \mathbb{E}_\pi[G_t | s_t = s] = \mathbb{E}_\pi\left[\sum_{k=0}^{\infty} \gamma^k r_{t+k+1} \,\middle|\, s_t = s\right]
+\end{equation}
+
+Funkcja wartości akcji (action-value function lub Q-function) określa oczekiwany zwrot przy rozpoczęciu w stanie \(s\), wykonaniu akcji \(a\) i następowaniu polityki \(\pi\) \citep{sutton2018}:
+\begin{equation}
+Q^\pi(s,a) = \mathbb{E}_\pi[G_t | s_t = s, a_t = a] = \mathbb{E}_\pi\left[\sum_{k=0}^{\infty} \gamma^k r_{t+k+1} \,\middle|\, s_t = s, a_t = a\right]
+\end{equation}
+
+\vspace{0.5cm}
+\textbf{Równanie Bellmana.}
+Funkcje wartości spełniają rekurencyjne równanie Bellmana, które wyraża wartość stanu poprzez natychmiastową nagrodę i zdyskontowaną wartość następnego stanu \citep{sutton2018}:
+\begin{equation}
+V^\pi(s) = \sum_{a \in \mathcal{A}} \pi(a|s) \sum_{s' \in \mathcal{S}} P(s'|s,a) \left[R(s,a,s') + \gamma V^\pi(s')\right]
+\end{equation}
+
+Dla funkcji Q równanie Bellmana przyjmuje postać \citep{sutton2018}:
+\begin{equation}
+Q^\pi(s,a) = \sum_{s' \in \mathcal{S}} P(s'|s,a) \left[R(s,a,s') + \gamma \sum_{a' \in \mathcal{A}} \pi(a'|s') Q^\pi(s',a')\right]
+\end{equation}
+
+Optymalna funkcja wartości \(V^*(s) = \max_\pi V^\pi(s)\) spełnia równanie optymalności Bellmana \citep{sutton2018}:
+\begin{equation}
+V^*(s) = \max_{a \in \mathcal{A}} \sum_{s' \in \mathcal{S}} P(s'|s,a) \left[R(s,a,s') + \gamma V^*(s')\right]
+\end{equation}
+
+\vspace{0.5cm}
+\subsection{Q-Learning}
+Q-Learning to algorytm uczenia ze wzmocnieniem bez modelu (model-free), który uczy się optymalnej funkcji wartości akcji \(Q^*(s,a)\) bez potrzeby znajomości dynamiki środowiska \(P(s'|s,a)\).
+Algorytm iteracyjnie aktualizuje oszacowania wartości Q na podstawie doświadczeń zebranych przez agenta w środowisku, wykorzystując zasadę temporal difference (TD) learning.
+Q-Learning jest algorytmem off-policy, co oznacza, że może uczyć się optymalnej polityki nawet gdy agent podąża za inną, eksploracyjną polityką \citep{sutton2018}.
+
+\vspace{0.5cm}
+\textbf{Reguła aktualizacji Q-Learning.}
+Po wykonaniu akcji \(a_t\) w stanie \(s_t\), otrzymaniu nagrody \(r_{t+1}\) i przejściu do stanu \(s_{t+1}\), wartość \(Q(s_t, a_t)\) jest aktualizowana zgodnie z regułą \citep{sutton2018}:
+\begin{equation}
+Q(s_t, a_t) \leftarrow Q(s_t, a_t) + \alpha \left[r_{t+1} + \gamma \max_{a'} Q(s_{t+1}, a') - Q(s_t, a_t)\right]
+\end{equation}
+gdzie \(\alpha \in (0,1]\) to współczynnik uczenia kontrolujący szybkość aktualizacji, a \(\max_{a'} Q(s_{t+1}, a')\) reprezentuje oszacowanie wartości najlepszej akcji w następnym stanie.
+
+Wyrażenie w nawiasie kwadratowym nazywane jest błędem TD (temporal difference error):
+\begin{equation}
+\delta_t = r_{t+1} + \gamma \max_{a'} Q(s_{t+1}, a') - Q(s_t, a_t)
+\end{equation}
+który mierzy różnicę między obecnym oszacowaniem a celem bootstrappowanym z następnego stanu.
+
+Wykazano, że Q-Learning zbiega do optymalnej funkcji wartości akcji \(Q^*\) pod warunkiem, że każda para stan-akcja jest odwiedzana nieskończenie wiele razy i współczynnik uczenia spełnia odpowiednie warunki \citep{sutton2018}.
+
+\vspace{0.5cm}
+\subsection{SARSA (State-Action-Reward-State-Action)}
+SARSA to algorytm uczenia ze wzmocnieniem bez modelu, który w przeciwieństwie do Q-Learning jest algorytmem on-policy — uczy się wartości polityki, którą faktycznie wykonuje.
+Nazwa algorytmu pochodzi od sekwencji elementów używanych do aktualizacji: \((s_t, a_t, r_{t+1}, s_{t+1}, a_{t+1})\).
+SARSA jest bardziej konserwatywny niż Q-Learning, ponieważ uwzględnia rzeczywiste akcje podejmowane przez agenta, a nie zakłada zawsze wybór optymalnej akcji \citep{sutton2018}.
+
+\vspace{0.5cm}
+\textbf{Reguła aktualizacji SARSA.}
+Po wykonaniu akcji \(a_t\) w stanie \(s_t\), otrzymaniu nagrody \(r_{t+1}\), przejściu do stanu \(s_{t+1}\) i wybraniu następnej akcji \(a_{t+1}\) zgodnie z polityką, wartość \(Q(s_t, a_t)\) jest aktualizowana według reguły \citep{sutton2018}:
+\begin{equation}
+Q(s_t, a_t) \leftarrow Q(s_t, a_t) + \alpha \left[r_{t+1} + \gamma Q(s_{t+1}, a_{t+1}) - Q(s_t, a_t)\right]
+\end{equation}
+
+Kluczowa różnica w porównaniu do Q-Learning polega na tym, że zamiast \(\max_{a'} Q(s_{t+1}, a')\) używane jest \(Q(s_{t+1}, a_{t+1})\), gdzie \(a_{t+1}\) to akcja rzeczywiście wybrana przez agenta zgodnie z jego polityką (np. \(\varepsilon\)-greedy).
+
+SARSA jest bardziej odpowiedni w środowiskach, gdzie eksploracja nieoptymalnych akcji jest ryzykowna, ponieważ uwzględnia konsekwencje faktycznie podejmowanych akcji eksploracyjnych \citep{sutton2018}.
+
+\vspace{0.5cm}
+\subsection{Deep Q-Network (DQN)}
+Deep Q-Network to przełomowe rozszerzenie Q-Learning wykorzystujące głębokie sieci neuronowe do aproksymacji funkcji wartości akcji w problemach z dużymi lub ciągłymi przestrzeniami stanów.
+Klasyczny Q-Learning przechowuje wartości Q w tabeli, co staje się niepraktyczne dla złożonych problemów.
+DQN reprezentuje funkcję \(Q(s,a)\) jako sieć neuronową z parametrami \(\theta\), oznaczaną jako \(Q(s,a;\theta)\), która może generalizować wiedzę między podobnymi stanami.
+Algorytm DQN wprowadza kilka innowacji technicznych niezbędnych do stabilnego trenowania głębokich sieci w kontekście uczenia ze wzmocnieniem \citep{sutton2018}.
+
+\vspace{0.5cm}
+\textbf{Experience Replay.}
+DQN wykorzystuje bufor doświadczeń (experience replay buffer), w którym przechowywane są krotki przejść \((s_t, a_t, r_{t+1}, s_{t+1})\).
+Podczas treningu losowo próbkowane są mini-batche z tego bufora, co łamie korelację między kolejnymi próbkami i poprawia stabilność uczenia \citep{sutton2018}.
+
+\vspace{0.5cm}
+\textbf{Target Network.}
+DQN wykorzystuje dwie sieci neuronowe: sieć główną \(Q(s,a;\theta)\) i sieć docelową \(Q(s,a;\theta^-)\).
+Sieć główna jest aktualizowana w każdym kroku, podczas gdy sieć docelowa jest aktualizowana rzadziej (co \(C\) kroków) kopiując wagi z sieci głównej.
+To rozwiązanie stabilizuje cele uczenia, ponieważ cel \(y_t\) w funkcji straty jest obliczany za pomocą stałych (przez pewien czas) wag \citep{sutton2018}.
+
+\vspace{0.5cm}
+\textbf{Funkcja straty DQN.}
+Parametry sieci \(\theta\) są optymalizowane poprzez minimalizację funkcji straty \citep{sutton2018}:
+\begin{equation}
+L(\theta) = \mathbb{E}_{(s,a,r,s') \sim \mathcal{D}} \left[\left(y - Q(s,a;\theta)\right)^2\right]
+\end{equation}
+gdzie cel \(y\) jest obliczany za pomocą sieci docelowej:
+\begin{equation}
+y = r + \gamma \max_{a'} Q(s', a'; \theta^-)
+\end{equation}
+a \(\mathcal{D}\) oznacza rozkład próbkowany z bufora doświadczeń.
+
+\vspace{0.5cm}
+\subsection{Policy Gradient Methods (Metody gradientu polityki)}
+Metody gradientu polityki to alternatywne podejście do uczenia ze wzmocnieniem, które zamiast uczyć się funkcji wartości, bezpośrednio optymalizują parametryzowaną politykę \(\pi(a|s;\theta)\).
+Polityka może być reprezentowana jako sieć neuronowa, która dla danego stanu \(s\) produkuje rozkład prawdopodobieństwa nad akcjami.
+Metody te są szczególnie efektywne w problemach z ciągłymi lub bardzo dużymi przestrzeniami akcji, gdzie wybór maksimum z funkcji Q byłby trudny obliczeniowo \citep{sutton2018,szepesvari2010}.
+
+\vspace{0.5cm}
+\textbf{Cel optymalizacji.}
+Celem jest maksymalizacja oczekiwanej wartości funkcji wartości stanu początkowego \citep{sutton2018}:
+\begin{equation}
+J(\theta) = \mathbb{E}_{s_0}\left[V^{\pi_\theta}(s_0)\right]
+\end{equation}
+lub równoważnie oczekiwanej skumulowanej nagrody pod polityką \(\pi_\theta\).
+
+\vspace{0.5cm}
+\textbf{Twierdzenie o gradiencie polityki.}
+Gradient funkcji celu względem parametrów polityki można wyrazić jako \citep{sutton2018}:
+\begin{equation}
+\nabla_\theta J(\theta) = \mathbb{E}_{\pi_\theta}\left[\nabla_\theta \log \pi(a|s;\theta) \, Q^{\pi_\theta}(s,a)\right]
+\end{equation}
+gdzie oczekiwanie jest po trajektoriach generowanych przez politykę \(\pi_\theta\).
+
+W praktyce \(Q^{\pi_\theta}(s,a)\) jest aproksymowane przez skumulowaną nagrodę z trajektorii (REINFORCE) lub przez nauczoną funkcję wartości (Actor-Critic).
+
+\vspace{0.5cm}
+\textbf{Algorytm REINFORCE.}
+Podstawowy algorytm gradientu polityki, REINFORCE, używa pełnych zwrotów z trajektorii jako nieobciążonych estymatorów \(Q^{\pi_\theta}(s,a)\) \citep{sutton2018}:
+\begin{equation}
+\theta \leftarrow \theta + \alpha G_t \nabla_\theta \log \pi(a_t|s_t;\theta)
+\end{equation}
+gdzie \(G_t\) to rzeczywisty zwrot otrzymany po akcji \(a_t\).
+
+\vspace{0.5cm}
+\textbf{Metody Actor-Critic.}
+Metody Actor-Critic łączą podejście gradientu polityki (actor) z uczeniem funkcji wartości (critic).
+Actor aktualizuje parametry polityki \(\theta\) w kierunku poprawy wydajności, podczas gdy critic uczy się funkcji wartości \(V^\pi(s)\) lub \(Q^\pi(s,a)\) z parametrami \(\omega\), która jest używana do oceny akcji aktora.
+Zamiast używać pełnych zwrotów \(G_t\), actor-critic wykorzystuje bootstrap-owane oszacowania z critic, co zmniejsza wariancję gradientu \citep{sutton2018,szepesvari2010}.
+
+Aktualizacja critic (dla TD(0)) \citep{sutton2018}:
+\begin{equation}
+\omega \leftarrow \omega + \beta \delta_t \nabla_\omega V(s_t;\omega)
+\end{equation}
+gdzie błąd TD wynosi:
+\begin{equation}
+\delta_t = r_{t+1} + \gamma V(s_{t+1};\omega) - V(s_t;\omega)
+\end{equation}
+
+Aktualizacja actor \citep{sutton2018}:
+\begin{equation}
+\theta \leftarrow \theta + \alpha \delta_t \nabla_\theta \log \pi(a_t|s_t;\theta)
+\end{equation}
+
+\vspace{0.5cm}
+\textbf{Zastosowania uczenia ze wzmocnieniem.}
+Uczenie ze wzmocnieniem znalazło szerokie zastosowanie w wielu dziedzinach \citep{sutton2018,szepesvari2010}:
+\begin{itemize}
+  \item \textbf{Robotyka i automatyka} — kontrola robotów, manipulacja obiektami, nawigacja autonomiczna.
+  \item \textbf{Gry} — osiągnięcie nadludzkiego poziomu w grach planszowych (Go, szachy) i grach wideo (Atari, StarCraft, Dota 2).
+  \item \textbf{Optymalizacja procesów przemysłowych} — kontrola parametrów procesów wytwórczych, zarządzanie łańcuchem dostaw, optymalizacja zużycia energii.
+  \item \textbf{Systemy rekomendacyjne} — personalizacja rekomendacji z uwzględnieniem długoterminowego zaangażowania użytkowników.
+  \item \textbf{Finanse} — handel algorytmiczny, zarządzanie portfelem, optymalizacja strategii inwestycyjnych.
+  \item \textbf{Healthcare} — personalizacja terapii, optymalizacja dawkowania leków, zarządzanie zasobami szpitalnymi.
+  \item \textbf{Zarządzanie ruchem i logistyka} — optymalizacja sygnalizacji świetlnej, routing pojazdów autonomicznych.
+\end{itemize}
+
+W kontekście procesów wytwórczych, uczenie ze wzmocnieniem pozwala na dynamiczną optymalizację parametrów produkcji w czasie rzeczywistym, adaptację do zmieniających się warunków oraz minimalizację kosztów przy jednoczesnym utrzymaniu wysokiej jakości produktów \citep{sutton2018}.
+
+\vspace{0.5cm}
+\section{Uczenie głębokie (Deep Learning)}
+Uczenie głębokie to poddziedzina uczenia maszynowego oparta na sztucznych sieciach neuronowych z wieloma warstwami przetwarzającymi informację w sposób hierarchiczny.
+W przeciwieństwie do klasycznych algorytmów uczenia maszynowego, które wymagają ręcznego inżynierowania cech (feature engineering), głębokie sieci neuronowe automatycznie uczą się reprezentacji danych na wielu poziomach abstrakcji.
+Niższe warstwy uczą się prostych wzorców (np. krawędzie w obrazach), podczas gdy wyższe warstwy komponują te proste wzorce w bardziej złożone reprezentacje (np. części obiektów, całe obiekty).
+Ta hierarchiczna nauka reprezentacji pozwala głębokim sieciom osiągać wyniki przewyższające tradycyjne metody w wielu zadaniach, szczególnie w dziedzinie wizji komputerowej, przetwarzania języka naturalnego i rozpoznawania mowy \citep{goodfellow2016,lecun2015}.
+
+\vspace{0.5cm}
+\textbf{Architektura głębokiej sieci neuronowej.}
+Podstawowym elementem sieci neuronowej jest perceptron wielowarstwowy (Multi-Layer Perceptron, MLP), składający się z warstw neuronów połączonych wagami.
+Dla wejścia \(\boldsymbol{x} \in \mathbb{R}^d\), warstwa ukryta oblicza \citep{goodfellow2016}:
+\begin{equation}
+\boldsymbol{h} = \sigma(W^{(1)} \boldsymbol{x} + \boldsymbol{b}^{(1)})
+\end{equation}
+gdzie \(W^{(1)}\) to macierz wag, \(\boldsymbol{b}^{(1)}\) to wektor biasów, a \(\sigma(\cdot)\) to nieliniowa funkcja aktywacji.
+
+Dla sieci wielowarstwowej transformacja danych przez kolejne warstwy wyraża się jako \citep{goodfellow2016}:
+\begin{equation}
+\boldsymbol{h}^{(l)} = \sigma^{(l)}(W^{(l)} \boldsymbol{h}^{(l-1)} + \boldsymbol{b}^{(l)})
+\end{equation}
+gdzie \(l\) oznacza numer warstwy, \(\boldsymbol{h}^{(0)} = \boldsymbol{x}\) to dane wejściowe, a \(\boldsymbol{h}^{(L)}\) to wyjście sieci.
+
+Warstwa wyjściowa dla klasyfikacji wieloklasowej często używa funkcji softmax \citep{goodfellow2016}:
+\begin{equation}
+P(y=k|\boldsymbol{x}) = \frac{\exp(z_k)}{\sum_{j=1}^{K} \exp(z_j)}
+\end{equation}
+gdzie \(\boldsymbol{z} = W^{(L)} \boldsymbol{h}^{(L-1)} + \boldsymbol{b}^{(L)}\) to logity, a \(K\) to liczba klas.
+
+\vspace{0.5cm}
+\textbf{Funkcje aktywacji.}
+Nieliniowe funkcje aktywacji są kluczowe dla zdolności sieci do modelowania złożonych zależności. Najczęściej stosowane funkcje aktywacji to \citep{goodfellow2016,lecun2015}:
+
+\vspace{0.5cm}
+\textit{ReLU (Rectified Linear Unit):} Najpopularniejsza funkcja aktywacji w głębokich sieciach \citep{goodfellow2016}:
+\begin{equation}
+\text{ReLU}(x) = \max(0, x)
+\end{equation}
+ReLU jest prosta obliczeniowo, łagodzi problem zanikającego gradientu i empirycznie przyspiesza trenowanie.
+
+\vspace{0.5cm}
+\textit{Leaky ReLU:} Wariant ReLU pozwalający na małe ujemne wartości \citep{goodfellow2016}:
+\begin{equation}
+\text{LeakyReLU}(x) = \max(\alpha x, x)
+\end{equation}
+gdzie typowo \(\alpha = 0.01\), co zapobiega „umieraniu" neuronów.
+
+\vspace{0.5cm}
+\textit{Sigmoid:} Klasyczna funkcja aktywacji mapująca wartości do przedziału (0,1) \citep{goodfellow2016}:
+\begin{equation}
+\sigma(x) = \frac{1}{1 + e^{-x}}
+\end{equation}
+Obecnie rzadziej używana w warstwach ukrytych ze względu na problem zanikającego gradientu.
+
+\vspace{0.5cm}
+\textit{Tanh:} Funkcja tangensa hiperbolicznego mapująca do przedziału (-1,1) \citep{goodfellow2016}:
+\begin{equation}
+\tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}
+\end{equation}
+
+\vspace{0.5cm}
+\subsection{Algorytm wstecznej propagacji (Backpropagation)}
+Backpropagation to algorytm służący do efektywnego obliczania gradientów funkcji straty względem wszystkich wag w sieci neuronowej, umożliwiający ich optymalizację metodami gradientowymi.
+Algorytm wykorzystuje regułę łańcuchową do propagowania błędu od warstwy wyjściowej do warstw wejściowych, obliczając gradienty w sposób sekwencyjny i efektywny obliczeniowo \citep{goodfellow2016}.
+
+\vspace{0.5cm}
+\textbf{Funkcja straty.}
+Dla klasyfikacji wieloklasowej typowo stosuje się entropię krzyżową (cross-entropy) \citep{goodfellow2016}:
+\begin{equation}
+L(\theta) = -\frac{1}{n} \sum_{i=1}^{n} \sum_{k=1}^{K} y_{ik} \log(\hat{y}_{ik})
+\end{equation}
+gdzie \(y_{ik}\) to prawdziwa etykieta (one-hot encoding), \(\hat{y}_{ik}\) to predykcja sieci, a \(\theta\) reprezentuje wszystkie parametry sieci.
+
+\vspace{0.5cm}
+\textbf{Propagacja wsteczna.}
+Dla warstwy wyjściowej gradient błędu wynosi \citep{goodfellow2016}:
+\begin{equation}
+\delta^{(L)} = \frac{\partial L}{\partial \boldsymbol{z}^{(L)}}
+\end{equation}
+
+Dla warstw ukrytych gradient propaguje się wstecznie \citep{goodfellow2016}:
+\begin{equation}
+\delta^{(l)} = \left((W^{(l+1)})^\top \delta^{(l+1)}\right) \odot \sigma'^{(l)}(\boldsymbol{z}^{(l)})
+\end{equation}
+gdzie \(\odot\) oznacza iloczyn Hadamarda (element-wise), a \(\sigma'^{(l)}\) to pochodna funkcji aktywacji.
+
+Gradienty względem wag i biasów \citep{goodfellow2016}:
+\begin{equation}
+\frac{\partial L}{\partial W^{(l)}} = \delta^{(l)} (\boldsymbol{h}^{(l-1)})^\top, \quad \frac{\partial L}{\partial \boldsymbol{b}^{(l)}} = \delta^{(l)}
+\end{equation}
+
+\vspace{0.5cm}
+\subsection{Metody optymalizacji}
+Trenowanie głębokich sieci neuronowych wymaga efektywnych algorytmów optymalizacji, które są rozszerzeniami klasycznego gradientu prostego (Gradient Descent).
+
+\vspace{0.5cm}
+\textbf{Stochastic Gradient Descent (SGD).}
+SGD aktualizuje parametry na podstawie gradientu obliczonego na małym batchu danych zamiast całego zbioru treningowego \citep{goodfellow2016}:
+\begin{equation}
+\theta \leftarrow \theta - \eta \nabla_\theta L_{\text{batch}}(\theta)
+\end{equation}
+gdzie \(\eta\) to współczynnik uczenia (learning rate), a \(L_{\text{batch}}\) to średnia strata na batchu.
+
+\vspace{0.5cm}
+\textbf{Momentum.}
+Momentum przyspiesza SGD w kierunkach z konsekwentnym gradientem i tłumi oscylacje \citep{goodfellow2016}:
+\begin{equation}
+\boldsymbol{v}_t = \beta \boldsymbol{v}_{t-1} + \eta \nabla_\theta L(\theta)
+\end{equation}
+\begin{equation}
+\theta \leftarrow \theta - \boldsymbol{v}_t
+\end{equation}
+gdzie \(\beta \in [0,1)\) (typowo 0.9) kontroluje wpływ poprzednich gradientów.
+
+\vspace{0.5cm}
+\textbf{Adam (Adaptive Moment Estimation).}
+Adam to obecnie najpopularniejszy optymalizator, łączący momentum z adaptacyjnymi współczynnikami uczenia dla każdego parametru \citep{goodfellow2016}:
+\begin{equation}
+\boldsymbol{m}_t = \beta_1 \boldsymbol{m}_{t-1} + (1-\beta_1) \nabla_\theta L(\theta)
+\end{equation}
+\begin{equation}
+\boldsymbol{v}_t = \beta_2 \boldsymbol{v}_{t-1} + (1-\beta_2) (\nabla_\theta L(\theta))^2
+\end{equation}
+\begin{equation}
+\hat{\boldsymbol{m}}_t = \frac{\boldsymbol{m}_t}{1-\beta_1^t}, \quad \hat{\boldsymbol{v}}_t = \frac{\boldsymbol{v}_t}{1-\beta_2^t}
+\end{equation}
+\begin{equation}
+\theta \leftarrow \theta - \eta \frac{\hat{\boldsymbol{m}}_t}{\sqrt{\hat{\boldsymbol{v}}_t} + \epsilon}
+\end{equation}
+gdzie typowo \(\beta_1 = 0.9\), \(\beta_2 = 0.999\), \(\epsilon = 10^{-8}\).
+
+\vspace{0.5cm}
+\subsection{Regularyzacja w sieciach głębokich}
+Głębokie sieci neuronowe są podatne na przeuczenie ze względu na dużą liczbę parametrów. Stosuje się różne techniki regularyzacji aby poprawić generalizację.
+
+\vspace{0.5cm}
+\textbf{Dropout.}
+Dropout to technika regularyzacji polegająca na losowym wyłączaniu neuronów podczas trenowania z prawdopodobieństwem \(p\) (typowo 0.5).
+Podczas forward pass każdy neuron jest zachowywany z prawdopodobieństwem \(1-p\) \citep{goodfellow2016}:
+\begin{equation}
+\boldsymbol{h}^{(l)} = \boldsymbol{r}^{(l)} \odot \sigma(W^{(l)} \boldsymbol{h}^{(l-1)} + \boldsymbol{b}^{(l)})
+\end{equation}
+gdzie \(\boldsymbol{r}^{(l)}\) to wektor binarny z elementami losowanymi z rozkładu Bernoulliego \(\text{Bernoulli}(1-p)\).
+
+Podczas testowania wszystkie neurony są aktywne, a ich wyjścia są skalowane przez \((1-p)\) aby zachować oczekiwaną wartość aktywacji.
+
+\vspace{0.5cm}
+\textbf{Batch Normalization.}
+Batch Normalization normalizuje aktywacje każdej warstwy, co stabilizuje i przyspiesza trenowanie.
+Dla mini-batcha aktywacji \(\{x_1, \ldots, x_m\}\), normalizacja wynosi \citep{goodfellow2016}:
+\begin{equation}
+\hat{x}_i = \frac{x_i - \mu_B}{\sqrt{\sigma_B^2 + \epsilon}}
+\end{equation}
+gdzie \(\mu_B = \frac{1}{m}\sum_{i=1}^{m} x_i\) to średnia batcha, \(\sigma_B^2 = \frac{1}{m}\sum_{i=1}^{m}(x_i - \mu_B)^2\) to wariancja batcha.
+
+Następnie stosuje się przekształcenie liniowe z nauczalnymi parametrami \citep{goodfellow2016}:
+\begin{equation}
+y_i = \gamma \hat{x}_i + \beta
+\end{equation}
+gdzie \(\gamma\) i \(\beta\) są parametrami uczonymi przez backpropagation.
+
+\vspace{0.5cm}
+\textbf{L2 Regularization (Weight Decay).}
+Dodanie kary L2 do funkcji straty zapobiega zbyt dużym wartościom wag \citep{goodfellow2016}:
+\begin{equation}
+L_{\text{total}} = L(\theta) + \lambda \sum_{l} \|W^{(l)}\|_F^2
+\end{equation}
+gdzie \(\|\cdot\|_F\) to norma Frobeniusa, a \(\lambda\) kontroluje siłę regularyzacji.
+
+\vspace{0.5cm}
+\subsection{Konwolucyjne sieci neuronowe (CNN)}
+Konwolucyjne sieci neuronowe to architektura zaprojektowana specjalnie do przetwarzania danych o strukturze kratowej, takich jak obrazy.
+CNN wykorzystują operację splotu (convolution) zamiast pełnego połączenia między neuronami, co drastycznie redukuje liczbę parametrów i pozwala na uczenie się lokalnych wzorców niezależnie od ich położenia w obrazie (translational invariance) \citep{lecun2015,goodfellow2016}.
+
+\vspace{0.5cm}
+\textbf{Warstwa konwolucyjna.}
+Operacja splotu 2D dla obrazu wejściowego \(X\) i filtra (kernela) \(W\) wynosi \citep{goodfellow2016}:
+\begin{equation}
+Y_{ij} = (X * W)_{ij} = \sum_{m}\sum_{n} X_{i+m, j+n} W_{mn} + b
+\end{equation}
+gdzie \(Y\) to mapa cech (feature map), a \(b\) to bias.
+
+Dla wielokanałowego wejścia (np. RGB) z \(C_{\text{in}}\) kanałami i \(C_{\text{out}}\) filtrami \citep{goodfellow2016}:
+\begin{equation}
+Y^{(k)}_{ij} = \sum_{c=1}^{C_{\text{in}}} (X^{(c)} * W^{(k,c)})_{ij} + b^{(k)}
+\end{equation}
+
+\vspace{0.5cm}
+\textbf{Pooling.}
+Warstwy poolingu redukują wymiary przestrzenne map cech, zwiększając niezmienniczość na małe translacje.
+Max pooling wybiera maksymalną wartość z okna \citep{goodfellow2016}:
+\begin{equation}
+Y_{ij} = \max_{(m,n) \in \mathcal{R}_{ij}} X_{mn}
+\end{equation}
+gdzie \(\mathcal{R}_{ij}\) to region poolingu dla pozycji \((i,j)\).
+
+Average pooling oblicza średnią \citep{goodfellow2016}:
+\begin{equation}
+Y_{ij} = \frac{1}{|\mathcal{R}_{ij}|} \sum_{(m,n) \in \mathcal{R}_{ij}} X_{mn}
+\end{equation}
+
+Typowa architektura CNN składa się z naprzemiennych warstw konwolucyjnych (z ReLU) i poolingu, zakończonych w pełni połączonymi warstwami do klasyfikacji \citep{lecun2015}.
+
+\vspace{0.5cm}
+\subsection{Rekurencyjne sieci neuronowe (RNN)}
+Rekurencyjne sieci neuronowe to architektura zaprojektowana do przetwarzania sekwencji danych o zmiennej długości, takich jak tekst, mowa czy szeregi czasowe.
+RNN utrzymują ukryty stan \(\boldsymbol{h}_t\), który jest aktualizowany w każdym kroku czasowym na podstawie bieżącego wejścia \(\boldsymbol{x}_t\) i poprzedniego stanu \(\boldsymbol{h}_{t-1}\), co pozwala sieci na „zapamiętywanie" informacji z przeszłości \citep{goodfellow2016}.
+
+\vspace{0.5cm}
+\textbf{Podstawowe RNN.}
+Aktualizacja stanu ukrytego w podstawowym RNN \citep{goodfellow2016}:
+\begin{equation}
+\boldsymbol{h}_t = \tanh(W_{hh} \boldsymbol{h}_{t-1} + W_{xh} \boldsymbol{x}_t + \boldsymbol{b}_h)
+\end{equation}
+
+Wyjście w kroku \(t\) \citep{goodfellow2016}:
+\begin{equation}
+\boldsymbol{y}_t = W_{hy} \boldsymbol{h}_t + \boldsymbol{b}_y
+\end{equation}
+
+Podstawowe RNN cierpią na problem zanikającego/eksplodującego gradientu podczas uczenia długich sekwencji, co ogranicza ich zdolność do uczenia się długoterminowych zależności.
+
+\vspace{0.5cm}
+\textbf{LSTM (Long Short-Term Memory).}
+LSTM to zaawansowana architektura RNN rozwiązująca problem długoterminowych zależności poprzez wprowadzenie mechanizmu bramek (gates).
+Komórka LSTM składa się z stanu komórki \(\boldsymbol{c}_t\) i trzech bramek: forget gate, input gate i output gate \citep{goodfellow2016}.
+
+Bramka zapominania (forget gate) \citep{goodfellow2016}:
+\begin{equation}
+\boldsymbol{f}_t = \sigma(W_f [\boldsymbol{h}_{t-1}, \boldsymbol{x}_t] + \boldsymbol{b}_f)
+\end{equation}
+
+Bramka wejściowa (input gate) \citep{goodfellow2016}:
+\begin{equation}
+\boldsymbol{i}_t = \sigma(W_i [\boldsymbol{h}_{t-1}, \boldsymbol{x}_t] + \boldsymbol{b}_i)
+\end{equation}
+
+Kandydat nowego stanu komórki \citep{goodfellow2016}:
+\begin{equation}
+\tilde{\boldsymbol{c}}_t = \tanh(W_c [\boldsymbol{h}_{t-1}, \boldsymbol{x}_t] + \boldsymbol{b}_c)
+\end{equation}
+
+Aktualizacja stanu komórki \citep{goodfellow2016}:
+\begin{equation}
+\boldsymbol{c}_t = \boldsymbol{f}_t \odot \boldsymbol{c}_{t-1} + \boldsymbol{i}_t \odot \tilde{\boldsymbol{c}}_t
+\end{equation}
+
+Bramka wyjściowa (output gate) \citep{goodfellow2016}:
+\begin{equation}
+\boldsymbol{o}_t = \sigma(W_o [\boldsymbol{h}_{t-1}, \boldsymbol{x}_t] + \boldsymbol{b}_o)
+\end{equation}
+
+Stan ukryty \citep{goodfellow2016}:
+\begin{equation}
+\boldsymbol{h}_t = \boldsymbol{o}_t \odot \tanh(\boldsymbol{c}_t)
+\end{equation}
+
+LSTM skutecznie modeluje zależności na dystansie dziesiątek lub setek kroków czasowych.
+
+\vspace{0.5cm}
+\textbf{Zastosowania uczenia głębokiego.}
+Uczenie głębokie zrewolucjonizowało wiele dziedzin i znalazło szerokie zastosowania \citep{goodfellow2016,lecun2015}:
+\begin{itemize}
+  \item \textbf{Wizja komputerowa} — klasyfikacja obrazów, detekcja obiektów, segmentacja semantyczna, rozpoznawanie twarzy.
+  \item \textbf{Przetwarzanie języka naturalnego} — tłumaczenie maszynowe, analiza sentymentu, chatboty, generowanie tekstu.
+  \item \textbf{Rozpoznawanie mowy} — transkrypcja audio, synteza mowy, asystenci głosowi.
+  \item \textbf{Systemy rekomendacyjne} — personalizacja treści, przewidywanie preferencji użytkowników.
+  \item \textbf{Medycyna} — diagnostyka obrazowa (RTG, MRI, CT), przewidywanie chorób, odkrywanie leków.
+  \item \textbf{Autonomiczne pojazdy} — percepcja środowiska, planowanie trasy, kontrola pojazdu.
+  \item \textbf{Przemysł i procesy wytwórcze} — kontrola jakości wizualna (inspekcja defektów), predykcyjne utrzymanie ruchu oparte na danych sensorycznych, optymalizacja parametrów procesów w czasie rzeczywistym.
+  \item \textbf{Finanse} — wykrywanie oszustw, prognozowanie rynków, automatyczny trading.
+\end{itemize}
+
+W kontekście procesów wytwórczych, głębokie sieci konwolucyjne (CNN) umożliwiają automatyczną inspekcję jakości produktów na liniach produkcyjnych, wykrywając defekty z dokładnością przewyższającą inspekcję ludzką.
+Rekurencyjne sieci neuronowe (RNN/LSTM) są wykorzystywane do analizy szeregów czasowych z czujników w celu predykcji awarii maszyn i optymalizacji harmonogramów konserwacji \citep{lecun2015,goodfellow2016}.

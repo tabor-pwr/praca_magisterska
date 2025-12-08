@@ -14,5 +14,23 @@
 \contentsline {subsection}{\numberline {1.2.3}DBSCAN (Density-Based Spatial Clustering)}{14}{subsection.1.2.3}%
 \contentsline {subsection}{\numberline {1.2.4}PCA (Principal Component Analysis)}{15}{subsection.1.2.4}%
 \contentsline {subsection}{\numberline {1.2.5}t-SNE (t-distributed Stochastic Neighbor Embedding)}{16}{subsection.1.2.5}%
-\contentsline {subsection}{\numberline {1.2.6}UMAP (Uniform Manifold Approximation and Projection)}{17}{subsection.1.2.6}%
-\contentsline {chapter}{Bibliografia}{19}{section*.2}%
+\contentsline {subsection}{\numberline {1.2.6}UMAP (Uniform Manifold Approximation and Projection)}{18}{subsection.1.2.6}%
+\contentsline {section}{\numberline {1.3}Uczenie półnadzorowane (Semi-Supervised Learning)}{19}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Self-Training (Samouczenie)}{19}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.3.2}Co-Training}{20}{subsection.1.3.2}%
+\contentsline {subsection}{\numberline {1.3.3}Transductive SVM (TSVM)}{21}{subsection.1.3.3}%
+\contentsline {subsection}{\numberline {1.3.4}Graph-Based Methods (Metody grafowe)}{21}{subsection.1.3.4}%
+\contentsline {subsection}{\numberline {1.3.5}Generative Models (Modele generatywne)}{22}{subsection.1.3.5}%
+\contentsline {subsection}{\numberline {1.3.6}Entropy Minimization (Minimalizacja entropii)}{23}{subsection.1.3.6}%
+\contentsline {section}{\numberline {1.4}Uczenie ze wzmocnieniem (Reinforcement Learning)}{24}{section.1.4}%
+\contentsline {subsection}{\numberline {1.4.1}Q-Learning}{26}{subsection.1.4.1}%
+\contentsline {subsection}{\numberline {1.4.2}SARSA (State-Action-Reward-State-Action)}{27}{subsection.1.4.2}%
+\contentsline {subsection}{\numberline {1.4.3}Deep Q-Network (DQN)}{27}{subsection.1.4.3}%
+\contentsline {subsection}{\numberline {1.4.4}Policy Gradient Methods (Metody gradientu polityki)}{28}{subsection.1.4.4}%
+\contentsline {section}{\numberline {1.5}Uczenie głębokie (Deep Learning)}{30}{section.1.5}%
+\contentsline {subsection}{\numberline {1.5.1}Algorytm wstecznej propagacji (Backpropagation)}{31}{subsection.1.5.1}%
+\contentsline {subsection}{\numberline {1.5.2}Metody optymalizacji}{32}{subsection.1.5.2}%
+\contentsline {subsection}{\numberline {1.5.3}Regularyzacja w sieciach głębokich}{32}{subsection.1.5.3}%
+\contentsline {subsection}{\numberline {1.5.4}Konwolucyjne sieci neuronowe (CNN)}{33}{subsection.1.5.4}%
+\contentsline {subsection}{\numberline {1.5.5}Rekurencyjne sieci neuronowe (RNN)}{34}{subsection.1.5.5}%
+\contentsline {chapter}{Bibliografia}{36}{section*.2}%

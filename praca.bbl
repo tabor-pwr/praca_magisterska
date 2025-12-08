@@ -1,4 +1,4 @@
-\begin{thebibliography}{27}
+\begin{thebibliography}{33}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -40,6 +40,11 @@ Leo Breiman, Jerome~H. Friedman, Richard~A. Olshen, and Charles~J. Stone.
 \newblock \emph{Classification and Regression Trees}.
 \newblock Wadsworth, Belmont, CA, 1984.
 
+\bibitem[Chapelle et~al.(2006)Chapelle, Schölkopf, and Zien]{chapelle2006}
+Olivier Chapelle, Bernhard Schölkopf, and Alexander Zien.
+\newblock \emph{Semi-Supervised Learning}.
+\newblock MIT Press, Cambridge, MA, 2006.
+
 \bibitem[Cover and Hart(1967)]{cover1967}
 Thomas~M. Cover and Peter~E. Hart.
 \newblock Nearest neighbor pattern classification.
@@ -79,6 +84,13 @@ Gene~H. Golub and Charles F.~Van Loan.
 \newblock \emph{Matrix Computations}.
 \newblock Johns Hopkins University Press, Baltimore, MD, 3rd edition, 1996.
 
+\bibitem[Goodfellow et~al.(2016)Goodfellow, Bengio, and
+  Courville]{goodfellow2016}
+Ian Goodfellow, Yoshua Bengio, and Aaron Courville.
+\newblock \emph{Deep Learning}.
+\newblock MIT Press, Cambridge, MA, 2016.
+\newblock URL \url{http://www.deeplearningbook.org}.
+
 \bibitem[Hastie et~al.(2009)Hastie, Tibshirani, and Friedman]{hastie2009}
 Trevor Hastie, Robert Tibshirani, and Jerome Friedman.
 \newblock \emph{The Elements of Statistical Learning: Data Mining, Inference,
@@ -96,6 +108,12 @@ Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani.
 \newblock \emph{An Introduction to Statistical Learning: with Applications in
   R}.
 \newblock Springer, New York, 1st edition, 2013.
+
+\bibitem[LeCun et~al.(2015)LeCun, Bengio, and Hinton]{lecun2015}
+Yann LeCun, Yoshua Bengio, and Geoffrey Hinton.
+\newblock Deep learning.
+\newblock \emph{Nature}, 521\penalty0 (7553):\penalty0 436--444, 2015.
+\newblock \doi{10.1038/nature14539}.
 
 \bibitem[Manning et~al.(2008)Manning, Raghavan, and Schütze]{manning2008}
 Christopher~D. Manning, Prabhakar Raghavan, and Hinrich Schütze.
@@ -151,6 +169,17 @@ Jasper Snoek, Hugo Larochelle, and Ryan~P. Adams.
 \newblock Practical bayesian optimization of machine learning algorithms.
 \newblock \emph{Advances in Neural Information Processing Systems}, 25, 2012.
 
+\bibitem[Sutton and Barto(2018)]{sutton2018}
+Richard~S. Sutton and Andrew~G. Barto.
+\newblock \emph{Reinforcement Learning: An Introduction}.
+\newblock MIT Press, Cambridge, MA, 2nd edition, 2018.
+
+\bibitem[Szepesvári(2010)]{szepesvari2010}
+Csaba Szepesvári.
+\newblock \emph{Algorithms for Reinforcement Learning}.
+\newblock Synthesis Lectures on Artificial Intelligence and Machine Learning.
+  Morgan \& Claypool Publishers, 2010.
+
 \bibitem[Tibshirani(1996)]{tibshirani1996}
 Robert Tibshirani.
 \newblock Regression shrinkage and selection via the lasso.
@@ -163,6 +192,12 @@ Laurens van~der Maaten and Geoffrey Hinton.
 \newblock Visualizing data using t-sne.
 \newblock \emph{Journal of Machine Learning Research}, 9:\penalty0 2579--2605,
   2008.
+
+\bibitem[Zhu and Goldberg(2009)]{zhu2009}
+Xiaojin Zhu and Andrew~B. Goldberg.
+\newblock \emph{Introduction to Semi-Supervised Learning}.
+\newblock Synthesis Lectures on Artificial Intelligence and Machine Learning.
+  Morgan \& Claypool Publishers, 2009.
 
 \bibitem[Zou and Hastie(2005)]{zou2005}
 Hui Zou and Trevor Hastie.
