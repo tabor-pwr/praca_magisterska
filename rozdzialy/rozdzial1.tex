@@ -1,3 +1,90 @@
 \chapter{Przegląd literatury}
-%ddd\footnote{Tu jest treść przypisu.} i cytatem do bibliografii \cite{knuth1997}.
+
+W tym rozdziale przedstawiono przegląd literatury dotyczącej uczenia maszynowego i jego zastosowań w przemyśle. Omówiono podstawowe prace teoretyczne z zakresu ML, algorytmy klasyfikacji i regresji, a także współczesne badania nad wykorzystaniem sztucznej inteligencji w kontekście Przemysłu 4.0. Rozdział podzielono na sekcje tematyczne, które odpowiadają strukturze pracy.
+
+\section{Podstawy uczenia maszynowego}
+
+Podstawy teoretyczne uczenia maszynowego można znaleźć w kilku klasycznych podręcznikach, które do dziś są podstawową lekturą w tej dziedzinie. \citet{bishop2006} przedstawia uczenie maszynowe z perspektywy rozpoznawania wzorców, koncentrując się na metodach bayesowskich i sieciach neuronowych. Z kolei \citet{hastie2009} skupiają się bardziej na aspektach statystycznych jak: regresja, klasyfikacja i selekcja zmiennych. \citet{murphy2012} prezentuje podejście probabilistyczne, łącząc klasyczne metody z nowoczesnymi algorytmami.
+
+Bardzo przydatną pozycją jest również książka \citet{james2013}, która daje przystępne wprowadzenie do uczenia maszynowego z licznymi przykładami w języku R. Ta książka kładzie szczególny nacisk na interpretowalność modeli i ich walidację, co jest bardzo ważne w przemyśle, gdzie trzeba rozumieć, dlaczego model podejmuje takie a nie inne decyzje.
+
+Warto też wspomnieć o klasycznych pracach dotyczących klasyfikacji wzorców, takich jak \citet{duda2001} oraz \citet{manning2008}. Te prace dostarczają teoretycznych podstaw dla algorytmów, które są dziś stosowane w przemysłowej kontroli jakości i diagnostyce systemów produkcyjnych.
+
+\section{Metody regresji i optymalizacji}
+
+Metody regresji są podstawą wielu zastosowań uczenia maszynowego w przemyśle, pozwalają modelować zależności między parametrami procesowymi a jakością lub wydajnością produkcji. \citet{birkes1993} opisują różne metody regresji, w tym techniki odporne na wartości odstające, co jest przydatne w przemyśle, gdzie pomiary często są zaszumione.
+
+W przypadku modeli wysokowymiarowych szczególnie ważne są techniki regularyzacji. \citet{hoerl1970} wprowadzili regresję grzbietową (ridge regression), która rozwiązuje problem współliniowości predyktorów. \citet{tibshirani1996} zaproponował metodę LASSO (Least Absolute Shrinkage and Selection Operator), która nie tylko regularyzuje model, ale też automatycznie wybiera zmienne. \citet{zou2005} rozwinęli tę koncepcję tworząc elastic net, który łączy zalety obu poprzednich metod.
+
+Jeśli chodzi o implementację, warto zajrzeć do prac \citet{golub1996} oraz \citet{press2007}, które omawiają praktyczne algorytmy obliczeniowe. \citet{gelman2006} przedstawiają zaawansowane techniki analizy danych z wykorzystaniem modeli wielopoziomowych, te modele dobrze sprawdzają się w analizie danych produkcyjnych o strukturze hierarchicznej.
+
+\section{Algorytmy klasyfikacji i drzewa decyzyjne}
+
+Algorytmy oparte na drzewach decyzyjnych są bardzo popularne w przemyśle, głównie dlatego że są łatwe do interpretacji i dobrze radzą sobie z nieliniowymi zależnościami. Podstawy teoretyczne drzew decyzyjnych można znaleźć w pracach \citet{quinlan1986} oraz \citet{breiman1984}, które opisują miary podziału oparte na entropii i wskaźniku Giniego. Sama koncepcja entropii informacyjnej pochodzi od \citet{shannon1948} i stanowi podstawę kryteriów podziału w drzewach.
+
+Dużym krokiem naprzód była praca \citet{breiman2001}, która wprowadziła Random Forest. To metoda zespołowa (ensemble method), która łączy predykcje wielu drzew, co zwiększa dokładność i zmniejsza wariancję modelu.
+
+Jeśli chodzi o optymalizację hiperparametrów, istnieje kilka ważnych prac: \citet{bergstra2012} analizują skuteczność przeszukiwania losowego, \citet{akiba2019} przedstawiają framework Optuna, \citet{snoek2012} proponują optymalizację bayesowską, a \citet{feurer2015} oraz \citet{olson2016} rozwijają koncepcje automatycznego uczenia maszynowego (AutoML).
+
+\section{Algorytmy klastrowania i redukcji wymiarowości}
+
+Metody uczenia nienadzorowanego, szczególnie klasteryzacja i redukcja wymiarowości, są przydatne przy eksploracyjnej analizie danych produkcyjnych i wykrywaniu anomalii. \citet{arthur2007} przedstawiają ulepszony algorytm k-means (k-means++), który lepiej inicjalizuje centroidy i szybciej zbiega. \citet{ester1996} zaproponowali algorytm DBSCAN oparty na gęstości, który potrafi identyfikować klastry o dowolnych kształtach i wykrywać obserwacje odstające, a to się przydaje przy detekcji defektów produkcyjnych.
+
+Do wizualizacji danych wysokowymiarowych popularny jest algorytm t-SNE opisany przez \citet{maaten2008} oraz nowsza metoda UMAP opracowana przez \citet{mcinnes2018}. Te techniki pozwalają zwizualizować złożone przestrzenie cech, co pomaga inżynierom zrozumieć strukturę danych procesowych.
+
+\section{Uczenie półnadzorowane i ze wzmocnieniem}
+
+Uczenie półnadzorowane (semi-supervised learning) to odpowiedź na częsty problem w przemyśle jakim jest brak wystarczającej ilości danych z etykietami. \citet{chapelle2006} oraz \citet{zhu2009} dogłębnie omawiają tę tematykę, pokazując metody, które wykorzystują zarówno dane etykietowane, jak i nieetykietowane do budowy lepszych modeli.
+
+Uczenie ze wzmocnieniem (reinforcement learning) omawiane jest w podręczniku \citet{sutton2018} oraz w pracy \citet{szepesvari2010}. Ten framework pozwala na sekwencyjne podejmowanie decyzji i optymalizację procesów. Algorytmy RL, takie jak Q-learning czy SARSA, mogą być stosowane do adaptacyjnego sterowania procesami produkcyjnymi oraz optymalizacji parametrów w czasie rzeczywistym.
+
+\section{Uczenie głębokie i sieci neuronowe}
+
+Rewolucja związana z rozwojem uczenia głębokiego jest doskonale opisana w \citet{goodfellow2016}, jest to solidne źródło wiedzy o architekturach sieciowych, metodach treningu i zastosowaniach deep learning. Ważny przegląd \citet{lecun2015} opublikowany w Nature podsumowuje osiągnięcia uczenia głębokiego i jego wpływ na wiele dziedzin, w tym wizję komputerową, przetwarzanie języka naturalnego czy systemy rekomendacyjne.
+
+Sieci konwolucyjne (CNN), które są podstawą nowoczesnych systemów inspekcji wizualnej w przemyśle, oraz sieci rekurencyjne (RNN, LSTM) wykorzystywane do analizy szeregów czasowych danych procesowych - to kluczowe architektury omawiane w literaturze o uczeniu głębokim.
+
+\section{Przemysł 4.0 i inteligentne wytwarzanie}
+
+Koncepcja Przemysłu 4.0, którą opisują \citet{schwab2016} oraz \citet{kagermann2013}, określa ramy cyfrowej transformacji procesów wytwórczych. \citet{zhong2017} przedstawiają przegląd inteligentnego wytwarzania w kontekście Przemysłu 4.0, wymieniając główne technologie: Internet Rzeczy (IoT), cyber-fizyczne systemy produkcyjne i uczenie maszynowe.
+
+Ważny przegląd zastosowań ML w produkcji przedstawiają \citet{wuest2016}, analizując korzyści, wyzwania i praktyczne implementacje w różnych sektorach przemysłowych. \citet{cioffi2020} rozszerzają tę analizę, identyfikując trendy i kierunki rozwoju AI w inteligentnej produkcji (systemy predykcyjne, adaptacyjne sterowanie i automatyzację decyzji).
+
+\citet{monostori2016} szczegółowo omawiają cyber-fizyczne systemy produkcyjne, które stanowią infrastrukturę dla implementacji algorytmów ML w środowisku fabrycznym. \citet{kusiak2018} definiuje koncepcję smart manufacturing, kładąc nacisk na integrację danych, analitykę w czasie rzeczywistym i adaptacyjne systemy sterowania.
+
+\section{Konserwacja predykcyjna}
+
+Konserwacja predykcyjna to jedno z najbardziej rozwiniętych zastosowań uczenia maszynowego w przemyśle. Klasyczna praca \citet{mobley2002} ustanawia podstawy teoretyczne konserwacji predykcyjnej, definiując strategie utrzymania ruchu i metodyki implementacyjne.
+
+\citet{lee2014} przedstawiają szczegółową metodologię prognostyki i zarządzania stanem technicznym dla maszyn wirujących, omawiają techniki przetwarzania sygnałów wibracyjnych, ekstrakcji cech i budowy modeli predykcyjnych. \citet{susto2015} proponują podejście wieloklasyfikatorowe, łączące różne algorytmy ML w celu zwiększenia niezawodności predykcji.
+
+Przegląd literatury przedstawiony przez \citet{carvalho2019} identyfikuje najczęściej stosowane metody uczenia maszynowego w konserwacji predykcyjnej - Random Forest, sieci neuronowe, SVM i modele zespołowe, analizując ich skuteczność w różnych zastosowaniach. \citet{ran2019} oferują szerszy przegląd systemów konserwacji predykcyjnej, obejmując architekturę, cele biznesowe i metodyki implementacyjne.
+
+\citet{dalzochio2020} analizują aktualny stan konserwacji predykcyjnej w erze Przemysłu 4.0, wskazując problemy związane z jakością danych, interpretowalnością modeli i integracją z istniejącymi systemami IT. \citet{zhang2019} przedstawiają przegląd metod opartych na danych dla predykcyjnego utrzymania ruchu urządzeń przemysłowych, ze szczególnym naciskiem na techniki uczenia głębokiego.
+
+\section{Optymalizacja procesów produkcyjnych}
+
+Zastosowanie uczenia maszynowego do optymalizacji parametrów procesowych to ważny obszar badań w kontekście inteligentnego wytwarzania. \citet{wang2018} przedstawiają przegląd big data analytics dla inteligentnych systemów produkcyjnych, analizując metody przetwarzania, analizy i wizualizacji danych w czasie rzeczywistym.
+
+\citet{sharp2019} oferują przegląd postępów w zastosowaniu ML w smart manufacturing, identyfikując trendy w optymalizacji procesów, predykcji jakości i adaptacyjnego sterowania. \citet{weichert2019} skupiają się szczególnie na zastosowaniu ML do optymalizacji procesów produkcyjnych, omawiając optymalizację bayesowską, uczenie ze wzmocnieniem oraz modele zastępcze (surrogate models).
+
+\citet{psarommatis2020} proponują hybrydowy system wspomagania decyzji dla automatyzacji reakcji na defekty w ramach koncepcji Zero Defect Manufacturing (ZDM), integrując uczenie maszynowe z systemami MES i ERP. \citet{shahriari2016} przedstawiają przegląd optymalizacji bayesowskiej, która się sprawdza przy efektywnym poszukiwaniu optymalnych parametrów procesowych, gdy liczba kosztownych eksperymentów jest ograniczona.
+
+\section{Kontrola jakości i inspekcja wizualna}
+
+Automatyczna kontrola jakości z wykorzystaniem wizji komputerowej i uczenia głębokiego to dynamicznie rozwijający się obszar badań. \citet{weimer2016} pokazują, jak projektować architektury głębokich sieci konwolucyjnych do automatycznej ekstrakcji cech w przemysłowej inspekcji, udowadniając przewagę uczenia głębokiego nad tradycyjnymi metodami ręcznego inżynierowania cech.
+
+\citet{tabernik2020} proponują metodę segmentacji opartą na uczeniu głębokim do detekcji defektów powierzchniowych, osiągając wysoką dokładność wykrywania z jednoczesną lokalizacją wad. Przegląd zastosowania deep learning w detekcji defektów przedstawiają \citet{yang2020}, analizując różne architektury sieciowe, metody treningu i wyzwania implementacyjne.
+
+\citet{bergmann2020} wprowadzają dataset MVTec Anomaly Detection, który stanowi benchmark dla metod nienadzorowanego wykrywania anomalii w inspekcji przemysłowej, umożliwiając porównywanie skuteczności różnych algorytmów w realistycznych scenariuszach.
+
+Jeśli chodzi o predykcyjną analitykę jakości, \citet{huang2021} proponują podejście oparte na danych do predykcji jakości w złożonych procesach produkcyjnych, wykorzystują dane historyczne do budowy modeli prognozujących wskaźniki jakości jeszcze przed zakończeniem procesu. \citet{wang2020qc} przedstawiają przegląd algorytmów ML w kontroli jakości, obejmujący inspekcję wizualną, virtual metrology i systemy closed-loop quality control.
+
+\citet{psarommatis2019} analizują koncepcję Zero Defect Manufacturing, przedstawiając aktualny stan badań, ograniczenia obecnych podejść i przyszłe kierunki rozwoju w kontekście całkowitej eliminacji defektów przez predykcję i proaktywną kontrolę. \citet{cheng2020} pokazują praktyczne zastosowanie koncepcji Przemysłu 4.0 w automatyzacji obróbki kół, integrując sensory IoT, analitykę w czasie rzeczywistym i adaptacyjne sterowanie.
+
+\section{Podsumowanie}
+
+Przegląd literatury pokazał, że choć fundamentalne algorytmy uczenia maszynowego są już dobrze ustanowione i teoretycznie udokumentowane, to ich praktyczne zastosowanie w procesach wytwórczych wciąż jest aktywnym obszarem badań. Istniejące prace skupiają się głównie na pokazywaniu skuteczności poszczególnych metod w izolowanych przypadkach, podczas gdy brakuje systematycznych porównań różnych podejść w takich samych warunkach produkcyjnych.
+
+
 

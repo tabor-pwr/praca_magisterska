@@ -1,2 +1,684 @@
-\chapter{Zastosowania uczenia maszynowego w procesach wytwórczych}
+\chapter{Studium przypadku: Klasyfikacja defektów w produktach odlewniczych}
+
+\section{Wprowadzenie}
+
+Poprzednie rozdziały niniejszej pracy przedstawiły teoretyczne podstawy uczenia maszynowego, szczegółowy przegląd algorytmów klasyfikacji i regresji oraz ich zastosowania w kontekście procesów wytwórczych. Niniejszy rozdział stanowi praktyczną część pracy, której celem jest weryfikacja skuteczności omawianych metod w rzeczywistym problemie przemysłowym.
+
+Automatyczna kontrola jakości z wykorzystaniem wizji komputerowej i algorytmów uczenia maszynowego jest stosowana we współczesnym przemyśle. W kontekście Przemysłu 4.0, gdzie integracja systemów cyber-fizycznych, Internetu Rzeczy i zaawansowanej analityki danych staje się standardem, zdolność do automatycznego wykrywania defektów w czasie rzeczywistym bezpośrednio przekłada się na konkurencyjność przedsiębiorstw produkcyjnych.
+
+\section{Cel i uzasadnienie studium przypadku}
+
+\subsection{Cel badania}
+
+Głównym celem niniejszego studium przypadku jest wyszkolenie i ocena modeli uczenia maszynowego do klasyfikacji defektów w produktach odlewniczych na podstawie obrazów.
+Modele wybrane do przeprowadzenia eksperymentów to:
+\begin{itemize}
+    \item Drzewa decyzyjne (Decision Trees)
+    \item Las losowy (Random Forest)
+    \item Maszyna wektorów nośnych (Support Vector Machine, SVM)
+    \item Sieci neuronowe (Neural Networks)
+    \item K najbliższych sąsiadów (K-Nearest Neighbors, KNN)
+    \item regresja logistyczna (Logistic Regression)
+\end{itemize}
+Dla każdego z modeli zostaną przeprowadzone eksperymenty mające na celu ocenę ich skuteczności w klasyfikacji i przedstawione zostaną wyniki porównawcze.
+\subsection{Charakterystyka procesu produkcyjnego i systemu kontroli jakości}
+Analizowany proces dotyczy produkcji komponentów metalowych metodą odlewania ciśnieniowego, jest to jednen z najbardziej wydajnych technik wytwarzania części o złożonych kształtach geometrycznych. Proces przebiega następująco
+\begin{enumerate}
+    \item Przygotowanie formy odlewniczej.
+    \item Wtrysk stopionego metalu do formy pod wysokim ciśnieniem.
+    \item Chłodzenie i utwardzanie odlewu w formie.
+    \item Usunięcie odlewu z formy i obróbka końcowa.
+    \item Kontrola jakości odlewów pod kątem defektów powierzchniowych i strukturalnych.
+\end{enumerate}
+Proces charakteryzuje się bardzo wysoką wydajnością i powtarzalnością, ale jest wrażliwy na zaburzenia parametrów technologicznych, które prowadzą do powstawania defektów.
+
+Tradycyjna kontrola jakości (wizualna) opiera się na inspecji wizualnej przeprowadzonej przez wykwalifikowany personel.
+Proces jest czasochłonny, podatny na błędy ludzkie i trudny do skalowania przy rosnącej produkcji.
+Zakresowi oceny podlegają pory powierzchniowe, pęknięcia,zafalowania, niedomycia, ślady erozji formy, błyszczące przebarwienia itp.
+
+\section{Definicja problemu decyzyjnego}
+Analizowany problem kontroli jakości w procesie produkcyjnym został sformalizowany jako zadanie klasyfikacji binarnej,
+gdzie celem jest przypisanie każdego obrazu odlewu do jednej z dwóch klas: "defekt" lub "brak defektu".
+Taki sposób ujęcia problemu odpowiada praktycznym wymaganiom przemysłu produkcyjnego, gdzie produkt jest albo zaakceptowany, albo odrzucony.
+
+Podstawą do przypisania etykiety "defekt" jest wykrycie widoczych wad powierzchniowych, takich jak rysy, ubytki, pęknięcia czy inne niezgodności z normami jakościowymi.
+W kontekście danych obrazowych każda próbka wejściowa reprezentuje pojedynczy wyrób, a decyzja klasyfikacyjna jest opisana
+na cechach wizualnych, kóre mogą być trudne do opisania za pomocą reguł deterministycznych.
+Z ten przyczyny tradycyjne metody inspekcji wizualnej bazujące na ręcznej inspekcji, charakteryzują się ograniczoną skutecznością i podatnością na subiektywną ocenę inspektorów.
+
+Zastosowanie algorytmów uczenia maszynowego w tym obszarze jest uzasadnione ze względu na możliwość automatycznego
+uczenia się istotnych cech na podstawie danych historycznych. Uczenie maszynowe pozwala na wykrywanie
+subtelnych różnic pomiędzy wyrobami zgodnymi i niezgodnymi, zapewnia powtarzalność i skalowalnośc procesu kontroli jakości.
+
+Szczególnie modele klasyfikacyjne, takie jak drzewa decyzyjne, lasy losowe, SVM lub sieci neuronowe są w stanie skutecznie
+odwzorowywać złożone zależności pomiedzy cechami wyrobu a jego jakoscią, co czyni je odpowiednimi narzędziami do 
+automatyzacji procesu kontroli jakości.
+
+\section{Opis danych}
+
+\textbf{Nazwa zbioru}: Casting Product Image Data for Quality Inspection
+
+\vspace{0.5cm}
+\textbf{Pochodzenie}: Dane zostaly pobrane ze strony Kaggle, platformy udostępniającej zbiory danych do celów edukacyjnych i badawczych.
+Dane są dostępne pod adresem: \url{https://www.kaggle.com/datasets/ravirajsinh45/real-life-industrial-dataset-of-casting-product}
+
+\vspace{0.5cm}
+\textbf{Opis zbioru danych}: Ten zbiór danych został zebrany w stabilnym środowisku oświetleniowym z dodatkowym układem. Używany aparat to lustrzanka cyfrowa Canon EOS 1300D.
+
+\vspace{0.5cm}
+\textbf{Liczba próbek}: zbiór zawiera łącznie 1300 obrazów, z czego 519 to obrazy bez defektów, a 781 to obrazy z defektami.
+
+\vspace{0.5cm}
+\textbf{Format danych}: Obrazy są zapisane w formacie JPEG o rozdzielczości 512x512 pikseli.
+
+\vspace{0.5cm}
+\textbf{Liczba cech}: Każdy obraz zawiera 512x512=262144 pikseli, które mogą być przetwarzane jako cechy wejściowe po odpowiedniej ekstrakcji cech.
+
+\vspace{0.5cm}
+\textbf{Zmienna docelowa}: Binarna klasyfiakcja - "OK" lub "Defekt". 
+
+\vspace{0.5cm}
+\textbf{Przykładowe obrazy}:
+
+\begin{figure}[htbp]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{cast_ok_0_35.jpeg}
+        \caption{Przykład odlewu bez defektów (klasa "OK")}
+        \label{fig:cast_ok}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{cast_def_0_0.jpeg}
+        \caption{Przykład odlewu z defektami (klasa "Defect")}
+        \label{fig:cast_defect}
+    \end{minipage}
+\end{figure}
+
+Jak widać na powyższych obrazach, produkty klasy "OK" charakteryzują się gładką, równomierną powierzchnią bez widocznych wad. Natomiast produkty wadliwe wykazują różnorodne defekty powierzchniowe, takie jak pory, pęknięcia lub nierówności strukturalne.
+
+\section{Przygotowanie danych}
+Przygotowanie danych bezpośrednio wpływa na jakość i skuteczność modeli klasyfikacyjnych. 
+W niniejszym projekcie zastosowano kompleksowe podejście do przetwarzania
+danych obrazowych, uwzględniające najlepsze praktyki w dziedzinie wizji komputerowej i uczenia maszynowego.
+\subsection{Czyszczenie danych}
+Pierwszym krokiem było sprawdzenie integralności danych.
+Została przeprowadzona identyfikacja i walidacja formatów plików obrazowych (JPEG).
+Nie wykryto uszkodzonych lub niekompletnych plików, co pozwoliło na kontynuację analizy bez konieczności usuwania próbek.
+Następnie została przeprowadzona kontrola jakości obrazów pod kątem rozdzielczości.
+Wszystkie obrazy zostały skonwertowane do jedolitej skali szarosci, co oznacza redukcję wymiarowości z 3 kanałów RGB (czerwony, zielony, niebieski)
+do pojedynczego kanału (skala szarości). Ta transformacja upraszcza dane wejściowe i zmniejsza złożoność obliczeniową modeli.
+
+\subsection{Normalizacja i standaryzacja danych}
+
+\textbf{Normalizacja min-max}: Piksele obrazów zostały znormalizowane do zakresu [0, 1].
+Zastosowano liniowe przelształcenie wartosci pikseli zgodnie ze wzorem: 
+\begin{equation}
+    X_{znormalizowane} = \frac{X}{255.0}
+\end{equation}
+gdzie \(X\) to oryginalna wartość piksela [0, 255]. Piksele w przedziale [0, 1] zapewniają stabilność numeryczną podczas obliczeń, przyśpieszają zbieżność algorytmów optymalizacji
+i elimunują problemy związane z różnymi skalami cech.
+
+\vspace{0.5cm}
+\textbf{Standaryzacja}: Dodatkowo, dla niektórych modeli zastosowano standaryzację cech zgodnie ze wzorem:
+\begin{equation}
+X_{\text{standardized}} = \frac{X - \mu}{\sigma}
+\end{equation}
+gdzie \(\mu\) to średnia wartość pikseli w zbiorze treningowym, a \(\sigma\) to odchylenie standardowe.
+Standaryzacja zapewnia, że cechy mają średnią 0 i odchylenie standardowe 1, co jest ważne dla algorytmów wrażliwych na skalę danych.
+
+\subsection{Ekstrakcja cech}
+Każdy obraz o rozdzielczości 512×512 pikseli został przekształcony w wektor 262,144-wymiarowy, gdzie każdy wymiar reprezentuje intensywność pojedynczego piksela.
+Przekształcenie obrazu na wektor zachowuje pełną informację o strukturze i teksturze, umożliwia bezpośrednią reprezentację intesywności pikseli
+bez utraty informacji i co najważniejsze, pozwala algorytmom samodzielnie indentyfikować istotne wzorce w danych.
+\begin{equation}
+\text{Obraz} \in \mathbb{R}^{512 \times 512} \to \text{Wektor} \in \mathbb{R}^{262144}
+\end{equation}
+
+\subsection{Podział danych na zbiory}
+Zastosowano metodologię stratyfikowanego podziału danych zapewniającą reprezentatywność statystyczną próbek:
+
+\vspace{0.5cm}
+\textbf{Zbiór treningowy}
+Zbiór treningowy przeznaczony jest do uczenia modeli i optymalizacji ich parametrów. Rozmiar tego zbioru wynosi 80\%, czyli 1040 obrazów (415 bez defektów, 625 z defektami).
+
+\textbf{Zbiór testowy}
+Zbiór testowy służy do oceny ogólnej wydajności wytrenowanych modeli na niewidzianych dla nich danych. Rozmiar tego zbioru wynosi 20\%, czyli 260 obrazów (104 bez defektów, 156 z defektami).
+Metryki ewaluacyjne użyte do oceny modeli to dokładność (accuracy), precyzja (precision), czułość (recall), F1-score i macierz zamieszania (confusion matrix).
+
+\subsection{Walidacja jakości przygotowania danych}
+W ramach kontroli jakości przeprowadzonej w projekcie zweryfikowano rozkład klas w zbiorach treningowym i testowym w celu potwierdzenia poprawności stratyfikacji danych.
+Skontrolowano wymiarowość macierzy danych, przeprowadzając walidację kształtu struktur. Sprawdzono zakres wartości po normalizacji, weryfikując wartości minimalne i maksymalne.
+Ponadto potwierdzono brak wartości brakujących poprzez detekcję wartości NaN w zbiorze danych.
+
+\section{Wybór i opis zastosowanego algorytmu uczenia maszynowego}
+W niniejszym projekcie zdecydowano się na zastosowanie metody porównawczej, obejmującej sześć różnych algorytmów klasyfikacji binarnej.
+Podejście to pozwala przeanalizować skuteczność różnych modeli uczenia maszynowego w kontekście wykrywania defektów produkcyjnych.
+Wybrane algorytmy reprezentują zarówno klasyczne metody statystyczne, jak i zaawansowane techniki uczenia zespołowego (ensemble learning) oraz uczenia głębokiego.
+
+\subsection{K-najbliższych sąsiadów (k-Nearest Neighbors)}
+
+Algorytm k-Nearest Neighbors należy do grupy metod nieparametrycznych. W przeciwieństwie do większości algorytmów uczenia maszynowego, k-NN nie buduje jawnego modelu podczas fazy treningu.
+Zamiast tego przechowuje w pamięci wszystkie przypadki treningowe i podejmuje decyzje klasyfikacyjne dopiero w momencie prezentacji nowej próbki, analizując jej podobieństwo do k najbliższych sąsiadów w przestrzeni cech.
+Szczegółowy opis teoretyczny algorytmu został przedstawiony w rozdziale 2.1.3.
+
+Mechanizm klasyfikacji nowej próbki $x$ opiera się na zasadzie głosowania większościowego wśród k najbliższych sąsiadów:
+\begin{equation}
+\hat{y} = \text{mode}\{y_i : x_i \in N_k(x)\}
+\end{equation}
+gdzie $N_k(x)$ oznacza zbiór k najbliższych sąsiadów próbki $x$ wyznaczonych według przyjętej metryki odległości, najczęściej euklidesowej.
+
+Wybór algorytmu k-NN do niniejszego studium przypadku podyktowany został kilkoma względami praktycznymi i metodologicznymi.
+Po pierwsze, algorytm cechuje się prostotą implementacji i łatwością interpretacji, decyzje klasyfikacyjne są intuicyjne i można je łatwo wyjaśnić, co jest istotne w kontekście przemysłowym.
+Po drugie, metoda wykazuje skuteczność w rozpoznawaniu wzorców lokalnych, co jest szczególnie przydatne przy wykrywaniu lokalnych anomalii tekstury powierzchni odlewów.
+Po trzecie, jako metoda nieparametryczna, k-NN nie wymaga przyjmowania założeń o rozkładzie danych, co jest zaletą w przypadku danych rzeczywistych, których struktura nie zawsze jest odgórnie znana.
+Dodatkowo algorytm służy jako punkt odniesienia dla bardziej złożonych metod, stanowiąc tzw. baseline do porównań.
+Wreszcie, zastosowania k-NN w dziedzinie wizji komputerowej, w tym w detekcji defektów powierzchniowych, są dobrze udokumentowane w literaturze.
+
+W przeprowadzonych eksperymentach zastosowano następującą konfigurację hiperparametrów.
+Parametr \texttt{n\_neighbors} ustalono na 5, co stanowi rozsądny kompromis między wrażliwością na szum w danych a nadmiernym wygładzaniem granic decyzyjnych.
+Jako metrykę odległości w przestrzeni cech przyjęto odległość euklidesową, która jest naturalnym wyborem dla danych liczbowych.
+Wszystkim sąsiadom przypisano jednakową wagę w procesie głosowania.
+W celu przyspieszenia obliczeń wykorzystano równoległe przetwarzanie na wszystkich dostępnych rdzeniach procesora.
+
+Należy jednak zwrócić uwagę na pewne ograniczenia algorytmu k-NN.
+Głównym problemem jest wysoka złożoność obliczeniowa w fazie predykcji.
+W kontekście danych obrazowych o wysokiej wymiarowości (w niniejszym przypadku 262,144 wymiary) może to prowadzić do znacznego spowolnienia procesu klasyfikacji.
+Dodatkowo algorytm jest wrażliwy na tzw. przekleństwo wymiarowości, które polega na tym, że w przestrzeniach o bardzo wysokiej wymiarowości pojęcie "odległości" traci swoją intuicyjną interpretację, a wszystkie punkty stają się w pewnym sensie jednakowo odległe od siebie.
+Wreszcie, algorytm wymaga utrzymywania w pamięci pełnego zbioru treningowego, co może być problematyczne w przypadku bardzo dużych zbiorów danych.
+
+\subsection{Drzewo Decyzyjne (Decision Tree)}
+
+Drzewo decyzyjne stanowi hierarchiczną strukturę reprezentującą sekwencję decyzji binarnych, które prowadzą do ostatecznej klasyfikacji próbki.
+Algorytm CART (\textit{Classification and Regression Trees}) konstruuje drzewo poprzez rekurencyjny podział przestrzeni cech, dążąc do maksymalizacji czystości powstających węzłów.
+Czystość ta jest najczęściej mierzona za pomocą indeksu Giniego lub entropii.
+Teoretyczne podstawy działania drzew decyzyjnych zostały szczegółowo omówione w rozdziale 2.1.4.
+
+W niniejszej implementacji wykorzystano kryterium podziału oparte na indeksie Giniego, zdefiniowane następująco:
+\begin{equation}
+\text{Gini}(S) = 1 - \sum_{i=1}^{C} p_i^2
+\end{equation}
+gdzie $p_i$ oznacza proporcję próbek należących do klasy $i$ w analizowanym zbiorze $S$, a $C$ to liczba klas.
+
+Decyzja o włączeniu drzew decyzyjnych do niniejszego studium przypadku wynika z szeregu zalet tej metody.
+Przede wszystkim, drzewa decyzyjne charakteryzują się wysoką interpretowalnością, struktura drzewa umożliwia bezpośrednią wizualizację procesu decyzyjnego,
+co jest niezwykle istotne w zastosowaniach przemysłowych, gdzie zrozumienie przyczyn danej decyzji może być równie ważne jak sama decyzja.
+Kolejną zaletą jest automatyczna selekcja cech, algorytm samodzielnie identyfikuje najważniejsze cechy bez konieczności ręcznego preprocessingu czy inżynierii cech.
+Drzewa są również odporne na obecność nieistotnych cech, które są po prostu ignorowane podczas budowy struktury.
+Dodatkowo algorytm charakteryzuje się stosunkowo krótkim czasem treningu oraz szybką predykcją o złożoności logarytmicznej.
+Wreszcie, drzewa decyzyjne znajdują szerokie zastosowanie w przemysłowych systemach kontroli jakości właśnie ze względu na swoją interpretowalność i efektywność.
+
+W przeprowadzonych eksperymentach zastosowano następującą konfigurację hiperparametrów.
+Maksymalną głębokość drzewa ograniczono do 10 poziomów.
+To ograniczenie stanowi mechanizm regularyzacji, który zapobiega nadmiernemu dopasowaniu modelu do szczegółów zbioru treningowego.
+Wartość 10 zapewnia wystarczającą ekspresję złożonych wzorców przy jednoczesnym zachowaniu zdolności do generalizacji na nowych danych.
+Jako miarę nieczystości węzłów wybrano indeks Giniego, będący standardowym wyborem w problemach klasyfikacyjnych.
+Parametr \texttt{random\_state} ustawiono na 42 w celu zapewnienia reprodukowalności wyników eksperymentów.
+
+Mimo licznych zalet, drzewa decyzyjne posiadają również ograniczenia.
+Bez odpowiedniej regularyzacji wykazują silną tendencję do przeuczenia, szczególnie gdy dozwolona jest duża głębokość drzewa.
+Charakteryzują się również niestabilnością, relatywnie małe zmiany w zbiorze treningowym mogą prowadzić do powstania drastycznie różnych struktur drzewa.
+Ponadto pojedyncze drzewa decyzyjne mogą mieć trudności z modelowaniem skomplikowanych nieliniowych zależności, które wymagają wielu rozgałęzień i poziomów w strukturze.
+
+\subsection{Las Losowy (Random Forest)}
+
+Random Forest reprezentuje zaawansowane podejście z kategorii metod uczenia zespołowego,
+które łączy predykcje wielu niezależnych drzew decyzyjnych w celu uzyskania bardziej stabilnego i dokładnego modelu końcowego.
+Algorytm wykorzystuje technikę baggingu, która polega na trenowaniu każdego drzewa na innym losowym podzbiorze danych z powtórzeniami.
+Dodatkowo wprowadza losową selekcję podzbiorów cech rozważanych przy każdym podziale węzła, co zwiększa różnorodność poszczególnych drzew i redukuje zarówno wariancję modelu,
+jak i ryzyko przeuczenia. Teoretyczne podstawy metody zostały szczegółowo omówione w rozdziale 2.1.5.
+
+Końcowa predykcja klasy dla nowej próbki jest wyznaczana poprzez głosowanie większościowe spośród wszystkich drzew w lesie:
+\begin{equation}
+\hat{y} = \text{mode}\{\hat{y}_1, \hat{y}_2, \ldots, \hat{y}_T\}
+\end{equation}
+gdzie $\hat{y}_t$ oznacza predykcję $t$-tego drzewa, a $T$ to całkowita liczba drzew w lesie.
+
+Decyzja o włączeniu algorytmu Random Forest do niniejszego studium przypadku jest uzasadniona wieloma czynnikami.
+Przede wszystkim, metoda ta wykazuje wybitną skuteczność empiryczną i często osiąga najlepsze wyniki bez konieczności szczegółowego dostrajania hiperparametrów,
+co czyni ją atrakcyjną w zastosowaniach praktycznych.
+Agregacja predykcji wielu modeli skutecznie redukuje problem przeuczenia, charakterystyczny dla pojedynczych drzew decyzyjnych, zwiększając zdolność do generalizacji.
+Losowość wprowadzona na różnych etapach algorytmu zwiększa jego odporność na szum w danych.
+Istotną zaletą jest również możliwość automatycznego obliczenia rankingu ważności cech, co wspomaga interpretację działania modelu.
+Random Forest znajduje liczne udokumentowane zastosowania w dziedzinie wizji komputerowej, w tym w detekcji defektów, klasyfikacji tekstur oraz analizie obrazów medycznych.
+Dodatkowo, algorytm naturalnie wspiera przetwarzanie równoległe. Poszczególne drzewa mogą być trenowane niezależnie na wielu rdzeniach procesora, co znacząco przyśpiesza proces uczenia.
+
+W przeprowadzonych eksperymentach przyjęto następującą konfigurację hiperparametrów.
+Liczbę drzew w lesie ustalono na 100 (\texttt{n\_estimators = 100}). Jest to wartość kompromisowa, większa liczba drzew zwiększa stabilność predykcji,
+ale wydłuża czas treningu i predykcji. W praktyce 100 drzew stanowi dobry balans między wydajnością modelu a kosztami obliczeniowymi.
+Maksymalną głębokość pojedynczego drzewa ograniczono do 10 poziomów (\texttt{max\_depth = 10}), co kontroluje złożoność poszczególnych bazowych estymatorów i zapobiega ich nadmiernemu rozrastaniu się.
+Parametr określający liczbę cech rozważanych przy każdym podziale ustawiono na \texttt{max\_features = 'sqrt'}, co oznacza wybór $\sqrt{d}$ losowych cech spośród $d$ dostępnych wymiarów.
+Taki wybór jest rekomendowany w literaturze dla problemów klasyfikacyjnych. Parametr \texttt{random\_state} ustalono na 42 dla zapewnienia reprodukowalności wyników.
+Wykorzystano również równoległy trening drzew na wszystkich dostępnych rdzeniach procesora.
+
+Metoda Random Forest wykazuje szereg istotnych zalet w porównaniu z pojedynczymi modelami.
+Charakteryzuje się wysoką dokładnością predykcji przy minimalnej potrzebie dostrajania hiperparametrów.
+Algorytm posiada wbudowany mechanizm walidacji nazywany błędem out-of-bag, który pozwala na oszacowanie błędu generalizacji bez potrzeby tworzenia osobnego zbioru walidacyjnego.
+Dzięki agregacji wielu modeli znacząco zmniejsza się ryzyko przeuczenia w porównaniu z pojedynczym drzewem decyzyjnym.
+
+\subsection{Maszyna Wektorów Nośnych (Support Vector Machine)}
+
+Maszyna wektorów nośnych reprezentuje klasę algorytmów uczenia opartych na koncepcji maksymalizacji marginesu.
+Fundamentalną ideą metody jest poszukiwanie optymalnej hiperpłaszczyzny, która nie tylko rozdziela klasy w przestrzeni cech, ale również maksymalizuje odległość od najbliższych punktów każdej z klas.
+Te kluczowe punkty, leżące najbliżej granicy decyzyjnej, nazywane są wektorami nośnymi i to one wyznaczają ostateczny kształt hiperpłaszczyzny separującej.
+Zaletą SVM jest możliwość radzenia sobie z danymi nieliniowo separowalnymi poprzez zastosowanie tzw. kernel trick - techniki pozwalającej na niejawne odwzorowanie danych w przestrzeń wyższych wymiarów, w której separacja liniowa staje się możliwa.
+Szczegółowe podstawy teoretyczne metody omówiono w rozdziale 2.1.6.
+
+Zastosowanie SVM w kontekście niniejszego problemu klasyfikacji defektów jest uzasadnione z kilku powodów. 
+Algorytm charakteryzuje się udokumentowaną skutecznością w przestrzeniach o wysokiej wymiarowości, w analizowanym przypadku mamy do czynienia z 262,144 wymiarami, co dla wielu metod stanowi poważne wyzwanie.
+SVM opiera się na solidnych podstawach matematycznych wywodzących się z teorii uczenia statystycznego.
+Maksymalizacja marginesu działa jako naturalny mechanizm regularyzacji, ograniczając ryzyko przeuczenia modelu.
+Istotną zaletą praktyczną jest efektywność pamięciowa, wytrenowany model jest zdefiniowany wyłącznie przez wektory nośne, które zazwyczaj stanowią stosunkowo niewielki podzbiór danych treningowych.
+SVM znajduje także liczne udokumentowane zastosowania w dziedzinie wizji komputerowej, w tym w rozpoznawaniu wzorców i klasyfikacji obrazów.
+
+Należy podkreślić istotny wymóg metodologiczny związany z zastosowaniem SVM, algorytm jest szczególnie wrażliwy na skalę cech, dlatego konieczne jest przeprowadzenie standaryzacji danych przed treningiem modelu.
+W przypadku pominięcia tego kroku, cechy o większych zakresach wartości mogłyby zdominować proces uczenia, prowadząc do suboptymalnych wyników.
+
+\subsection{Neural Network – Multi-Layer Perceptron (MLP)}
+
+Wielowarstwowy perceptron reprezentuje klasę sztucznych sieci neuronowych o architekturze feed-forward,
+w której informacja przepływa jednokierunkowo od warstwy wejściowej przez jedną lub więcej warstw ukrytych do warstwy wyjściowej.
+Proces uczenia sieci realizowany jest za pomocą algorytmu wstecznej propagacji błędu w połączeniu z metodami optymalizacji gradientowej.
+W każdej warstwie ukrytej następuje transformacja danych wejściowych poprzez zastosowanie operacji liniowej oraz nieliniowej funkcji aktywacji,
+co umożliwia sieci uczenie się złożonych, nieliniowych zależności między cechami a zmienną docelową.
+Szczegółowe podstawy teoretyczne architektury i mechanizmów uczenia sieci neuronowych zostały omówione w rozdziale 2.5.
+
+Wybór sieci neuronowej typu MLP jako jednego z algorytmów w niniejszym studium jest podyktowany kilkoma istotnymi względami.
+Zgodnie z twierdzeniem o uniwersalnej aproksymacji, sieć neuronowa z odpowiednio dobraną architekturą może aproksymować dowolnie złożone funkcje, co czyni ją niezwykle elastycznym narzędziem modelowania.
+Kluczową zaletą jest automatyczna ekstrakcja cech, warstwy ukryte uczą się hierarchicznych reprezentacji danych, przekształcając surowe piksele w coraz bardziej abstrakcyjne i semantycznie znaczące cechy.
+W dziedzinie wizji komputerowej sieci neuronowe, szczególnie konwolucyjne sieci neuronowe (CNN), stanowią aktualny standard i osiągają wyniki przewyższające tradycyjne metody.
+Zastosowanie nieliniowych funkcji aktywacji, takich jak ReLU, umożliwia modelowanie skomplikowanych, nieliniowych granic decyzyjnych.
+Dodatkowo, architektura MLP oferuje naturalną ścieżkę rozwoju projektu w kierunku bardziej zaawansowanych, głębokich architektur sieciowych.
+
+Przyjęta architektura sieci składa się z dwóch warstw ukrytych zawierających odpowiednio 128 i 64 neurony.
+Taka konfiguracja realizuje progresywną redukcję wymiarowości danych: od 262,144 wymiarów na wejściu, poprzez 128 neuronów w pierwszej warstwie ukrytej, 64 neurony w drugiej warstwie ukrytej, aż do 2 neuronów w warstwie wyjściowej odpowiadających klasom binarnym.
+Jako funkcję aktywacji w warstwach ukrytych zastosowano ReLU, która transformuje sygnał zgodnie z prostą regułą: wartości ujemne są zerowane, a dodatnie pozostają bez zmian.
+ReLU charakteryzuje się dwoma istotnymi zaletami: zapobiega problemowi zanikającego gradientu, który może występować w głębokich sieciach przy użyciu funkcji sigmoidalnych,
+oraz przyspiesza zbieżność procesu uczenia.
+Do optymalizacji wag sieci wykorzystano algorytm Adam (\textit{Adaptive Moment Estimation}),
+który łączy zalety metod momentum i RMSprop, stosując adaptacyjne współczynniki uczenia dla każdego parametru osobno.
+Liczbę epok treningu ograniczono do 50, co stanowi kompromis między czasem obliczeń a ryzykiem przeuczenia, dalsza nauka mogłaby prowadzić do nadmiernego dopasowania do zbioru treningowego.
+
+Podobnie jak w przypadku SVM, standaryzacja danych wejściowych ma kluczowe znaczenie dla stabilności i efektywności procesu uczenia.
+Zapewnia ona, że gradienty podczas propagacji wstecznej pozostają w rozsądnym zakresie wartości, co przyspiesza zbieżność algorytmu optymalizacji. Należy jednak mieć świadomość pewnych ograniczeń metody.
+Trening sieci neuronowych jest procesem czasochłonnym, szczególnie dla danych wysokowymiarowych.
+Model ma charakter "czarnej skrzynki", w przeciwieństwie do drzew decyzyjnych, trudno jest bezpośrednio zrozumieć i wyjaśnić, w jaki sposób sieć dochodzi do konkretnych decyzji.
+Sieci neuronowe posiadają wiele hiperparametrów do dostrojenia, takich jak liczba warstw, liczba neuronów w każdej warstwie, typ funkcji aktywacji, algorytm optymalizacji czy współczynnik uczenia, co wymaga przeprowadzenia eksperymentów w celu znalezienia optymalnej konfiguracji.
+Bez odpowiedniej regularyzacji, takiej jak dropout czy weight decay, sieci są podatne na przeuczenie, szczególnie gdy stosunek liczby parametrów do liczby przykładów treningowych jest wysoki.
+
+\subsection{Logistic Regression (Regresja Logistyczna)}
+
+Regresja logistyczna, pomimo sugerującej nazwę, jest w istocie algorytmem klasyfikacji, który modeluje prawdopodobieństwo przynależności próbki do danej klasy.
+Metoda opiera się na liniowej kombinacji cech wejściowych, która następnie jest przekształcana przez funkcję logistyczną w wartość z przedziału [0, 1] interpretowaną jako prawdopodobieństwo.
+Algorytm uczy się optymalnych wag poprzez minimalizację funkcji straty opartej na entropii krzyżowej.
+Teoretyczne podstawy metody zostały omówione w rozdziale 2.1.2.
+
+Wybór regresji logistycznej jako jednego z badanych algorytmów wynika przede wszystkim z jej roli jako modelu bazowego.
+Jest to najprostszy algorytm probabilistyczny, którego wyniki stanowią naturalny punkt odniesienia dla oceny bardziej złożonych metod,
+jeśli zaawansowany model nie przewyższa regresji logistycznej, może to sugerować, że albo problem jest z natury liniowy, albo bardziej skomplikowany model wymaga lepszego dostrojenia.
+Metoda charakteryzuje się ekstremalną szybkością treningu i predykcji oraz niskimi wymaganiami obliczeniowymi, co czyni ją idealnym kandydatem do aplikacji wymagających działania w czasie rzeczywistym.
+Dodatkową zaletą jest interpretowalność, nauczone wagi bezpośrednio wskazują wpływ poszczególnych cech na decyzję klasyfikacyjną.
+W przeciwieństwie do metod zwracających jedynie etykiety klas, regresja logistyczna generuje wyjście probabilistyczne, co może być wartościowe w zastosowaniach przemysłowych wymagających oszacowania pewności decyzji.
+
+Konfiguracja hiperparametrów została dostosowana do specyfiki problemu wysokowymiarowego.
+Maksymalną liczbę iteracji optymalizatora ustalono na 1000, co zapewnia zbieżność algorytmu nawet dla danych o dużej liczbie wymiarów.
+Jako optymalizator wybrano L-BFGS ({Limited-memory Broyden–Fletcher–Goldfarb–Shanno}), który jest efektywny dla problemów o średniej wielkości i naturalnie obsługuje regularyzację L2.
+Podobnie jak w przypadku poprzednich algorytmów, niezbędna jest standaryzacja danych, która poprawia zbieżność numeryczną i stabilność procesu uczenia.
+
+Do głównych zalet regresji logistycznej należą niezwykle krótki czas treningu i predykcji, bardzo niskie zużycie pamięci oraz zdolność do osiągania dobrych wyników w problemach, w których klasy są w przybliżeniu liniowo separowalne.
+Metoda może służyć jako szybka diagnoza charakteru problemu, jeśli osiąga wysoką dokładność, sugeruje to, że dane są relatywnie proste do rozdzielenia, co może wpływać na decyzje dotyczące dalszego modelowania.
+
+\section{Implementacja modelu i przebieg eksperymentu}
+Niniejsza sekcja przedstawia szczegółowy opis implementacji technicznej projektu, obejmujący specyfikację środowiska programistycznego,
+wykorzystane narzędzia, procedury eksperymentalne oraz metodologię walidacji modeli.
+\subsection{Środowisko programistyczne}
+\textbf{Język programowania:} Python 3.12.1
+
+\vspace{0.5cm}
+\textbf{Środowisko deweloperskie:} Jupyter Notebook / VS Code
+
+\vspace{0.5cm}
+\textbf{Platforma obliczeniowa:}
+Lokalny komputer z systemem Windows 10, wyposażony w procesor AMD Ryzen 5 7600 6-Core Processor, 32 GB RAM oraz kartę graficzną AMD Radeon RX 7700 XT.
+
+\subsection{Wykorzystane biblioteki}
+
+W realizacji niniejszego projektu wykorzystano szereg bibliotek i narzędzi języka Python, które stanowią standardowe wyposażenie w projektach uczenia maszynowego i przetwarzania obrazów.
+
+\vspace{0.5cm}
+\textbf{NumPy:} Służy do operacji na tablicach wielowymiarowych, jest wydajny do obliczeń numerycznych i stanowi podstawę dla innych bibliotek naukowych.
+
+\vspace{0.5cm}
+\textbf{Pandas:} Umożliwia pracę ze strukturami danych typu DataFrame, pozwala na analizę i agregację wyników eksperymentów oraz eksport danych do formatu CSV.
+
+\vspace{0.5cm}
+\textbf{OpenCV:} Biblioteka służąca do przetwarzania obrazów, wykorzystywana do wczytywania obrazów, konwersji do skali szarości, zmiany rozmiaru oraz przeprowadzania operacji morfologicznych i filtrowania.
+
+\vspace{0.5cm}
+\textbf{Pillow:} Stanowi alternatywne narzędzie do wczytywania i wizualizacji obrazów, obsługuje różnorodne formaty obrazowe takie jak JPEG czy PNG.
+
+\vspace{0.5cm}
+\textbf{Scikit-learn:} Główna biblioteka uczenia maszynowego projektu, dostarcza implementacje algorytmów klasyfikacji (k-NN, drzewa decyzyjne, lasy losowe, SVM, sieci neuronowe, regresja logistyczna), narzędzia do preprocessingu danych (standaryzacja, podział na zbiory) oraz metryki ewaluacyjne (dokładność, precyzja, czułość, F1-score, macierz pomyłek).
+
+\vspace{0.5cm}
+\textbf{Matplotlib:} Służy do tworzenia wykresów i diagramów, wizualizacji macierzy pomyłek oraz eksportu grafik do formatu PNG.
+
+\vspace{0.5cm}
+\textbf{Seaborn:} Umożliwia tworzenie zaawansowanych wizualizacji statystycznych, w tym heatmap dla macierzy pomyłek, oferując estetyczne style wykresów.
+
+\vspace{0.5cm}
+\textbf{Biblioteki pomocnicze:} Wykorzystano również Pathlib do zarządzania ścieżkami plików, Time do pomiaru czasu wykonania algorytmów oraz Warnings do filtrowania ostrzeżeń systemowych.
+
+\subsection{Schemat procesu uczenia}
+
+Proces uczenia modeli został zorganizowany zgodnie z ustaloną metodologią, obejmującą pięć głównych etapów realizowanych sekwencyjnie.
+
+\vspace{0.5cm}
+\textbf{Etap 1: Wczytywanie i preprocessing danych.}
+Obrazy w formacie JPEG o rozdzielczości 512×512 pikseli zostały wczytane z wykorzystaniem biblioteki OpenCV. W trakcie wczytywania zastosowano konwersję do skali szarości, co zredukowało wymiarowość danych z trzech kanałów kolorów do jednego kanału intensywności. Następnie każdy obraz został przekształcony w jednowymiarowy wektor o długości 262,144 elementów poprzez operację spłaszczania. Wartości pikseli zostały znormalizowane do przedziału [0, 1] poprzez dzielenie przez 255.0. Po przetworzeniu wszystkich obrazów, dane zostały połączone i losowo przetasowane w celu zapewnienia losowości w kolejnych etapach.
+
+\vspace{0.5cm}
+\textbf{Etap 2: Podział danych.}
+Pełny zbiór danych został podzielony na zbiór treningowy i testowy w proporcji 80:20 z wykorzystaniem funkcji \texttt{train\_test\_split} z biblioteki Scikit-learn. Zastosowano stratyfikację względem zmiennej docelowej oraz ustalono parametr \texttt{random\_state = 42} w celu zapewnienia reprodukowalności wyników. W efekcie otrzymano 1040 próbek w zbiorze treningowym oraz 260 próbek w zbiorze testowym, z zachowaniem oryginalnych proporcji klas w obu zbiorach.
+
+\vspace{0.5cm}
+\textbf{Etap 3: Standaryzacja danych.}
+Dla algorytmów wrażliwych na skalę cech (SVM, MLP, regresja logistyczna, k-NN) przeprowadzono dodatkowy krok standaryzacji Z-score z wykorzystaniem klasy \texttt{StandardScaler}. Scaler został dopasowany wyłącznie na zbiorze treningowym, a następnie zastosowany zarówno do danych treningowych, jak i testowych. Algorytmy oparte na drzewach decyzyjnych (drzewo decyzyjne, las losowy) zostały wytrenowane bezpośrednio na danych znormalizowanych, bez dodatkowej standaryzacji.
+
+\vspace{0.5cm}
+\textbf{Etap 4: Trening modeli.}
+Każdy z sześciu algorytmów klasyfikacji został wytrenowany sekwencyjnie zgodnie z następującą kolejnością: k-najbliższych sąsiadów, drzewo decyzyjne, las losowy, maszyna wektorów nośnych, sieć neuronowa oraz regresja logistyczna. Dla każdego modelu zmierzono czas treningu, rejestrując moment rozpoczęcia i zakończenia procesu uczenia. Model został zainicjalizowany z ustalonymi hiperparametrami, następnie wytrenowany na odpowiednim zbiorze treningowym, a po zakończeniu treningu wykorzystany do predykcji etykiet dla zbioru testowego.
+
+\vspace{0.5cm}
+\textbf{Etap 5: Ewaluacja i porównanie.}
+Dla każdego modelu obliczono zestaw metryk ewaluacyjnych: dokładność (accuracy), precyzję (precision), czułość (recall), wynik F1 (F1-score) oraz czas treningu. Wyniki zostały zagregowane w strukturze DataFrame biblioteki Pandas, co umożliwiło łatwe porównanie wydajności wszystkich algorytmów. Dodatkowo wygenerowano wizualizacje w postaci macierzy pomyłek oraz wykresów porównawczych metryk. Końcowe wyniki zostały wyeksportowane do formatu CSV w celu dalszej analizy i dokumentacji.
+
+\subsection{Walidacja modeli}
+
+W niniejszym projekcie zastosowano metodę hold-out validation z podziałem 80/20 oraz stratyfikacją klas. Wybór tego podejścia, pomimo istnienia bardziej zaawansowanych technik walidacji, jest uzasadniony wystarczającą wielkością zbioru danych (ponad tysiąc próbek), efektywnością obliczeniową oraz prostotą implementacji zapewniającą reprodukowalność eksperymentu.
+
+Parametr \texttt{stratify=y} w funkcji podziału zapewnia, że proporcje klas defekt/OK są identyczne w zbiorach treningowym i testowym, eliminując bias wynikający z nierównomiernego podziału i zwiększając wiarygodność metryk testowych. Po podziale danych przeprowadzono weryfikację rozkładu klas w celu potwierdzenia poprawności stratyfikacji.
+
+W bardziej zaawansowanych implementacjach można rozważyć zastosowanie walidacji krzyżowej k-fold, która lepiej ocenia generalizację modelu wykorzystując wszystkie dane do treningu i walidacji, lub stratified k-fold łączącego walidację krzyżową ze stratyfikacją klas w każdym foldzie.
+
+\subsection{Strojenie hiperparametrów}
+
+W niniejszym projekcie zastosowano ręczny dobór hiperparametrów oparty na wartościach domyślnych z dokumentacji Scikit-learn, najlepszych praktykach z literatury oraz empirycznej wiedzy o problemie. Dla k-NN wybrano \texttt{n\_neighbors = 5} jako klasyczną wartość zapewniającą balans między wygładzaniem a wrażliwością. Dla drzew decyzyjnych i lasu losowego ustalono \texttt{max\_depth = 10} w celu ograniczenia przeuczenia przy zachowaniu ekspresji modelu, a dla lasu losowego dodatkowo \texttt{n\_estimators = 100} jako standard przemysłowy. SVM skonfigurowano z jądrem \texttt{rbf} dla modelowania nieliniowych granic, parametrem regularyzacji \texttt{C = 1.0} oraz adaptacyjnym \texttt{gamma = 'scale'}. Dla MLP przyjęto architekturę \texttt{(128, 64)} realizującą progresywną redukcję wymiarowości, funkcję aktywacji ReLU, optymalizator \texttt{adam} oraz \texttt{max\_iter = 50}. Dla regresji logistycznej ustawiono \texttt{max\_iter = 1000} zapewniając zbieżność dla wysokowymiarowego problemu.
+
+Nie zastosowano zaawansowanych metod strojenia takich jak Grid Search, Randomized Search czy Bayesian Optimization ze względu na cel badawczy projektu, który koncentruje się na porównaniu różnych modeli uczenia maszynowego, a nie na maksymalizacji wydajności pojedynczego modelu. Wartości domyślne Scikit-learn są oparte na badaniach empirycznych i stanowią rozsądny punkt wyjścia, a koszt obliczeniowy zaawansowanego tuningu zwiększyłby czas eksperymentu wielokrotnie przy zachowaniu przejrzystości i reprodukowalności wyników.
+
+\subsection{Pomiar wydajności i metryki czasowe}
+
+Dla każdego modelu przeprowadzono precyzyjny pomiar czasu treningu z wykorzystaniem biblioteki Time, rejestrując moment rozpoczęcia i zakończenia procesu uczenia. Metryka czasowa umożliwia porównanie efektywności obliczeniowej algorytmów, ocenę ich praktycznej użyteczności w scenariuszach produkcyjnych oraz identyfikację kompromisu między dokładnością a czasem wykonania.
+
+Jako metryki ewaluacyjne zastosowano standardowy zestaw wskaźników klasyfikacji binarnej: dokładność (accuracy) mierzącą ogólną poprawność predykcji, precyzję (precision) wskazującą odsetek poprawnie zidentyfikowanych defektów, czułość (recall) określającą zdolność do wykrywania wszystkich rzeczywistych defektów, oraz wynik F1 (F1-score) będący harmoniczną średnią precyzji i czułości. Wszystkie metryki zostały zagregowane w strukturze DataFrame umożliwiającej systematyczne porównanie wydajności modeli.
+
+\subsection{Reprodukowalność eksperymentu}
+
+W celu zapewnienia pełnej reprodukowalności eksperymentu zastosowano szereg mechanizmów kontrolujących losowość procesu. Dla wszystkich operacji wykorzystujących generatory liczb pseudolosowych ustalono parametr \texttt{random\_state = 42}, obejmujący podział danych, inicjalizację modeli oraz procedury bootstrapingu. Równoległe przetwarzanie (\texttt{n\_jobs = -1}) zostało skonfigurowane z kontrolowanym ziarnem generatora.
+
+Środowisko obliczeniowe zostało udokumentowane poprzez zapis wersji wszystkich wykorzystanych bibliotek, umożliwiając odtworzenie identycznego środowiska programistycznego. Pełny kod eksperymentu wraz z komentarzami został zachowany w notebooku Jupyter, a wszystkie wyniki numeryczne wyeksportowano do formatu CSV, co pozwala na weryfikację i dalszą analizę uzyskanych rezultatów.
+
+\section{Wyniki i ich analiza}
+
+\subsection{Wprowadzenie do analizy wyników}
+
+Sekcja prezentuje szczegółową ocenę rezultatów eksperymentów przeprowadzonych w ramach badania klasyfikacji wad w odlewach metalowych. Analiza opiera się na porównaniu wydajności sześciu różnych algorytmów uczenia maszynowego z zastosowaniem uznanych metryk klasyfikacji binarnej. Wyniki są interpretowane w kontekście potencjalnego zastosowania w warunkach przemysłowych, ze szczególnym uwzględnieniem aspektów praktycznych i ekonomicznych.
+
+\subsection{Charakterystyka zastosowanych metryk ewaluacyjnych}
+
+Kompleksowa ocena jakości modeli klasyfikacyjnych wymaga zastosowania wieloaspektowego zestawu miar statystycznych. W przeprowadzonym badaniu wykorzystano następujące metryki:
+
+\subsubsection{Dokładność (Accuracy)}
+
+Miara ta definiuje proporcję poprawnie zaklasyfikowanych próbek w całkowitej liczbie obserwacji:
+
+$$\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}$$
+
+gdzie poszczególne symbole oznaczają:
+\begin{itemize}
+    \item TP (True Positive) - poprawnie zidentyfikowane przypadki z defektem
+    \item TN (True Negative) - poprawnie rozpoznane przypadki bez defektu
+    \item FP (False Positive) - błędna klasyfikacja jako defekt
+    \item FN (False Negative) - nierozpoznany defekt
+\end{itemize}
+
+\textbf{Interpretacja produkcyjna:} Wskaźnik ten odzwierciedla całkowitą efektywność systemu, jednakże w sytuacji niezrównoważonych zbiorów danych może prowadzić do mylących wniosków.
+
+\subsubsection{Precyzja (Precision)}
+
+Wskaźnik określający stosunek prawidłowo wykrytych defektów do wszystkich przypadków oznaczonych jako wadliwe:
+
+$$\text{Precision} = \frac{TP}{TP + FP}$$
+
+\textbf{Znaczenie w produkcji:} Wysoka wartość tego wskaźnika świadczy o wysokim prawdopodobieństwie, że produkt oznaczony jako wadliwy rzeczywiście posiada defekt. Niska precyzja generuje wzrost kosztów związanych z dodatkową kontrolą jakości, niepotrzebne odrzucanie produktów zgodnych ze specyfikacją oraz spadek efektywności całego procesu produkcyjnego.
+
+\subsubsection{Czułość (Recall)}
+
+Miara określająca proporcję rzeczywiście wykrytych defektów spośród wszystkich faktycznie wadliwych produktów:
+
+$$\text{Recall} = \frac{TP}{TP + FN}$$
+
+\textbf{Znaczenie w produkcji:} Wysoka czułość oznacza, że system identyfikuje większość rzeczywistych wad. Niska wartość tego wskaźnika niesie poważne konsekwencje, ponieważ wadliwe produkty trafiają do odbiorców końcowych, występuje zwiększone ryzyko roszczeń gwarancyjnych i utraty reputacji oraz pojawiają się potencjalne implikacje prawne oraz znaczące straty finansowe.
+
+\subsubsection{Miara F1 (F1-Score)}
+
+Wskaźnik stanowiący średnią harmoniczną precyzji i czułości:
+
+$$\text{F1\text{-}Score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}$$
+
+\textbf{Znaczenie w produkcji:} Metryka ta dostarcza zbalansowanej oceny modelu, szczególnie istotnej w sytuacji, gdy koszty błędów typu FP i FN są porównywalne.
+
+\subsubsection{Macierz błędów (Confusion Matrix)}
+
+Macierz błędów stanowi narzędzie wizualizacji szczegółowych informacji dotyczących procesu klasyfikacji:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|c|c|}
+\hline
+                              & \textbf{Predykcja: OK} & \textbf{Predykcja: DEFEKT} \\ \hline
+\textbf{Rzeczywistość: OK}     & TN                     & FP                          \\ \hline
+\textbf{Rzeczywistość: DEFEKT} & FN                     & TP                          \\ \hline
+\end{tabular}
+\end{table}
+
+\textbf{Znaczenie w produkcji:} Umożliwia identyfikację dominującego typu błędów w systemie, co pozwala na dostosowanie strategii kontroli jakości do specyfiki problemu.
+
+\subsection{Wyniki badań empirycznych}
+
+\subsubsection{Zestawienie tabelaryczne uzyskanych rezultatów}
+
+Przeprowadzone eksperymenty z zastosowaniem sześciu algorytmów uczenia maszynowego przyniosły następujące rezultaty:
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline
+\textbf{Algorytm}            & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Czas [s]} \\ \hline
+\textbf{Random Forest}       & \textbf{91.15\%}  & \textbf{94.04\%}   & \textbf{91.03\%}        & \textbf{92.51\%}  & 2.31              \\ \hline
+\textbf{Neural Network}      & 90.38\%           & 92.81\%            & \textbf{91.03\%} & 91.91\%          & 196.99            \\ \hline
+k-NN                         & 86.54\%           & 89.54\%            & 87.82\%         & 88.67\%           & \textbf{0.30}     \\ \hline
+Decision Tree                & 85.77\%           & 87.90\%            & 88.46\%         & 88.18\%           & 115.46            \\ \hline
+SVM                          & 84.62\%           & 90.28\%            & 83.33\%         & 86.67\%           & 46.30             \\ \hline
+Logistic Regression          & 80.38\%           & 88.89\%            & 76.92\%         & 82.47\%           & 7.06              \\ \hline
+\end{tabular}
+\caption{Zestawienie wyników dla wszystkich testowanych algorytmów}
+\end{table}
+
+\textit{Uwaga: Najlepsze rezultaty w poszczególnych kategoriach wyróżniono pogrubieniem.}
+
+W celu lepszej wizualizacji uzyskanych wyników, na rysunkach \ref{fig:accuracy_comparison} - \ref{fig:training_time_comparison} przedstawiono porównanie wydajności wszystkich badanych algorytmów w formie wykresów słupkowych dla poszczególnych metryk.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{02_accuracy.png}
+    \caption{Porównanie dokładności (Accuracy) dla wszystkich algorytmów}
+    \label{fig:accuracy_comparison}
+\end{figure}
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{03_precision.png}
+    \caption{Porównanie precyzji (Precision) dla wszystkich algorytmów}
+    \label{fig:precision_comparison}
+\end{figure}
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{04_recall.png}
+    \caption{Porównanie czułości (Recall) dla wszystkich algorytmów}
+    \label{fig:recall_comparison}
+\end{figure}
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{05_f1_score.png}
+    \caption{Porównanie miary F1-Score dla wszystkich algorytmów}
+    \label{fig:f1_comparison}
+\end{figure}
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{06_training_time.png}
+    \caption{Porównanie czasu treningu dla wszystkich algorytmów}
+    \label{fig:training_time_comparison}
+\end{figure}
+
+\FloatBarrier
+
+Z przedstawionych wykresów wyraźnie widać przewagę algorytmu Random Forest w metrykach Accuracy, Precision i F1-Score. Warto zauważyć, że Random Forest i Neural Network osiągają identyczny poziom Recall (91.03\%). Znaczące różnice obserwuje się w czasie treningu, gdzie k-NN charakteryzuje się najkrótszym czasem uczenia, natomiast Neural Network wymaga znacząco więcej czasu obliczeniowego.
+
+\subsubsection{Szczegółowa analiza modelu o najwyższej skuteczności}
+
+Algorytm Random Forest osiągnął najkorzystniejsze wyniki w trzech metrykach oraz taki sam wynik jak Neural Network w czwartej:
+
+\begin{itemize}
+    \item \textbf{Accuracy: 91.15\%} - najwyższa ogólna trafność klasyfikacji
+    \item \textbf{Precision: 94.04\%} - najniższy poziom fałszywych alarmów
+    \item \textbf{F1-Score: 92.51\%} - optymalna równowaga między precyzją a czułością
+    \item \textbf{Recall: 91.03\%} - identyczny wynik jak Neural Network, najwyższy wśród wszystkich algorytmów
+\end{itemize}
+
+\textbf{Interpretacja w kontekście produkcyjnym:}
+\begin{itemize}
+    \item Spośród 100 odlewów oznaczonych jako wadliwe, około 94 faktycznie będzie posiadało defekty
+    \item System poprawnie klasyfikuje 91.15\% wszystkich analizowanych wyrobów
+    \item Model identyfikuje 91.03\% rzeczywistych przypadków wadliwych
+\end{itemize}
+
+\subsubsection{Analiza macierzy błędów}
+
+Dla modelu Random Forest na zbiorze walidacyjnym (260 próbek) uzyskano następującą macierz błędów:
+
+\begin{verbatim}
+Macierz błędów:
+                 Przewidywane
+                 OK    DEFEKT
+Rzeczywiste OK   [114     9]
+      DEFEKT     [ 14   123]
+\end{verbatim}
+
+Interpretacja poszczególnych wartości:
+\begin{itemize}
+    \item \textbf{True Negatives (114):} Produkty bez defektów poprawnie zidentyfikowane
+    \item \textbf{False Positives (9):} Produkty zgodne ze specyfikacją błędnie oznaczone jako wadliwe (7.3\% przypadków OK)
+    \item \textbf{False Negatives (14):} Nierozpoznane defekty (10.2\% produktów wadliwych)
+    \item \textbf{True Positives (123):} Prawidłowo wykryte defekty (89.8\% produktów wadliwych)
+\end{itemize}
+
+\textbf{Implikacje dla procesu produkcyjnego:}
+\begin{itemize}
+    \item \textbf{FP (9 przypadków):} Wymaga dodatkowej inspekcji manualnej 9 produktów zgodnych, co oznacza koszt robocizny
+    \item \textbf{FN (14 przypadków):} 14 wadliwych produktów może przejść do kolejnych etapów procesu i spowodować wysokie ryzyko kosztowe
+\end{itemize}
+
+\subsection{Analiza porównawcza alternatywnych metod uczenia maszynowego}
+
+\subsubsection{Porównanie Neural Network z Random Forest}
+
+Sieć neuronowa osiągnęła wynik F1-Score na poziomie 91.91\%, co stanowi nieznaczne obniżenie w porównaniu do Random Forest o 0.6 punktu procentowego. Należy jednak zwrócić uwagę na znaczące różnice w efektywności czasowej, proces treningu sieci neuronowej jest 85-krotnie dłuższy. Dodatkowo, sieci neuronowe charakteryzują się większym zapotrzebowaniem na dane treningowe dla osiągnięcia optymalnej wydajności, choć posiadają potencjał do dalszej optymalizacji poprzez dostrojenie architektury sieci.
+
+Z kolei Random Forest uzyskał najwyższy wynik F1-Score w ramach eksperymentu wynoszący 92.51\%. Algorytm ten charakteryzuje się relatywnie krótkim czasem treningu, co czyni go praktycznym dla zastosowań produkcyjnych. Istotną zaletą jest również łatwiejsza interpretacja wyników poprzez analizę ważności cech oraz większa stabilność bez konieczności zaawansowanego dostrajania hiperparametrów. W kontekście analizowanego zbioru danych Random Forest stanowi bardziej racjonalny wybór ze względu na optymalne połączenie wydajności, czasu uczenia i prostoty implementacji.
+
+\subsubsection{Klasyfikacja algorytmów według kryterium efektywności czasowej}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Algorytm}        & \textbf{F1-Score} & \textbf{Czas [s]} & \textbf{F1/Czas} \\ \hline
+k-NN                     & 88.67\%           & 0.30              & 295.57           \\ \hline
+\textbf{Random Forest}   & 92.51\%           & 2.31              & \textbf{40.05}   \\ \hline
+Logistic Regression      & 82.47\%           & 7.06              & 11.68            \\ \hline
+SVM                      & 86.67\%           & 46.30             & 1.87             \\ \hline
+Decision Tree            & 88.18\%           & 115.46            & 0.76             \\ \hline
+Neural Network           & 91.91\%           & 196.99            & 0.47             \\ \hline
+\end{tabular}
+\caption{Ranking algorytmów według stosunku jakości do czasu treningu}
+\end{table}
+
+Rysunek \ref{fig:training_time_comparison} ilustruje znaczące różnice w efektywności czasowej poszczególnych algorytmów. Najkrótszy czas treningu charakteryzuje algorytm k-NN (0.30s), który nie wymaga właściwego procesu uczenia, podczas gdy Neural Network wymaga najdłuższego czasu obliczeniowego wynoszącego prawie 197 sekund. Random Forest osiąga optymalny balans między jakością wyników a czasem treningu, co przekłada się na najkorzystniejszy stosunek F1-Score do czasu (40.05).
+
+Wybór algorytmu powinien być uzależniony od specyfiki zastosowania. W kontekście badań i rozwoju, gdzie priorytetem jest najwyższa jakość klasyfikacji, rekomendowane są Neural Network lub Random Forest. Dla zastosowań produkcyjnych z ograniczeniami czasowymi bardziej odpowiednie będą k-NN lub Random Forest. Implementacja na urządzeniach brzegowych wymaga algorytmu charakteryzującego się najkrótszym czasem przetwarzania, co czyni k-NN optymalnym wyborem mimo nieco niższej jakości. Jednak w sytuacji, gdy poszukiwana jest optymalna równowaga między jakością a czasem, Random Forest pozostaje najlepszym rozwiązaniem dzięki najkorzystniejszemu stosunkowi wydajności do czasu treningu.
+
+\subsubsection{Analiza kompromisów między precyzją a czułością}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{|l|c|c|l|}
+\hline
+\textbf{Algorytm}        & \textbf{Precision} & \textbf{Recall} & \textbf{Charakterystyka błędów}     \\ \hline
+SVM                      & 90.28\%            & 83.33\%         & Więcej FN (pomija defekty)          \\ \hline
+Neural Network           & 92.81\%            & 91.03\%         & Zrównoważone                        \\ \hline
+Random Forest            & 94.04\%            & 91.03\%         & Najmniej FP                         \\ \hline
+Logistic Regression      & 88.89\%            & 76.92\%         & Znacząca liczba FN                  \\ \hline
+\end{tabular}
+\caption{Porównanie algorytmów pod kątem precision i recall}
+\end{table}
+
+Analiza kompromisów między precyzją a czułością ujawnia istotne różnice w charakterze błędów popełnianych przez poszczególne algorytmy. SVM wykazuje stosunkowo wysoką precyzję (90.28\%), jednak czułość na poziomie 83.33\% wskazuje na tendencję do pomijania defektów (więcej błędów typu FN). Neural Network oraz Random Forest osiągają zrównoważone wyniki z identycznym poziomem czułości wynoszącym 91.03\%, przy czym Random Forest charakteryzuje się najwyższą precyzją (94.04\%), co oznacza najmniejszą liczbę fałszywych alarmów. Regresja logistyczna wykazuje znaczącą liczbę błędów typu FN, co przejawia się najniższą czułością spośród wszystkich badanych algorytmów (76.92\%).
+
+Wybór algorytmu powinien być zdeterminowany przez priorytety biznesowe konkretnego zastosowania. W sytuacji, gdy ważne jest minimalizowanie kosztownej ponownej inspekcji (minimalizacja FP), rekomendowany jest Random Forest z precyzją 94.04\%. Dla zastosowań, gdzie krytyczne znaczenie ma bezpieczeństwo i konieczne jest wykrycie maksymalnej liczby defektów (minimalizacja FN), odpowiednie będą Neural Network lub Random Forest z czułością na poziomie 91.03\%. Natomiast w przypadku, gdy priorytetem jest szybkie wdrożenie systemu, algorytm k-NN stanowi kompromisowe rozwiązanie z czasem treningu 0.30s i czułością 87.82\%.
+
+\section{Podsumowanie wyników i ograniczenia rozwiązania}
+
+\subsection{Mocne strony zaproponowanego podejścia}
+
+Przeprowadzone badanie wykazało szereg mocnych stron zaproponowanego rozwiązania opartego na algorytmach uczenia maszynowego. Algorytm Random Forest osiągnął wysoką skuteczność klasyfikacji na poziomie 91.15\% accuracy oraz 94.04\% precision, co stanowi znaczącą poprawę w porównaniu z tradycyjnymi metodami inspekcji wizualnej. Wszystkie testowane algorytmy przekroczyły próg 80\% dokładności, co potwierdza zasadność zastosowania metod uczenia maszynowego w automatycznej kontroli jakości odlewów.
+
+Istotną zaletą jest automatyzacja procesu ekstrakcji cech z surowych obrazów, eliminująca konieczność ręcznego definiowania reguł klasyfikacji. Random Forest jako model rekomendowany charakteryzuje się dodatkowo krótkim czasem treningu wynoszącym 2.31 sekundy, co umożliwia szybką adaptację do nowych danych oraz ponowne uczenie modelu bez znaczącego obciążenia infrastruktury obliczeniowej. Kompleksowe porównanie sześciu różnych algorytmów pozwoliło na obiektywny wybór najlepszego rozwiązania oraz zrozumienie kompromisów między dokładnością a efektywnością czasową.
+
+\subsection{Ograniczenia rozwiązania}
+
+Pomimo osiągniętych wyników, należy zwrócić uwagę na istotne ograniczenia przeprowadzonego badania, które mogą wpływać na możliwość bezpośredniego wdrożenia rozwiązania w środowisku produkcyjnym.
+
+\subsubsection{Jakość i rozmiar danych}
+
+Podstawowym ograniczeniem jest stosunkowo mały rozmiar zbioru danych wynoszący 1,300 obrazów. W kontekście nowoczesnego uczenia maszynowego, szczególnie głębokiego uczenia, jest to zbiór niewystarczający do pełnej oceny zdolności generalizacji modelu. Małe zbiory danych zwiększają ryzyko przeuczenia oraz mogą nie odzwierciedlać pełnej zmienności warunków produkcyjnych, takich jak różne warunki oświetlenia, różnorodność typów defektów czy zmienność materiałów.
+
+Dataset został zebrany w kontrolowanych warunkach laboratoryjnych z wykorzystaniem lustrzanki cyfrowej Canon EOS 1300D, co może nie w pełni odpowiadać rzeczywistym warunkom przemysłowym. Wszystkie obrazy charakteryzują się stałym rozmiarem 512×512 pikseli oraz są już odpowiednio wykadrowane, podczas gdy w warunkach produkcyjnych może występować znacznie większa zmienność jakości i parametrów akwizycji obrazu. Dodatkowo, klasyfikacja binarna (OK/DEFEKT) nie uwzględnia różnych typów i stopni nasilenia defektów, co w praktyce może być istotne dla procesu decyzyjnego.
+
+\subsubsection{Skalowalność rozwiązania}
+
+Rozwiązanie zostało przetestowane na stosunkowo niewielkim zbiorze danych, co rodzi pytania o jego skalowalność przy znacznie większych wolumenach produkcji. Czas predykcji wynoszący około 0.05 sekundy na obraz odpowiada przepustowości około 20 obrazów na sekundę, co może być niewystarczające dla linii produkcyjnych o wysokiej wydajności. Model został wytrenowany na konkretnym typie odlewów, co oznacza konieczność całkowitego przetrenowania dla każdego nowego produktu, bez możliwości wykorzystania mechanizmów transfer learning czy incremental learning.
+
+Brak testów w rzeczywistych warunkach produkcyjnych uniemożliwia ocenę odporności systemu na zmienne warunki środowiskowe, takie jak wahania oświetlenia, zapylenie optyki czy wibracje maszyn. Nie przeprowadzono również analizy wymagań sprzętowych dla wdrożenia w skali przemysłowej, w tym zapotrzebowania na pamięć operacyjną, moc obliczeniową oraz infrastrukturę sieciową.
+
+\subsubsection{Ryzyko przeuczenia}
+
+Zastosowanie prostego podziału train-test (80/20) bez walidacji krzyżowej ogranicza pewność co do stabilności uzyskanych wyników. Brak k-fold cross-validation oznacza, że metryki mogą być zależne od konkretnego, losowego podziału danych. Wysokie wyniki na zbiorze testowym nie gwarantują podobnej wydajności na całkowicie niezależnych danych z innych okresów produkcji czy różnych partii materiału. 
+
+Decision Tree wykazał stosunkowo długi czas treningu (115.46s) przy niższej accuracy (85.77\%), co może sugerować potencjalne przeuczenie. Brak prezentacji krzywych uczenia (learning curves) uniemożliwia diagnozę, czy modele wymagają więcej danych treningowych czy lepszej regularyzacji. Nie przedstawiono również szczegółowej analizy błędów, która pozwoliłaby zidentyfikować systematyczne wzorce w nieprawidłowych klasyfikacjach.
+
+\subsection{Wnioski końcowe}
+
+Przeprowadzone studium przypadku potwierdza, że algorytmy uczenia maszynowego, w szczególności Random Forest, stanowią obiecujące rozwiązanie dla automatyzacji kontroli jakości w przemyśle odlewniczym. Osiągnięte wyniki (91.15\% accuracy, 94.04\% precision) są satysfakcjonujące jako proof of concept i punkt wyjścia do dalszych prac rozwojowych.
+
+Jednakże obecne rozwiązanie stanowi prototyp badawczy, który wymaga znaczących rozszerzeń i walidacji przed wdrożeniem produkcyjnym. Ograniczenia związane z rozmiarem i reprezentatywnością danych, brak testów w warunkach rzeczywistych oraz potrzeba rozbudowy infrastruktury monitorowania i ciągłego uczenia czynią z tego projektu solidną podstawę teoretyczną, wymagającą jednak dalszego rozwoju inżynieryjnego.
 

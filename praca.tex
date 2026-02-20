@@ -17,7 +17,7 @@
 \usepackage{indentfirst} 
 \usepackage{float}       % wcięcia akapitowe w pierwszych paragrafach rozdziałów
 \usepackage[dvipsnames]{xcolor} % by mieć nazwy kolorów
-
+\usepackage{mhchem}
 %% zmiana formatowania tytulariów
 \usepackage{titlesec}
 \titleformat{\chapter}[display]
@@ -42,7 +42,7 @@
 
 \usepackage{graphicx}                % dołaczanie i manipulowanie grafikami
 \usepackage[caption = false]{subfig} % obsługa rysunków z częściami
-
+\usepackage{placeins}
 \usepackage{mathtools}          % doskonałe pakiety rozszerzające do matematyki
 \usepackage{amssymb, amsfonts}  % mathtools zastępuje amsmath
 \usepackage{bm}                 % pogrubiona matematyka
@@ -130,8 +130,8 @@
 
 \cleardoublepage
 
-%% Streszczenia (opcjonalnie)
-%\input{sources/streszczenie.tex}
+%% Streszczenia
+\include{rozdzialy/streszczenie}
 
 \cleardoublepage
 \pdfbookmark{\contentsname}{Contents}
@@ -140,13 +140,12 @@
 
 %---------------------------| Część właściwa dokumentu |---------------------------
 
-%\include{rozdzialy/wstep}
-%\include{rozdzialy/rozdzial1}
-%\include{rozdzialy/rozdzial2}
+\include{rozdzialy/wstep}
+\include{rozdzialy/rozdzial1}
+\include{rozdzialy/rozdzial2}
 \include{rozdzialy/rozdzial3}
-%\include{rozdzialy/rozdzial4}
-%\include{rozdzialy/rozdzial5}
-%\include{rozdzialy/zakonczenie}
+\include{rozdzialy/rozdzial4}
+\include{rozdzialy/zakonczenie}
 
 %---------------------------| Bibliografia |---------------------------
 \cleardoublepage

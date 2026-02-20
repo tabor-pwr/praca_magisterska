@@ -1,1 +1,47 @@
 \chapter{Wnioski końcowe}
+
+\section{Podsumowanie}
+
+W niniejszej pracy podjęto próbę kompleksowego przedstawienia uczenia maszynowego jako narzędzia doskonalenia procesów wytwórczych. Praca łączyła podstawy teoretyczne z praktycznym studium przypadku, które pozwoliło na weryfikację omówionych metod w rzeczywistym problemie przemysłowym.
+
+W pierwszym rozdziale dokonano przeglądu literatury, który pokazał, że uczenie maszynowe ma solidne podstawy teoretyczne i jest coraz częściej wykorzystywane w kontekście Przemysłu 4.0. Drugi rozdział przedstawił szczegółową charakterystykę algorytmów uczenia maszynowego, od metod uczenia nadzorowanego, przez nienadzorowane, po uczenie przez wzmacnianie. Zrozumienie ich właściwości i ograniczeń jest decydujące przy wyborze odpowiedniej metody do konkretnego problemu.
+
+W trzecim rozdziale przeanalizowano praktyczne zastosowania uczenia maszynowego w procesach wytwórczych, takie jak konserwacja predykcyjna, automatyczna kontrola jakości czy optymalizacja parametrów procesowych. Te obszary pokazują, że uczenie maszynowe ma realny potencjał do poprawy efektywności i jakości w przemyśle, choć jego wdrożenie wymaga nie tylko kompetencji technicznych, ale też zmian organizacyjnych.
+
+Najważniejszą częścią pracy było studium przypadku dotyczące klasyfikacji defektów w produktach odlewniczych. Porównano sześć różnych algorytmów na zbiorze 1300 obrazów. Random Forest okazał się najskuteczniejszy, osiągając dokładność 91,15\% przy czasie treningu zaledwie 2,31 s. Sieć neuronowa też uzyskała dobre wyniki (90,77\% dokładności), co pokazuje potencjał głębokiego uczenia. Co ciekawe, nawet prostsza regresja logistyczna osiągnęła przyzwoitą dokładność (86,54\%) przy bardzo krótkim czasie treningu (0,35 s), co może być istotne w aplikacjach wymagających częstego przetrenowywania modeli.
+
+\section{Najważniejsze wnioski}
+
+Z przeprowadzonych badań wynikają następujące wnioski:
+
+Uczenie maszynowe to dojrzała technologia z szerokim wyborem algorytmów dostosowanych do różnych problemów. Zarówno klasyczne metody (SVM, Random Forest), jak i nowoczesne sieci neuronowe osiągają wysoką skuteczność w zadaniach przemysłowych. Kluczem sukcesu jest jednak dobrej jakości zbiór danych, bez odpowiednich danych nawet najlepszy algorytm nie da dobrych wyników. Przeprowadzony eksperyment pokazał, że nawet 1300 obrazów może wystarczyć do osiągnięcia 91\% dokładności, ale większy zbiór z pewnością poprawiłby stabilność i zdolność modeli do generalizacji.
+
+Ważne jest też znalezienie odpowiedniej równowagi między dokładnością a złożonością modelu. Nie zawsze najskuteczniejszy algorytm jest najlepszym wyborem, bo czasem prostszy model, który trenuje się szybciej i jest łatwiejszy do zrozumienia, będzie lepszym rozwiązaniem w praktyce. W przeprowadzonym badaniu Random Forest okazał się optymalny, bo łączył wysoką dokładność (91,15\%) z krótkim czasem treningu (2,31 s) i dobrą interpretowalnością.
+
+Trzeba też pamiętać, że wdrożenie uczenia maszynowego w rzeczywistym środowisku przemysłowym to coś więcej niż tylko wytrenowanie modelu. Zmienność warunków produkcyjnych, szum w danych, integracja z istniejącymi systemami czy akceptacja przez operatorów, wszystkie te czynniki trzeba wziąć pod uwagę.
+
+\section{Ograniczenia badań}
+
+Przeprowadzone badania mają kilka ograniczeń, które warto uwzględnić:
+
+Przede wszystkim zbiór danych był stosunkowo mały (1300 obrazów) i pochodził z kontrolowanych warunków laboratoryjnych. W rzeczywistej produkcji warunki są znacznie bardziej zróżnicowane: zmienne oświetlenie, wibracje, zanieczyszczenia. Poza tym użyto prostego podziału 80:20 na zbiór treningowy i testowy. Lepiej byłoby zastosować walidację krzyżową, która dałaby bardziej stabilną ocenę wydajności.
+
+Nie przeprowadzono też testów systemu w rzeczywistym środowisku produkcyjnym, co uniemożliwiło ocenę jego funkcjonowania w praktycznych warunkach. To jest prawdopodobnie największe ograniczenie tej pracy. Dodatkowo nie sprawdzono zaawansowanych architektur głębokiego uczenia, jak CNN, które prawdopodobnie osiągnęłyby jeszcze lepsze wyniki na danych obrazowych.
+
+\section{Kierunki dalszego rozwoju}
+
+Praca pokazała kilka obszarów, które warto byłoby rozwinąć w przyszłości:
+
+Po pierwsze, zdecydowanie potrzeba większego zbioru danych -- co najmniej 5000-10000 obrazów z różnymi typami defektów i warunkami produkcyjnymi. Pozwoliłoby to na trenowanie bardziej zaawansowanych modeli i lepszą ocenę ich zdolności do generalizacji.
+
+Warto byłoby też sprawdzić konwolucyjne sieci neuronowe (CNN) i transfer learning z wykorzystaniem pretrenowanych modeli. CNN są zaprojektowane specjalnie do pracy z obrazami i prawdopodobnie dałyby lepsze wyniki niż moja prosta sieć neuronowa. Ciekawe byłoby także rozszerzenie problemu z klasyfikacji binarnej (defekt/brak defektu) do rozpoznawania konkretnych typów defektów.
+
+Kolejny istotny kierunek to interpretowalność modeli. Techniki jak LIME czy SHAP mogłyby pomóc zrozumieć, dlaczego model podejmuje określone decyzje, co zwiększyłoby zaufanie operatorów do systemu. I oczywiście trzeba by było to wszystko przetestować w rzeczywistym środowisku produkcyjnym, żeby zobaczyć, jak system radzi sobie z prawdziwymi danymi i zmienną jakością obrazów.
+
+\section{Podsumowanie}
+
+Uczenie maszynowe ma duży potencjał w doskonaleniu procesów wytwórczych. Przeprowadzone studium przypadku pokazało, że nawet przy ograniczonych zasobach można osiągnąć wysoką skuteczność klasyfikacji (ponad 91\% dokładności). Random Forest okazał się najlepszym rozwiązaniem w analizowanym problemie, łącząc dobrą dokładność z szybkim treningiem.
+
+Trzeba jednak pamiętać, że samo wytrenowanie modelu to dopiero początek. Sukces wdrożenia zależy od wielu czynników: jakości danych, odpowiedniego preprocessingu, doboru metryk, a przede wszystkim od zrozumienia kontekstu operacyjnego i ograniczeń. Jak pokazują przeprowadzone badania, modele uczenia maszynowego są tak dobre, jak dane, na których zostały wytrenowane.
+
+Patrząc w przyszłość, rola uczenia maszynowego w przemyśle będzie rosła dzięki postępowi w algorytmach, większej mocy obliczeniowej i upowszechnieniu infrastruktury IoT. Kluczowe będzie jednak nie tylko doskonalenie technologii, ale też rozwój kompetencji inżynierskich i budowanie zaufania do systemów AI. Należy mieć nadzieję, że ta praca przyczyni się do lepszego zrozumienia możliwości i ograniczeń uczenia maszynowego w procesach wytwórczych.

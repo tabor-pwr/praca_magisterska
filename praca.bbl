@@ -1,4 +1,4 @@
-\begin{thebibliography}{33}
+\begin{thebibliography}{61}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -18,6 +18,21 @@ David Arthur and Sergei Vassilvitskii.
 \newblock In \emph{Proceedings of the Eighteenth Annual ACM-SIAM Symposium on
   Discrete Algorithms}, pages 1027--1035, Philadelphia, PA, 2007. Society for
   Industrial and Applied Mathematics.
+
+\bibitem[Bergmann et~al.(2021)Bergmann, Batzner, Fauser, Sattlegger, and
+  Steger]{bergmann2020}
+Paul Bergmann, Kilian Batzner, Michael Fauser, David Sattlegger, and Carsten
+  Steger.
+\newblock The {MVTec} anomaly detection dataset: A comprehensive real-world
+  dataset for unsupervised anomaly detection.
+\newblock \emph{International Journal of Computer Vision}, 129\penalty0
+  (4):\penalty0 1038--1059, 2021.
+
+\bibitem[Bergstra and Bengio(2012)]{bergstra2012}
+James Bergstra and Yoshua Bengio.
+\newblock Random search for hyper-parameter optimization.
+\newblock \emph{Journal of Machine Learning Research}, 13:\penalty0 281--305,
+  2012.
 
 \bibitem[Birkes and Dodge(1993)]{birkes1993}
 David Birkes and Yadolah Dodge.
@@ -40,10 +55,33 @@ Leo Breiman, Jerome~H. Friedman, Richard~A. Olshen, and Charles~J. Stone.
 \newblock \emph{Classification and Regression Trees}.
 \newblock Wadsworth, Belmont, CA, 1984.
 
+\bibitem[Carvalho et~al.(2019)Carvalho, Soares, Vita, da~P.~Francisco, Basto,
+  and Alcalá]{carvalho2019}
+Thyago~P. Carvalho, Fabrízzio A. A. M.~N. Soares, Roberto Vita, Roberto
+  da~P.~Francisco, João~P. Basto, and Symone G.~S. Alcalá.
+\newblock A systematic literature review of machine learning methods applied to
+  predictive maintenance.
+\newblock \emph{Computers \& Industrial Engineering}, 137:\penalty0 106024,
+  2019.
+
 \bibitem[Chapelle et~al.(2006)Chapelle, Schölkopf, and Zien]{chapelle2006}
 Olivier Chapelle, Bernhard Schölkopf, and Alexander Zien.
 \newblock \emph{Semi-Supervised Learning}.
 \newblock MIT Press, Cambridge, MA, 2006.
+
+\bibitem[Cheng et~al.(2016)Cheng, Yang, Cheng, and Chen]{cheng2020}
+Fan-Tien Cheng, Haw-Ching Yang, Yu-Ning Cheng, and Yi-Cheng Chen.
+\newblock Industry 4.0 for wheel machining automation.
+\newblock \emph{IEEE Robotics and Automation Letters}, 1\penalty0 (1):\penalty0
+  332--339, 2016.
+
+\bibitem[Cioffi et~al.(2020)Cioffi, Travaglioni, Piscitelli, Petrillo, and
+  Felice]{cioffi2020}
+Raffaele Cioffi, Marta Travaglioni, Giuseppina Piscitelli, Alessandra Petrillo,
+  and Fabio~De Felice.
+\newblock Artificial intelligence and machine learning applications in smart
+  production: Progress, trends, and directions.
+\newblock \emph{Sustainability}, 12\penalty0 (2):\penalty0 492, 2020.
 
 \bibitem[Cover and Hart(1967)]{cover1967}
 Thomas~M. Cover and Peter~E. Hart.
@@ -51,6 +89,14 @@ Thomas~M. Cover and Peter~E. Hart.
 \newblock \emph{IEEE Transactions on Information Theory}, 13\penalty0
   (1):\penalty0 21--27, 1967.
 \newblock \doi{10.1109/TIT.1967.1053964}.
+
+\bibitem[Dalzochio et~al.(2020)Dalzochio, Kunst, Pignaton, Binotto, Sanyal,
+  Favilla, and Barbosa]{dalzochio2020}
+Jorge Dalzochio, Rafael Kunst, Edison Pignaton, Alecio Binotto, Sandro Sanyal,
+  José Favilla, and Jorge Barbosa.
+\newblock Machine learning and reasoning for predictive maintenance in
+  {Industry 4.0}: Current status and challenges.
+\newblock \emph{Computers in Industry}, 123:\penalty0 103298, 2020.
 
 \bibitem[Duda et~al.(2001)Duda, Hart, and Stork]{duda2001}
 Richard~O. Duda, Peter~E. Hart, and David~G. Stork.
@@ -103,17 +149,42 @@ Arthur~E. Hoerl and Robert~W. Kennard.
 \newblock \emph{Technometrics}, 12\penalty0 (1):\penalty0 55--67, 1970.
 \newblock \doi{10.1080/00401706.1970.10488634}.
 
+\bibitem[Huang et~al.(2021)Huang, Liu, Huang, Zhang, and Wan]{huang2021}
+Zheng Huang, Chao Liu, Xiaohong Huang, Jun Zhang, and Guoping Wan.
+\newblock Data-driven quality prediction for complex production processes using
+  machine learning.
+\newblock \emph{IEEE Access}, 9:\penalty0 89030--89044, 2021.
+
 \bibitem[James et~al.(2013)James, Witten, Hastie, and Tibshirani]{james2013}
 Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani.
 \newblock \emph{An Introduction to Statistical Learning: with Applications in
   R}.
 \newblock Springer, New York, 1st edition, 2013.
 
+\bibitem[Kagermann et~al.(2013)Kagermann, Wahlster, and Helbig]{kagermann2013}
+Henning Kagermann, Wolfgang Wahlster, and Johannes Helbig.
+\newblock Recommendations for implementing the strategic initiative {INDUSTRIE
+  4.0}: Final report of the industrie 4.0 working group.
+\newblock In \emph{Forschungsunion}. acatech, 2013.
+
+\bibitem[Kusiak(2018)]{kusiak2018}
+Andrew Kusiak.
+\newblock Smart manufacturing.
+\newblock \emph{International Journal of Production Research}, 56\penalty0
+  (1-2):\penalty0 508--517, 2018.
+
 \bibitem[LeCun et~al.(2015)LeCun, Bengio, and Hinton]{lecun2015}
 Yann LeCun, Yoshua Bengio, and Geoffrey Hinton.
 \newblock Deep learning.
 \newblock \emph{Nature}, 521\penalty0 (7553):\penalty0 436--444, 2015.
 \newblock \doi{10.1038/nature14539}.
+
+\bibitem[Lee et~al.(2014)Lee, Wu, Zhao, Ghaffari, Liao, and Siegel]{lee2014}
+Jay Lee, Fangji Wu, Wenyu Zhao, Masoud Ghaffari, Linxia Liao, and David Siegel.
+\newblock Prognostics and health management design for rotary machinery systems
+  -- reviews, methodology and applications.
+\newblock \emph{Mechanical Systems and Signal Processing}, 42\penalty0
+  (1-2):\penalty0 314--334, 2014.
 
 \bibitem[Manning et~al.(2008)Manning, Raghavan, and Schütze]{manning2008}
 Christopher~D. Manning, Prabhakar Raghavan, and Hinrich Schütze.
@@ -125,6 +196,20 @@ Leland McInnes, John Healy, and James Melville.
 \newblock Umap: Uniform manifold approximation and projection for dimension
   reduction.
 \newblock \emph{arXiv preprint arXiv:1802.03426}, 2018.
+
+\bibitem[Mobley(2002)]{mobley2002}
+R.~Keith Mobley.
+\newblock \emph{An Introduction to Predictive Maintenance}.
+\newblock Butterworth-Heinemann, Oxford, 2nd edition, 2002.
+
+\bibitem[Monostori et~al.(2016)Monostori, Kádár, Bauernhansl, Kondoh, Kumara,
+  Reinhart, Sauer, Schuh, Sihn, and Ueda]{monostori2016}
+László Monostori, Botond Kádár, Tibor Bauernhansl, Sándor Kondoh, Soundar
+  Kumara, Georg Reinhart, Olaf Sauer, Günther Schuh, Wim Sihn, and Kathryn
+  Ueda.
+\newblock Cyber-physical systems in manufacturing.
+\newblock \emph{CIRP Annals - Manufacturing Technology}, 65\penalty0
+  (2):\penalty0 621--641, 2016.
 
 \bibitem[Murphy(2012)]{murphy2012}
 Kevin~P. Murphy.
@@ -146,6 +231,21 @@ William~H. Press, Saul~A. Teukolsky, William~T. Vetterling, and Brian~P.
 \newblock \emph{Numerical Recipes: The Art of Scientific Computing}.
 \newblock Cambridge University Press, Cambridge, 3rd edition, 2007.
 
+\bibitem[Psarommatis and Kiritsis(2022)]{psarommatis2020}
+Foivos Psarommatis and Dimitris Kiritsis.
+\newblock A hybrid decision support system for automating decision making in
+  the event of defects in the era of {Zero Defect Manufacturing}.
+\newblock \emph{Journal of Industrial Information Integration}, 26:\penalty0
+  100263, 2022.
+
+\bibitem[Psarommatis et~al.(2020)Psarommatis, May, Dreyfus, and
+  Kiritsis]{psarommatis2019}
+Foivos Psarommatis, Gökan May, Paul-Arthur Dreyfus, and Dimitris Kiritsis.
+\newblock Zero defect manufacturing: State-of-the-art review, shortcomings and
+  future directions in research.
+\newblock \emph{International Journal of Production Research}, 58\penalty0
+  (1):\penalty0 1--17, 2020.
+
 \bibitem[Quinlan(1986)]{quinlan1986}
 J.~Ross Quinlan.
 \newblock Induction of decision trees.
@@ -157,6 +257,24 @@ J.~Ross Quinlan.
 \newblock \emph{C4.5: Programs for Machine Learning}.
 \newblock Morgan Kaufmann, San Mateo, CA, 1993.
 
+\bibitem[Ran et~al.(2019)Ran, Zhou, Lin, Wen, and Deng]{ran2019}
+Yongyi Ran, Xin Zhou, Pengfeng Lin, Yonggang Wen, and Ruilong Deng.
+\newblock A survey of predictive maintenance: Systems, purposes and approaches.
+\newblock \emph{arXiv preprint arXiv:1912.07383}, 2019.
+
+\bibitem[Schwab(2016)]{schwab2016}
+Klaus Schwab.
+\newblock \emph{The Fourth Industrial Revolution}.
+\newblock World Economic Forum, Geneva, 2016.
+
+\bibitem[Shahriari et~al.(2016)Shahriari, Swersky, Wang, Adams, and
+  de~Freitas]{shahriari2016}
+Bobak Shahriari, Kevin Swersky, Ziyu Wang, Ryan~P. Adams, and Nando de~Freitas.
+\newblock Taking the human out of the loop: A review of {Bayesian}
+  optimization.
+\newblock \emph{Proceedings of the IEEE}, 104\penalty0 (1):\penalty0 148--175,
+  2016.
+
 \bibitem[Shannon(1948)]{shannon1948}
 Claude~E. Shannon.
 \newblock A mathematical theory of communication.
@@ -164,10 +282,25 @@ Claude~E. Shannon.
   379--423, 1948.
 \newblock \doi{10.1002/j.1538-7305.1948.tb01338.x}.
 
+\bibitem[Sharp et~al.(2018)Sharp, Ak, and Jr]{sharp2019}
+Melissa Sharp, Rayid Ak, and Thomas~Hedberg Jr.
+\newblock A survey of the advancing use and development of machine learning in
+  smart manufacturing.
+\newblock \emph{Journal of Manufacturing Systems}, 48:\penalty0 170--179, 2018.
+
 \bibitem[Snoek et~al.(2012)Snoek, Larochelle, and Adams]{snoek2012}
 Jasper Snoek, Hugo Larochelle, and Ryan~P. Adams.
 \newblock Practical bayesian optimization of machine learning algorithms.
 \newblock \emph{Advances in Neural Information Processing Systems}, 25, 2012.
+
+\bibitem[Susto et~al.(2015)Susto, Schirru, Pampuri, McLoone, and
+  Beghi]{susto2015}
+Gian~Antonio Susto, Andrea Schirru, Simone Pampuri, Seán McLoone, and
+  Alessandro Beghi.
+\newblock Machine learning for predictive maintenance: A multiple classifier
+  approach.
+\newblock \emph{IEEE Transactions on Industrial Informatics}, 11\penalty0
+  (3):\penalty0 812--820, 2015.
 
 \bibitem[Sutton and Barto(2018)]{sutton2018}
 Richard~S. Sutton and Andrew~G. Barto.
@@ -179,6 +312,14 @@ Csaba Szepesvári.
 \newblock \emph{Algorithms for Reinforcement Learning}.
 \newblock Synthesis Lectures on Artificial Intelligence and Machine Learning.
   Morgan \& Claypool Publishers, 2010.
+
+\bibitem[Tabernik et~al.(2020)Tabernik, Šela, Skvarč, and
+  Skočaj]{tabernik2020}
+Domen Tabernik, Samo Šela, Jure Skvarč, and Danijel Skočaj.
+\newblock Segmentation-based deep-learning approach for surface-defect
+  detection.
+\newblock \emph{Journal of Intelligent Manufacturing}, 31\penalty0
+  (3):\penalty0 759--776, 2020.
 
 \bibitem[Tibshirani(1996)]{tibshirani1996}
 Robert Tibshirani.
@@ -192,6 +333,61 @@ Laurens van~der Maaten and Geoffrey Hinton.
 \newblock Visualizing data using t-sne.
 \newblock \emph{Journal of Machine Learning Research}, 9:\penalty0 2579--2605,
   2008.
+
+\bibitem[Wang et~al.(2022{\natexlab{a}})Wang, Fu, Chen, Peng, and
+  Liu]{wang2020qc}
+Jiayi Wang, Zhangjie Fu, Kai Chen, Peng Peng, and Fang Liu.
+\newblock Machine learning for quality control in manufacturing: A
+  comprehensive review.
+\newblock \emph{Journal of Manufacturing Systems}, 63:\penalty0 550--567,
+  2022{\natexlab{a}}.
+
+\bibitem[Wang et~al.(2022{\natexlab{b}})Wang, Zheng, Zhang, and Liu]{wang2018}
+Junliang Wang, Pai Zheng, Yan Zhang, and Ang Liu.
+\newblock Big data analytics for intelligent manufacturing systems: A review.
+\newblock \emph{Journal of Manufacturing Systems}, 62:\penalty0 738--752,
+  2022{\natexlab{b}}.
+
+\bibitem[Weichert et~al.(2019)Weichert, Link, Stoll, Rüping, Ihlenfeldt, and
+  Wrobel]{weichert2019}
+Daniel Weichert, Patrick Link, Anke Stoll, Stefan Rüping, Steffen Ihlenfeldt,
+  and Stefan Wrobel.
+\newblock A review of machine learning for the optimization of production
+  processes.
+\newblock \emph{The International Journal of Advanced Manufacturing
+  Technology}, 104\penalty0 (5-8):\penalty0 1889--1902, 2019.
+
+\bibitem[Weimer et~al.(2016)Weimer, Scholz-Reiter, and Shpitalni]{weimer2016}
+Daniel Weimer, Bernhard Scholz-Reiter, and Meik Shpitalni.
+\newblock Design of deep convolutional neural network architectures for
+  automated feature extraction in industrial inspection.
+\newblock \emph{CIRP Annals - Manufacturing Technology}, 65\penalty0
+  (1):\penalty0 417--420, 2016.
+
+\bibitem[Wuest et~al.(2016)Wuest, Weimer, Irgens, and Thoben]{wuest2016}
+Thorsten Wuest, Daniel Weimer, Christopher Irgens, and Klaus-Dieter Thoben.
+\newblock Machine learning in manufacturing: Advantages, challenges, and
+  applications.
+\newblock \emph{Production \& Manufacturing Research}, 4\penalty0 (1):\penalty0
+  23--45, 2016.
+
+\bibitem[Yang et~al.(2020)Yang, Li, Wang, Dong, Wang, and Tang]{yang2020}
+Jing Yang, Shiqi Li, Zheng Wang, Haiyong Dong, Jun Wang, and Senlin Tang.
+\newblock Using deep learning to detect defects in manufacturing: A
+  comprehensive survey and current challenges.
+\newblock \emph{Materials}, 13\penalty0 (24):\penalty0 5755, 2020.
+
+\bibitem[Zhang et~al.(2019)Zhang, Yang, and Wang]{zhang2019}
+Weimin Zhang, Dong Yang, and Hongchao Wang.
+\newblock Data-driven methods for predictive maintenance of industrial
+  equipment: A survey.
+\newblock \emph{IEEE Systems Journal}, 13\penalty0 (3):\penalty0 2213--2227,
+  2019.
+
+\bibitem[Zhong et~al.(2017)Zhong, Xu, Klotz, and Newman]{zhong2017}
+Ray~Y. Zhong, Xun Xu, Eberhard Klotz, and Stephen~T. Newman.
+\newblock Intelligent manufacturing in the context of industry 4.0: A review.
+\newblock \emph{Engineering}, 3\penalty0 (5):\penalty0 616--630, 2017.
 
 \bibitem[Zhu and Goldberg(2009)]{zhu2009}
 Xiaojin Zhu and Andrew~B. Goldberg.
